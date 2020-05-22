@@ -1,0 +1,35 @@
+https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+<div class="home-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Amis Process</span>
+      <span class="example-spacer"></span>
+      <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <mat-selection-list [multiple]="false">
+        <mat-list-option>
+          Quản lí quy trình
+        </mat-list-option>
+        <mat-list-option>
+          Danh sách quy trình
+        </mat-list-option>
+        <mat-list-option>
+          Quy trình cần xác nhận
+        </mat-list-option>
+        <mat-list-option>
+          Quy trình của bạn
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-drawer>
+    <mat-drawer-content *ngFor="let option of menuList">
+      Main content
+      <p>You select:  {{option.selected}}</p>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+</div>
