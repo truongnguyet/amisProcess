@@ -2,10 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\e2e",
-    "\\src",
+    "\\e2e\\src",
     "\\src\\app",
-    "\\src\\app\\login"
+    "\\src\\app\\home",
+    "\\src\\app\\home\\home",
+    "\\src\\app\\login-dashboard"
   ],
-  "SelectedNode": "\\src\\app\\login\\login.component.html",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
