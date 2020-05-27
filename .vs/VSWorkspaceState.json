@@ -1,13 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\e2e",
-    "\\e2e\\src",
+    "\\src",
     "\\src\\app",
     "\\src\\app\\home",
     "\\src\\app\\home\\home",
-    "\\src\\app\\login-dashboard"
+    "\\src\\app\\list-process"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\app\\home\\home\\home.component.ts",
   "PreviewInSolutionExplorer": false
 }
