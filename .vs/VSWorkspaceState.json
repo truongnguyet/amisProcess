@@ -1,13 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\e2e",
-    "\\e2e\\src",
+    "\\src",
     "\\src\\app",
-    "\\src\\app\\home",
     "\\src\\app\\home\\home",
-    "\\src\\app\\login-dashboard"
+    "\\src\\app\\login-dashboard\\login-dashboard"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\app",
   "PreviewInSolutionExplorer": false
 }
