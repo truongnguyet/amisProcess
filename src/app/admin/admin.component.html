@@ -1,2 +1,9 @@
-<p>admin works!</p>
-<h2>Hello from the admin component</h2>
+<div class="admin-container">
+  <h2>Danh sách các quy trình bạn quản lí:</h2>
+  <ul>
+    <li *ngFor="let process of processes">
+      <span class="badge">{{process.id}} . </span> {{process.nameProcess}}
+    </li>
+  </ul>
+</div>
+
