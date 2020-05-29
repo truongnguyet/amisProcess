@@ -1,0 +1,13 @@
+.setting-container{
+    padding: 30px;
+}
+.setting-item{
+    width:50%;
+
+}
+.example-button-container {
+  float: right;
+  justify-content: center;
+  width: 120px;
+  margin: 10px;
+}

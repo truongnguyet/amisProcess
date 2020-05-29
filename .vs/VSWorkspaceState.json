@@ -5,8 +5,17 @@
     "\\src\\app",
     "\\src\\app\\admin",
     "\\src\\app\\home\\home",
+<<<<<<< HEAD
     "\\src\\app\\process"
   ],
   "SelectedNode": "\\src\\app\\admin\\admin.component.ts",
+=======
+    "\\src\\app\\login-dashboard\\login-dashboard",
+    "\\src\\app\\models",
+    "\\src\\app\\services",
+    "\\src\\environments"
+  ],
+  "SelectedNode": "\\src\\app\\app.module.ts",
+>>>>>>> 16e22c53f4615867830b3aafccd10095b848278b
   "PreviewInSolutionExplorer": false
 }

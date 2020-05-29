@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Process } from '../process/process';
 import { PROCESS } from '../process/mock-processes';
+import { MatButtonModule } from '@angular/material/button';
+import { CreatedialogComponent } from './createdialog/createdialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-admin',
@@ -10,9 +13,18 @@ import { PROCESS } from '../process/mock-processes';
 export class AdminComponent implements OnInit {
   processes = PROCESS;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
+  openDialog() {
+    const dialogRef = this.dialog.open(CreatedialogComponent);
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
+
+
+

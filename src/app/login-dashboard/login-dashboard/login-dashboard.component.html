@@ -5,25 +5,28 @@
       <h2>Đăng nhập</h2>
 
       <div>
-        <form class="example-form">
+        <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Ex. pat@gmail.com">
-            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-              Please enter a valid email address
-            </mat-error>
-            <mat-error *ngIf="emailFormControl.hasError('required')">
+            <input matInput placeholder="Ex. pat@gmail.com" formControlName="username" [ngClass]="{'is-invalid': submitted && f.username.errors }">
+            
+            <mat-error *ngIf="submitted && f.username.errors">
               Email is <strong>required</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
-            <input type="password" matInput placeholder="">
-            <!--<mat-icon matSuffix>mode_edit</mat-icon>-->
+            <input type="password" matInput formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+           <mat-error *ngIf="submitted && f.password.errors">
+             Password is <strong>required</strong>
+           </mat-error>
           </mat-form-field>
         </form>
         <div class="example-button-row button">
-          <button mat-raised-button color="primary">Đăng nhập</button>
+          <button mat-raised-button color="primary" [disabled]="loading" type="submit" (click)="onSubmit()">
+            <mat-spinner *ngIf="loading"></mat-spinner>
+            Đăng nhập
+          </button>
         </div>
       </div>
 

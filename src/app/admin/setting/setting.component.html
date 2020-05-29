@@ -1,0 +1,254 @@
+
+  <div>
+    <div class="example-button-container">
+      <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạnd">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <mat-tab-group>
+      <mat-tab label="Giai đoạn 1">
+        <div class="setting-container">
+          <h2>Cài đặt GĐ 1</h2>
+          <div class="setting-item">
+            <label>
+              Tên giai đoạn
+            </label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <label>
+              Mô tả
+            </label>
+            <div class="input-group">
+              <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <br />
+            <br />
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item">Action</a>
+                  <a class="dropdown-item">Another action</a>
+                  <a class="dropdown-item">Something else here</a>
+                  <a class="dropdown-item">Separated link</a>
+                </div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+            <br />
+            <br />
+            <p> (Chưa có trường nào được chọn)</p>
+            <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField()">
+                <mat-icon>favorite</mat-icon>
+                <span>{{field.nameField}}</span>
+              </button>
+            </mat-menu>
+          </div>
+          <br />
+          <br />
+          <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+          <button type="button" class="btn btn-success">Lưu</button>
+
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Giai đoạn 2">
+        <div class="setting-container">
+          <h2>Cài đặt GĐ 2</h2>
+          <div class="setting-item">
+            <label>
+              Tên giai đoạn
+            </label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <label>
+              Mô tả
+            </label>
+            <div class="input-group">
+              <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <br />
+            <br />
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item">Action</a>
+                  <a class="dropdown-item">Another action</a>
+                  <a class="dropdown-item">Something else here</a>
+                  <a class="dropdown-item">Separated link</a>
+                </div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+            <br />
+            <br />
+            <p> (Chưa có trường nào được chọn)</p>
+            <button type="button" class="btn btn-outline-primary">Thêm trường</button>
+            <br />
+            <br />
+            <h2>Danh sách người thực hiện</h2>
+            <br />
+            <mat-radio-group aria-label="Select an option">
+              <mat-radio-button value="1" (change)="onCloseListUser()">Tất cả thành viên</mat-radio-button><br />
+              <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
+              <div *ngIf="limitUser == true">
+                <mat-list>
+                  <mat-list-item *ngFor="let user of users">
+                    <mat-icon mat-list-icon>folder</mat-icon>
+                    <div mat-line>{{user.name}}</div>
+                  </mat-list-item>
+                </mat-list>
+                <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
+              </div>
+            </mat-radio-group>
+          </div>
+          <br />
+          <br />
+          <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+          <button type="button" class="btn btn-success">Lưu</button>
+
+        </div>
+      </mat-tab>
+      <mat-tab label="Giai đoạn 3">
+        <div class="setting-container">
+          <h2>Cài đặt GĐ 3</h2>
+          <div class="setting-item">
+            <label>
+              Tên giai đoạn
+            </label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <label>
+              Mô tả
+            </label>
+            <div class="input-group">
+              <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <br />
+            <br />
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item">Action</a>
+                  <a class="dropdown-item">Another action</a>
+                  <a class="dropdown-item">Something else here</a>
+                  <a class="dropdown-item">Separated link</a>
+                </div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+            <br />
+            <br />
+            <p> (Chưa có trường nào được chọn)</p>
+            <button type="button" class="btn btn-outline-primary">Thêm trường</button>
+          </div>
+          <br />
+          <h2>Danh sách người thực hiện</h2>
+          <br />
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1" (change)="onCloseListUser()">Tất cả thành viên</mat-radio-button><br />
+            <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
+            <div *ngIf="limitUser == true">
+              <mat-list>
+                <mat-list-item *ngFor="let user of users">
+                  <mat-icon mat-list-icon>folder</mat-icon>
+                  <div mat-line>{{user.name}}</div>
+                </mat-list-item>
+              </mat-list>
+              <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
+            </div>
+
+          </mat-radio-group>
+          <br />
+          <br />
+          <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+          <button type="button" class="btn btn-success">Lưu</button>
+
+        </div>
+      </mat-tab>
+      <mat-tab label="Thành công">
+        <div class="setting-container">
+          <h2>Cài đặt GĐ thành công</h2>
+          <div class="seting-item">
+            <label>
+              Tên giai đoạn
+            </label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <label>
+              Mô tả
+            </label>
+            <div class="input-group">
+              <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <br />
+            <br />
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item">Action</a>
+                  <a class="dropdown-item">Another action</a>
+                  <a class="dropdown-item">Something else here</a>
+                  <a class="dropdown-item">Separated link</a>
+                </div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+            <br />
+            <br />
+            <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+            <button type="button" class="btn btn-success">Lưu</button>
+
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Thất bại">
+        <div class="setting-container">
+          <h2>Cài đặt GĐ thất bại</h2>
+          <div class="setting-item">
+            <label>
+              Tên giai đoạn
+            </label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <label>
+              Mô tả
+            </label>
+            <div class="input-group">
+              <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <br />
+            <br />
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item">Action</a>
+                  <a class="dropdown-item">Another action</a>
+                  <a class="dropdown-item">Something else here</a>
+                  <a class="dropdown-item">Separated link</a>
+                </div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+            <br />
+            <br />
+            <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+            <button type="button" class="btn btn-success">Lưu</button>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    
+  </div>
+
