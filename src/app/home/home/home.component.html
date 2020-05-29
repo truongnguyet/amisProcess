@@ -11,23 +11,28 @@
   <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
       <mat-selection-list [multiple]="false">
-        <mat-list-option>
+        <mat-list-option (click)="gotoAdmin()">
           Quản lí quy trình
         </mat-list-option>
-        <mat-list-option>
+        <mat-list-option (click)="gotoList()">
           Danh sách quy trình
         </mat-list-option>
-        <mat-list-option>
+        <mat-list-option (click)="gotoConfirm()">
           Quy trình cần xác nhận
         </mat-list-option>
-        <mat-list-option>
+        <mat-list-option (click)="gotoYourPro()">
           Quy trình của bạn
         </mat-list-option>
       </mat-selection-list>
     </mat-drawer>
-    <mat-drawer-content *ngFor="let option of menuList">
-      Main content
-      <p>You select:  {{option.selected}}</p>
+    <mat-drawer-content>
+      <ul *ngIf="users">
+        <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+      </ul>
+      <button (click)="logout()">Logout</button>
+    
+      <router-outlet></router-outlet>
+
     </mat-drawer-content>
   </mat-drawer-container>
 

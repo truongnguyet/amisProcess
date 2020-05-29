@@ -3,9 +3,13 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\home",
     "\\src\\app\\home\\home",
-    "\\src\\app\\login-dashboard\\login-dashboard"
+    "\\src\\app\\login-dashboard\\login-dashboard",
+    "\\src\\app\\models",
+    "\\src\\app\\services",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app",
+  "SelectedNode": "\\src\\app\\app.module.ts",
   "PreviewInSolutionExplorer": false
 }
