@@ -3,10 +3,10 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\home",
+    "\\src\\app\\admin",
     "\\src\\app\\home\\home",
-    "\\src\\app\\list-process"
+    "\\src\\app\\process"
   ],
-  "SelectedNode": "\\src\\app\\home\\home\\home.component.ts",
+  "SelectedNode": "\\src\\app\\admin\\admin.component.ts",
   "PreviewInSolutionExplorer": false
 }
