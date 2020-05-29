@@ -12,8 +12,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 import { HomeRoutingModule } from './home-routing.module';
+import { AdminModule } from '../admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +37,13 @@ import { HomeRoutingModule } from './home-routing.module';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatRadioModule,
+    AdminModule,
+    MatTooltipModule
   ],
 
 })

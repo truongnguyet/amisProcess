@@ -1,2 +1,19 @@
-<p>admin works!</p>
-<h2>Hello from the admin component</h2>
+<div class="admin-container">
+  <div class="example-button-container">
+    <button mat-fab color="accent" aria-label="add process" (click)="openDialog()"  matTooltip="Tạo mới quy trình">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="list">
+    <h2>Danh sách các quy trình bạn quản lí:</h2>
+    <ul class="admin-container">
+      <li *ngFor="let process of processes">
+        <span class="badge">{{process.id}}  </span> {{process.nameProcess}}
+        - {{process.createdBy}} - {{process.status}}
+      </li>
+    </ul>
+  </div>
+  
+</div>
+
+<router-outlet></router-outlet>

@@ -6,6 +6,7 @@ import { ListProcessComponent } from '../list-process/list-process.component';
 import { AdminComponent } from '../admin/admin.component';
 import { ConfirmProcessComponent } from '../confirm-process/confirm-process.component';
 import { YourProcessComponent } from '../your-process/your-process.component';
+import { SettingComponent } from '../admin/setting/setting.component';
 
 const homeRoutes: Routes = [
   {
@@ -14,7 +15,7 @@ const homeRoutes: Routes = [
     children: [
       {
         path: '',
-        component: AdminComponent
+        component: AdminComponent,
       },
       {
         path: 'list',
@@ -27,6 +28,10 @@ const homeRoutes: Routes = [
       {
         path: 'yours-process',
         component: YourProcessComponent
+      },
+      {
+        path: 'home/setting',
+        component: SettingComponent
       }
 
     ]
