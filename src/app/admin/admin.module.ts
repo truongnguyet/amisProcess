@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,19 +15,24 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { CreatedialogComponent } from './createdialog/createdialog.component';
 import { InviteUserComponent } from './invite-user/invite-user.component';
 import { SettingComponent } from './setting/setting.component';
+import { DialogFieldComponent } from '../fields/dialog-field/dialog-field.component';
+
 
 @NgModule({
   declarations: [
     CreatedialogComponent,
     InviteUserComponent,
-    SettingComponent
+    SettingComponent,
+    DialogFieldComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
     MatDialogModule,
     MatButtonModule,
@@ -39,7 +45,8 @@ import { SettingComponent } from './setting/setting.component';
     MatTooltipModule,
     MatListModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSlideToggleModule
   ],
 
 })

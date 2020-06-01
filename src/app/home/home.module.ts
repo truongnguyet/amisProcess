@@ -7,6 +7,7 @@ import { ListProcessComponent } from '../list-process/list-process.component';
 import { AdminComponent } from '../admin/admin.component';
 import { ConfirmProcessComponent } from '../confirm-process/confirm-process.component';
 import { YourProcessComponent } from '../your-process/your-process.component';
+import { ProcessDetailComponent } from '../process-detail/process-detail.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,10 +18,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 import { HomeRoutingModule } from './home-routing.module';
 import { AdminModule } from '../admin/admin.module';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { AdminModule } from '../admin/admin.module';
     ListProcessComponent,
     AdminComponent,
     ConfirmProcessComponent,
-    YourProcessComponent
+    YourProcessComponent,
+    ProcessDetailComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +47,8 @@ import { AdminModule } from '../admin/admin.module';
     MatDialogModule,
     MatRadioModule,
     AdminModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatGridListModule
   ],
 
 })

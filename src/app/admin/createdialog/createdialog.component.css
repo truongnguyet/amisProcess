@@ -9,3 +9,21 @@
   width: 25px;
   height: 25px;
 }
+.select-container {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+}
+.select-content {
+    margin-left:30px;
+}
+.select-name{
+    width:100px;
+    text-align:center;
+}
+.invite-container {
+    margin-bottom:30px;
+}
+mat-dialog-actions {
+    float:right;
+}

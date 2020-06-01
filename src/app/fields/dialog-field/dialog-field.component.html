@@ -1,12 +1,98 @@
-<mat-grid-list cols="12" rowHeight="100px">
-  <mat-grid-tile [colspan]="7"
-                 [rowspan]="2"
-                 [style.background]="red">
-    One
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="5"
-                 [rowspan]="1"
-                 [style.background]="lightgreen">
-    One
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="container-field">
+  <mat-grid-list cols="2">
+    <mat-grid-tile>
+      <div class="mat-grid-tile div">
+        <div class="title">
+          <i class="material-icons">{{data.icon}}</i>
+          <h5>{{data.nameField}}</h5>
+        </div>
+        <p>{{data.description}}</p>
+       
+        <label>
+          Tên trường
+        </label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editName">
+        </div>
+        <label>
+          Mô tả
+        </label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editDes">
+        </div>
+        <div class="title">
+          <h4>
+            Trường này có bắt buộc không ?
+          </h4>
+          <mat-slide-toggle></mat-slide-toggle>
+        </div>
+       
+        <button type="button" class="btn btn-danger" mat-dialog-close>Hủy</button>
+        <button type="button" class="btn btn-primary" mat-dialog-close>Lưu</button>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="mat-grid-tile div">
+
+        <h3>{{editName}}</h3>
+        <label>{{editDes}}</label>
+
+        <!--<div *ngIf="{{data.nameField}} === Assignees select">
+          <ul>
+            <li *ngFor="let user of users">
+              <span class="badge">{{user.name}}</span>
+            </li>
+          </ul>
+        </div>-->
+        <!--<div  *ngIf="{{data.nameField}} === Attachment">
+          <form >
+            <label for="myfile">Select a file:</label>
+            <input type="file" id="myfile" name="myfile">
+          </form>
+        </div>-->
+
+        <!--<div *ngIf="{{data.nameField}} === Currency">
+          <input type="number" id="money" placeholder="0.00"/>
+        </div>-->
+
+        <!--date-->
+        <div>
+
+        </div>
+
+        <!--datetime-->
+        <div>
+
+        </div>
+        <!--Email--> 
+        <div>
+
+        </div>
+        <div>
+          Long Text
+        </div>
+        <div>
+          PhoneNumber
+        </div>
+        <div>
+          Radio
+        </div>
+        <div>
+          ShortText
+        </div>
+        <div>
+          Time
+        </div>
+        <div>
+          checkbox
+        </div>
+        <div>
+          dropdown
+        </div>
+        <p>(Kết quả xem trước)</p>
+      </div>
+     
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

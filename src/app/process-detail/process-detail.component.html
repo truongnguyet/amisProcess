@@ -1,0 +1,93 @@
+<div class="process-container">
+  <button type="button" class="btn btn-primary">
+    Tạm ngừng quy trình
+  </button>
+  <mat-grid-list cols="5">
+    <mat-grid-tile>
+      <div>
+        <i class="material-icons">check_circle</i>
+        <label>
+          Tên giai đoạn
+        </label>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <i class="material-icons">more_vert</i>
+        </button>
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <i class="material-icons">check_circle</i>
+        <label>
+          Tên giai đoạn
+        </label>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <i class="material-icons">more_vert</i>
+        </button>
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <i class="material-icons">check_circle</i>
+        <label>
+          Tên giai đoạn
+        </label>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <i class="material-icons">more_vert</i>
+        </button>
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <i class="material-icons">check_circle</i>
+        <label>
+          Tên giai đoạn
+        </label>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <i class="material-icons">more_vert</i>
+        </button>
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <i class="material-icons">check_circle</i>
+        <label>
+          Tên giai đoạn
+        </label>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <i class="material-icons">more_vert</i>
+        </button>
+
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>unfold_more</mat-icon>
+      <span>Sắp xếp</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>edit</mat-icon>
+      <span>Chỉnh sửa</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>arrow_back</mat-icon>
+      <span>Di chuyển sang trái</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>arrow_right_alt</mat-icon>
+      <span>Di chuyển sang phải</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>line_weight</mat-icon>
+      <span>Mặc định di chuyển</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      <span>Xóa</span>
+    </button>
+  </mat-menu>
+</div>

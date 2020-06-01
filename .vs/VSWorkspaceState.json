@@ -7,9 +7,15 @@
     "\\src\\app\\admin\\setting",
     "\\src\\app\\fields",
     "\\src\\app\\fields\\dialog-field",
+<<<<<<< HEAD
     "\\src\\app\\home\\home",
     "\\src\\app\\users",
     "\\src\\assets\\img"
+=======
+    "\\src\\app\\home",
+    "\\src\\app\\home\\home",
+    "\\src\\app\\process"
+>>>>>>> 61afbfacf9cf8fb5b09cec6165d952f36e4ceaa3
   ],
   "SelectedNode": "\\src\\app\\fields\\fiedls.ts",
   "PreviewInSolutionExplorer": false

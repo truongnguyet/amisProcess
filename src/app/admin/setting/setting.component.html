@@ -1,7 +1,7 @@
 
   <div>
     <div class="example-button-container">
-      <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạnd">
+      <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạn">
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -26,23 +26,25 @@
             <br />
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item">Action</a>
-                  <a class="dropdown-item">Another action</a>
-                  <a class="dropdown-item">Something else here</a>
-                  <a class="dropdown-item">Separated link</a>
-                </div>
+                <button class="btn btn-outline-secondary dropdown-toggle" [matMenuTriggerFor]="menu" type="button" data-toggle="dropdown" aria-haspopup="true" >Icon</button>
+                <!--<div class="dropdown-menu" *ngFor="let icon of icons">
+                 <i class="material-icons">{{icon.name}}</i>
+                </div>-->
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item mat-icon *ngFor="let icon of icons">
+                    <i class="material-icons">{{icon.name}}</i>
+                  </button>
+                </mat-menu>
               </div>
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+             <i class="material-icons">apps</i>
             </div>
             <br />
             <br />
             <p> (Chưa có trường nào được chọn)</p>
             <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField()">
-                <mat-icon>favorite</mat-icon>
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)" >
+                <i  class="material-icons">{{field.icon}}</i>
                 <span>{{field.nameField}}</span>
               </button>
             </mat-menu>
@@ -99,7 +101,7 @@
               <div *ngIf="limitUser == true">
                 <mat-list>
                   <mat-list-item *ngFor="let user of users">
-                    <mat-icon mat-list-icon>folder</mat-icon>
+                    <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
                     <div mat-line>{{user.name}}</div>
                   </mat-list-item>
                 </mat-list>
@@ -244,7 +246,7 @@
             <br />
             <br />
             <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
-            <button type="button" class="btn btn-success">Lưu</button>
+            <button type="button" class="btn btn-success" (click)="gotoProcess()">Lưu</button>
           </div>
         </div>
       </mat-tab>
