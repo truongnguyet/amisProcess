@@ -1,0 +1,26 @@
+mat-grid-tile {
+  background: lightblue;
+  height:500px;
+}
+.mat-grid-tile div {
+    padding: 15px;
+}
+.container-field {
+    width:600px;
+    height:auto;
+    padding:10px;
+}
+.mat-grid-list {
+    height:500px;
+}
+.title {
+  display: flex;
+}
+p {
+  color :#959da5;
+}
+button {
+    margin:15px;
+}
+
+

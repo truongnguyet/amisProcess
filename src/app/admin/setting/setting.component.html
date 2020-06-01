@@ -1,7 +1,7 @@
 
   <div>
     <div class="example-button-container">
-      <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạnd">
+      <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạn">
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -41,8 +41,8 @@
             <p> (Chưa có trường nào được chọn)</p>
             <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField()">
-                <mat-icon>favorite</mat-icon>
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField)">
+                <i  class="material-icons">{{field.icon}}</i>
                 <span>{{field.nameField}}</span>
               </button>
             </mat-menu>
@@ -99,7 +99,7 @@
               <div *ngIf="limitUser == true">
                 <mat-list>
                   <mat-list-item *ngFor="let user of users">
-                    <mat-icon mat-list-icon>folder</mat-icon>
+                    <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
                     <div mat-line>{{user.name}}</div>
                   </mat-list-item>
                 </mat-list>

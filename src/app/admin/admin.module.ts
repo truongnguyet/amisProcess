@@ -14,16 +14,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { CreatedialogComponent } from './createdialog/createdialog.component';
 import { InviteUserComponent } from './invite-user/invite-user.component';
 import { SettingComponent } from './setting/setting.component';
+import { DialogFieldComponent } from '../fields/dialog-field/dialog-field.component';
+
 
 @NgModule({
   declarations: [
     CreatedialogComponent,
     InviteUserComponent,
-    SettingComponent
+    SettingComponent,
+    DialogFieldComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +43,8 @@ import { SettingComponent } from './setting/setting.component';
     MatTooltipModule,
     MatListModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSlideToggleModule
   ],
 
 })

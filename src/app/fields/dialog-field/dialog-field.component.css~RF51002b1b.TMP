@@ -1,0 +1,13 @@
+mat-grid-tile {
+  background: lightblue;
+}
+.mat-grid-tile div {
+    padding: 15px;
+}
+.container-field {
+    width:600px;
+    height:600px;
+    padding:10px;
+}
+
+

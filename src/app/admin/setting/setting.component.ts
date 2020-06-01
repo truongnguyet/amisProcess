@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -8,10 +8,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { USERS } from '../../users/mock-users';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { FIELDS } from '../../fields/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
+import { Fields } from '../../fields/fiedls';
 
 @Component({
   selector: 'app-setting',
@@ -22,8 +23,11 @@ export class SettingComponent implements OnInit {
   users = USERS;
   limitUser = false;
   fields = FIELDS;
+  selectedField: string;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -36,8 +40,14 @@ export class SettingComponent implements OnInit {
   onCloseListUser() {
     this.limitUser = false;
   }
-  addField() {
-    this.dialog.open(DialogFieldComponent);
+  addField(name: string) {
+    this.selectedField = name;
+    this.dialog.open(DialogFieldComponent, {
+      data: {
+        name: name,
+      }
+    });
+    console.log("value dialog",name );
   }
 
 }
