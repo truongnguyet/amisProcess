@@ -3,13 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\home",
+    "\\src\\app\\admin",
+    "\\src\\app\\admin\\setting",
+    "\\src\\app\\fields",
+    "\\src\\app\\fields\\dialog-field",
     "\\src\\app\\home\\home",
-    "\\src\\app\\login-dashboard\\login-dashboard",
-    "\\src\\app\\models",
-    "\\src\\app\\services",
-    "\\src\\environments"
+    "\\src\\app\\users",
+    "\\src\\assets\\img"
   ],
-  "SelectedNode": "\\src\\app\\app.module.ts",
+  "SelectedNode": "\\src\\app\\fields\\fiedls.ts",
   "PreviewInSolutionExplorer": false
 }
