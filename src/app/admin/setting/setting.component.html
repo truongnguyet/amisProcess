@@ -97,13 +97,16 @@
                   <div class="container">
                     <div class="row" *ngFor="let icon of icons">
                       <div class="col-sm">
-                        <i class="material-icons" (click)="selectIcon(icon.id)"
+                        <i class="material-icons icon-btn" (click)="selectIcon(icon.name)"
                            [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
                       </div>
                     </div>
                   </div>
                 </mat-expansion-panel>
               </mat-accordion>
+              <div *ngIf="selectedIcon">
+                <i class="material-icons icon-btn"> {{selectedIcon}} </i>
+              </div>
             </div>
             
             <br />
@@ -350,6 +353,7 @@
 
       </div>
     </mat-tab>
+
   </mat-tab-group>
 </div>
 

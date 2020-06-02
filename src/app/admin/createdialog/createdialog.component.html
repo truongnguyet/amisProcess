@@ -10,7 +10,11 @@
              required
              id="name"
              name="name"
+             (input)="onChange($event.target.value)"
              />
+      <div *ngIf="error.name">
+        <p>Bạn chưa nhập tên quy trình</p>
+      </div>
       <!--<mat-error *ngIf="nameFormControl.hasError('required')">
         Chưa nhập tên quy trình
       </mat-error>-->
@@ -35,7 +39,7 @@
   <div class="select-container">
     <p class="select-name">Permission</p>
     <div class="select-content">
-      <mat-radio-group aria-label="Select an option">
+      <mat-radio-group aria-label="permission" >
         <mat-radio-button value="1">
         Public(Ai cũng có thể nhìn thấy quy trình này)
           </mat-radio-button><br />
@@ -59,7 +63,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Hủy</button>
-  <button mat-button [mat-dialog-close]="true"
+  <button mat-button 
           cdkFocusInitial (click)="gotoSetting()">
     Tạo mới
   </button>

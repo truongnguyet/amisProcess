@@ -6,12 +6,7 @@
   </div>
   <div class="list">
     <h2>Danh sách các quy trình bạn quản lí:</h2>
-    <ul class="admin-container">
-      <li *ngFor="let process of processes">
-        <span class="badge">{{process.id}}  </span> {{process.nameProcess}}
-        - {{process.createdBy}} - {{process.status}}
-      </li>
-    </ul>
+    
     <table class="table table-striped">
       <thead>
         <tr>
@@ -23,24 +18,12 @@
       </thead>
       <tbody *ngFor="let process of processes">
         <tr>
-          <th scope="row"></th>
           <td>{{process.id}}</td>
-        </tr>
-        <tr>
-          <th scope="row"></th>
           <td>{{process.nameProcess}}</td>
-        </tr>
-        <tr>
-          <th scope="row"></th>
           <td>{{process.createdBy}}</td>
-
-        </tr>
-        <tr>
-          <th scope="row"></th>
           <td>
             {{process.status}}
           </td>
-          
         </tr>
       </tbody>
     </table>

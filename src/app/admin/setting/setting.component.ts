@@ -29,12 +29,11 @@ export class SettingComponent implements OnInit {
   limitUser = false;
   fields = FIELDS;
   icons = ICONS;
-  selectedIcon: number;
+  selectedIcon: string;
   panelOpenState = false;
-
   tabs = ['Giai đoạn 1', 'Giai đoạn 2', 'Giai đoạn 3', 'Thành công', 'Thất bại'];
   selected = new FormControl(0);
-
+  count =1;
 
   constructor(
     private dialog: MatDialog,
@@ -69,13 +68,15 @@ export class SettingComponent implements OnInit {
 
 
   addTab() {
-    this.tabs.push('Giai đoạn mới');
+    this.tabs.splice(this.tabs.length - 2, 0, 'Giai đoạn mới ' + this.count);
+    this.count++;
   }
   removeTab(index: number) {
     this.tabs.splice(index, 1);
   }
-  selectIcon(id: number) {
-    console.log("id of icon",id);
+  selectIcon(id: string) {
+    this.selectedIcon = id;
+  
   }
 
 }
