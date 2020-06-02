@@ -8,6 +8,8 @@ import { AdminComponent } from '../admin/admin.component';
 import { ConfirmProcessComponent } from '../confirm-process/confirm-process.component';
 import { YourProcessComponent } from '../your-process/your-process.component';
 import { ProcessDetailComponent } from '../process-detail/process-detail.component';
+import { DeleteMemberComponent } from '../viewmembers/viewmembers.component';
+import { ViewmembersComponent } from '../viewmembers/viewmembers.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,9 +22,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
 
-
 import { HomeRoutingModule } from './home-routing.module';
 import { AdminModule } from '../admin/admin.module';
+
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { AdminModule } from '../admin/admin.module';
     AdminComponent,
     ConfirmProcessComponent,
     YourProcessComponent,
-    ProcessDetailComponent
+    ProcessDetailComponent,
+    DeleteMemberComponent,
+    ViewmembersComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +52,7 @@ import { AdminModule } from '../admin/admin.module';
     MatRadioModule,
     AdminModule,
     MatTooltipModule,
-    MatGridListModule
+    MatGridListModule,
   ],
 
 })

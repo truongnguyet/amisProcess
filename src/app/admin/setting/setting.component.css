@@ -14,3 +14,13 @@
 button{
     margin:10px;
 }
+.container{
+    display:flex;
+}
+
+i{
+    margin:10px;
+}
+.div-icon {
+    width: 50%;
+}

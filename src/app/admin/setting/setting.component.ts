@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { USERS } from '../../users/mock-users';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -15,6 +16,7 @@ import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.com
 import { Fields } from '../../fields/fiedls';
 import { Router } from '@angular/router';
 import { ICONS } from '../../process/mock-icons';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -27,10 +29,16 @@ export class SettingComponent implements OnInit {
   limitUser = false;
   fields = FIELDS;
   icons = ICONS;
+  selectedIcon: number;
+  panelOpenState = false;
+
+  tabs = ['Giai đoạn 1', 'Giai đoạn 2', 'Giai đoạn 3', 'Thành công', 'Thất bại'];
+  selected = new FormControl(0);
+
 
   constructor(
     private dialog: MatDialog,
-    private router : Router,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +54,7 @@ export class SettingComponent implements OnInit {
     this.limitUser = false;
   }
 
-  addField(nameField: string, icon: string, description : string) {
+  addField(nameField: string, icon: string, description: string) {
     this.dialog.open(DialogFieldComponent, {
       data: {
         nameField: nameField,
@@ -57,6 +65,17 @@ export class SettingComponent implements OnInit {
   }
   gotoProcess() {
     this.router.navigate(['/process-detail'])
+  }
+
+
+  addTab() {
+    this.tabs.push('Giai đoạn mới');
+  }
+  removeTab(index: number) {
+    this.tabs.splice(index, 1);
+  }
+  selectIcon(id: number) {
+    console.log("id of icon",id);
   }
 
 }

@@ -27,3 +27,6 @@
 mat-dialog-actions {
     float:right;
 }
+.cross-validation-error input {
+  border-left: 5px solid red;
+}

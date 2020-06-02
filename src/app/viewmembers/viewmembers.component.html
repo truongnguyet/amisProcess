@@ -1,0 +1,15 @@
+
+  <div class="view-container">
+    <h2>Xem thành viên</h2>
+    <h4>Hiện tại có 5 thành viên trong quy trình của bạn</h4>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let user of users">
+        <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
+        <div mat-line>{{user.name}}</div>
+        <i class="material-icons" (click)="deleteUser()">delete</i>
+      </mat-list-option>
+    </mat-selection-list>
+    <button type="button" class="btn btn-outline-primary" (click)="addUser()">
+      Mời thêm thành viên
+    </button>
+  </div>

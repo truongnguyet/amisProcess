@@ -8,6 +8,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-createdialog',
@@ -15,12 +24,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./createdialog.component.css']
 })
 export class CreatedialogComponent implements OnInit {
-
+  nameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+  matcher = new MyErrorStateMatcher();
+  
   constructor(
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
 
-  ) { }
+  ) {  }
 
   ngOnInit(): void {
   }
@@ -30,5 +43,5 @@ export class CreatedialogComponent implements OnInit {
   gotoSetting() {
     this.router.navigate(['/home/setting']);
   }
-
+ 
 }

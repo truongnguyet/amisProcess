@@ -3,10 +3,11 @@
     <mat-toolbar-row>
       <span>Amis Process</span>
       <span class="example-spacer"></span>
-      <!--<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-  <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-  <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>-->
-      <img class="img" src="assets/img/user.png" [matMenuTriggerFor]="menu"/>
+      <div class="icon-process">
+        <i class="material-icons">settings</i>
+        <i class="material-icons" (click)="viewMember()">people_alt</i>
+      </div>
+      <img class="img" src="assets/img/user.png" [matMenuTriggerFor]="menu" />
       <mat-menu #menu="matMenu">
         <button mat-menu-item>Thông tin cá nhân</button>
         <button mat-menu-item (click)="logout()">Đăng xuất</button>

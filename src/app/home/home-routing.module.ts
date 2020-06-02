@@ -8,6 +8,7 @@ import { ConfirmProcessComponent } from '../confirm-process/confirm-process.comp
 import { YourProcessComponent } from '../your-process/your-process.component';
 import { SettingComponent } from '../admin/setting/setting.component';
 import { ProcessDetailComponent } from '../process-detail/process-detail.component';
+import { ViewmembersComponent } from '../viewmembers/viewmembers.component';
 
 const homeRoutes: Routes = [
   {
@@ -37,6 +38,10 @@ const homeRoutes: Routes = [
       {
         path: 'process-detail',
         component: ProcessDetailComponent
+      },
+      {
+        path: 'process/view-member',
+        component: ViewmembersComponent
       }
 
     ]

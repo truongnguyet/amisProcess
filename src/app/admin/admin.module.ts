@@ -16,6 +16,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { CreatedialogComponent } from './createdialog/createdialog.component';
 import { InviteUserComponent } from './invite-user/invite-user.component';
@@ -46,7 +48,9 @@ import { DialogFieldComponent } from '../fields/dialog-field/dialog-field.compon
     MatListModule,
     MatMenuModule,
     MatGridListModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule,
+    MatExpansionModule
   ],
 
 })

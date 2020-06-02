@@ -18,6 +18,7 @@ mat-grid-tile {
 }
 p {
   color :#959da5;
+  text-align:center;
 }
 button {
     margin:15px;
@@ -52,4 +53,7 @@ li {
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
-
+.item-control {
+    width:200px;
+    height:200px;
+}

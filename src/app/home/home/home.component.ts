@@ -43,6 +43,9 @@ export class HomeComponent implements OnInit {
   gotoYourPro() {
     this.router.navigate(['/yours-process'])
   }
+  viewMember() {
+    this.router.navigate(['/process/view-member'])
+  }
 //xoa
   ngOnInit() {
     this.loading = true;

@@ -1,12 +1,15 @@
 
-  <div>
-    <div class="example-button-container">
-      <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạn">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-    <mat-tab-group>
-      <mat-tab label="Giai đoạn 1">
+<div>
+  <div class="example-button-container">
+    <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạn" (click)="addTab()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-tab-group [selectedIndex]="selected.value"
+                 (selectedIndexChange)="selected.setValue($event)">
+    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+
+      <div *ngIf="tab === 'Giai đoạn 1' ">
         <div class="setting-container">
           <h2>Cài đặt GĐ 1</h2>
           <div class="setting-item">
@@ -26,38 +29,41 @@
             <br />
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" [matMenuTriggerFor]="menu" type="button" data-toggle="dropdown" aria-haspopup="true" >Icon</button>
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">Icon</button>
                 <!--<div class="dropdown-menu" *ngFor="let icon of icons">
                  <i class="material-icons">{{icon.name}}</i>
                 </div>-->
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item mat-icon *ngFor="let icon of icons">
+                <!--<mat-menu #menu="matmenu">
+                  <button mat-menu-item mat-icon *ngfor="let icon of icons">
                     <i class="material-icons">{{icon.name}}</i>
                   </button>
-                </mat-menu>
+                </mat-menu>-->
               </div>
-             <i class="material-icons">apps</i>
+              <i class="material-icons">apps</i>
             </div>
             <br />
             <br />
             <p> (Chưa có trường nào được chọn)</p>
             <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)" >
-                <i  class="material-icons">{{field.icon}}</i>
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
+                <i class="material-icons">{{field.icon}}</i>
                 <span>{{field.nameField}}</span>
               </button>
             </mat-menu>
           </div>
           <br />
           <br />
-          <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+          <button type="button" class="btn btn-danger"
+                  [disabled]="tabs.length === 2"
+                  (click)="removeTab(index)">
+            Xóa giai đoạn
+          </button>
           <button type="button" class="btn btn-success">Lưu</button>
 
         </div>
-
-      </mat-tab>
-      <mat-tab label="Giai đoạn 2">
+      </div>
+      <div *ngIf="tab === 'Giai đoạn 2' ">
         <div class="setting-container">
           <h2>Cài đặt GĐ 2</h2>
           <div class="setting-item">
@@ -75,18 +81,31 @@
             </div>
             <br />
             <br />
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item">Action</a>
-                  <a class="dropdown-item">Another action</a>
-                  <a class="dropdown-item">Something else here</a>
-                  <a class="dropdown-item">Separated link</a>
-                </div>
-              </div>
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            <div class="div-icon">
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Icon
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Nhấp vào để chọn icon
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <div class="container">
+                    <div class="row" *ngFor="let icon of icons">
+                      <div class="col-sm">
+                        <i class="material-icons" (click)="selectIcon(icon.id)"
+                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
             </div>
+            
             <br />
             <br />
             <p> (Chưa có trường nào được chọn)</p>
@@ -111,12 +130,16 @@
           </div>
           <br />
           <br />
-          <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+          <button type="button" class="btn btn-danger"
+                  [disabled]="tabs.length === 1"
+                  (click)="removeTab(index)">
+            Xóa giai đoạn
+          </button>
           <button type="button" class="btn btn-success">Lưu</button>
 
         </div>
-      </mat-tab>
-      <mat-tab label="Giai đoạn 3">
+      </div>
+      <div *ngIf="tab === 'Giai đoạn 3' ">
         <div class="setting-container">
           <h2>Cài đặt GĐ 3</h2>
           <div class="setting-item">
@@ -170,15 +193,19 @@
           </mat-radio-group>
           <br />
           <br />
-          <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+          <button type="button" class="btn btn-danger"
+                  [disabled]="tabs.length === 1"
+                  (click)="removeTab(index)">
+            Xóa giai đoạn
+          </button>
           <button type="button" class="btn btn-success">Lưu</button>
 
         </div>
-      </mat-tab>
-      <mat-tab label="Thành công">
+      </div>
+      <div *ngIf="tab === 'Thành công' ">
         <div class="setting-container">
           <h2>Cài đặt GĐ thành công</h2>
-          <div class="seting-item">
+          <div class="setting-item">
             <label>
               Tên giai đoạn
             </label>
@@ -207,13 +234,17 @@
             </div>
             <br />
             <br />
-            <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+            <button type="button" class="btn btn-danger"
+                    [disabled]="tabs.length === 1"
+                    (click)="removeTab(index)">
+              Xóa giai đoạn
+            </button>
             <button type="button" class="btn btn-success">Lưu</button>
 
           </div>
         </div>
-      </mat-tab>
-      <mat-tab label="Thất bại">
+      </div>
+      <div *ngIf="tab === 'Thất bại' ">
         <div class="setting-container">
           <h2>Cài đặt GĐ thất bại</h2>
           <div class="setting-item">
@@ -245,12 +276,80 @@
             </div>
             <br />
             <br />
-            <button type="button" class="btn btn-danger">Xóa giai đoạn</button>
+            <button type="button" class="btn btn-danger"
+                    [disabled]="tabs.length === 1"
+                    (click)="removeTab(index)">
+              Xóa giai đoạn
+            </button>
             <button type="button" class="btn btn-success" (click)="gotoProcess()">Lưu</button>
           </div>
         </div>
-      </mat-tab>
-    </mat-tab-group>
-    
-  </div>
+      </div>
+      <div *ngIf="tab=== 'Giai đoạn mới' ">
+        <div class="setting-container">
+          <h2>Cài đặt GĐ </h2>
+          <div class="setting-item">
+            <label>
+              Tên giai đoạn
+            </label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <label>
+              Mô tả
+            </label>
+            <div class="input-group">
+              <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <br />
+            <br />
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item">Action</a>
+                  <a class="dropdown-item">Another action</a>
+                  <a class="dropdown-item">Something else here</a>
+                  <a class="dropdown-item">Separated link</a>
+                </div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+            <br />
+            <br />
+            <p> (Chưa có trường nào được chọn)</p>
+            <button type="button" class="btn btn-outline-primary">Thêm trường</button>
+            <br />
+            <br />
+            <h2>Danh sách người thực hiện</h2>
+            <br />
+            <mat-radio-group aria-label="Select an option">
+              <mat-radio-button value="1" (change)="onCloseListUser()">Tất cả thành viên</mat-radio-button><br />
+              <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
+              <div *ngIf="limitUser == true">
+                <mat-list>
+                  <mat-list-item *ngFor="let user of users">
+                    <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
+                    <div mat-line>{{user.name}}</div>
+                  </mat-list-item>
+                </mat-list>
+                <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
+              </div>
+            </mat-radio-group>
+          </div>
+          <br />
+          <br />
+          <button type="button" class="btn btn-danger"
+                  [disabled]="tabs.length === 1"
+                  (click)="removeTab(index)">
+            Xóa giai đoạn
+          </button>
+          <button type="button" class="btn btn-success">Lưu</button>
+
+        </div>
+
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
 
