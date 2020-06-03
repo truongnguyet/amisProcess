@@ -3,8 +3,22 @@
     Tạm ngừng quy trình
   </button>
   <mat-grid-list cols="5">
-    <mat-grid-tile>
-      <div>
+    <div>
+      <mat-grid-tile [ngStyle]="{'border-right': '1px solid gray'}"   >
+        <div class="div-content">
+          <i class="material-icons">check_circle</i>
+          <label>
+            Tên giai đoạn
+          </label>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <i class="material-icons">more_vert</i>
+          </button>
+
+        </div>
+      </mat-grid-tile>
+    </div>
+    <mat-grid-tile [ngStyle]="{'border-right': '1px solid gray'}">
+      <div class="div-content">
         <i class="material-icons">check_circle</i>
         <label>
           Tên giai đoạn
@@ -15,8 +29,8 @@
 
       </div>
     </mat-grid-tile>
-    <mat-grid-tile>
-      <div>
+    <mat-grid-tile [ngStyle]="{'border-right': '1px solid gray'}">
+      <div class="div-content">
         <i class="material-icons">check_circle</i>
         <label>
           Tên giai đoạn
@@ -27,8 +41,8 @@
 
       </div>
     </mat-grid-tile>
-    <mat-grid-tile>
-      <div>
+    <mat-grid-tile [ngStyle]="{'border-right': '1px solid gray'}">
+      <div class="div-content">
         <i class="material-icons">check_circle</i>
         <label>
           Tên giai đoạn
@@ -39,20 +53,8 @@
 
       </div>
     </mat-grid-tile>
-    <mat-grid-tile>
-      <div>
-        <i class="material-icons">check_circle</i>
-        <label>
-          Tên giai đoạn
-        </label>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <i class="material-icons">more_vert</i>
-        </button>
-
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div>
+    <mat-grid-tile [ngStyle]="{'border-right': '1px solid gray'}"  >
+      <div class="div-content">
         <i class="material-icons">check_circle</i>
         <label>
           Tên giai đoạn

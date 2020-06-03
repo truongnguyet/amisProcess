@@ -18,6 +18,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 
 import { CreatedialogComponent } from './createdialog/createdialog.component';
 import { InviteUserComponent } from './invite-user/invite-user.component';
@@ -50,7 +51,8 @@ import { DialogFieldComponent } from '../fields/dialog-field/dialog-field.compon
     MatGridListModule,
     MatSlideToggleModule,
     MatTableModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ],
 
 })

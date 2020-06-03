@@ -20,6 +20,18 @@
         <div class="input-group mb-3">
           <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editDes">
         </div>
+        <div *ngIf="data.nameField === 'Radio' || data.nameField ==='CheckBox' || data.nameField === 'DropDownSelect' ">
+          <label>
+            Lựa chọn
+          </label>
+          <div class="input-group mb-3" *ngFor="let option of options">
+            <input type="text" class="form-control" aria-describedby="basic-addon1" [placeholder]="option.index" [(ngModel)]="option.value">
+            <i class="material-icons icon-btn" (click)="removeOption(option.index -1)"
+               disabled="noDelete">delete</i>
+
+          </div>
+          <i class="material-icons icon-btn" (click)="addOption()">add_circle</i>
+        </div>
         <div class="title">
           <h4>
             Trường này có bắt buộc không ?
@@ -43,14 +55,14 @@
             </li>
           </ul>
         </div>
-        <div  *ngIf="data.nameField=== 'Attachment' ">
-          <form >
+        <div *ngIf="data.nameField=== 'Attachment' ">
+          <form>
             <label for="myfile">Select a file:</label>
             <input type="file" id="myfile" name="myfile">
           </form>
         </div>
         <div *ngIf="data.nameField === 'Currency' ">
-          <input type="number" id="money" placeholder="0.00"/>
+          <input type="number" id="money" placeholder="0.00" />
         </div>
         <!--date-->
         <div class="item-control" *ngIf="data.nameField === 'Date' ">
@@ -82,11 +94,15 @@
         </div>
         <!--Radio-->
         <div *ngIf="data.nameField === 'Radio' ">
-          Radio
+          <div *ngFor="let option of options">
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">{{option.value}}</label><br>
+          </div>
+
         </div>
         <!--ShortText-->
         <div *ngIf="data.nameField === 'ShortText' ">
-         <input type="text" id="text" name="text">
+          <input type="text" id="text" name="text">
         </div>
 
         <!--Time-->
@@ -96,10 +112,22 @@
         </div>
 
         <div *ngIf="data.nameField === 'CheckBox' ">
-          checkbox
+          <div *ngFor="let option of options">
+            <input type="checkbox" id="male" name="gender" value="male">
+            <label for="male">{{option.value}}</label>
+          </div>
         </div>
+
         <div *ngIf="data.nameField === 'DropDownSelect' ">
-          dropdown
+          <mat-form-field>
+            <mat-label>Chọn select</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{option.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
         </div>
         <p>(Kết quả xem trước)</p>
       </div>

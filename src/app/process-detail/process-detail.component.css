@@ -1,11 +1,15 @@
-mat-grid-tile {
-  background: #e6dee1;
-  height: 90%;
+ mat-grid-tile {
+  border-right: 2px solid groove;
+  height: 90vh;
 }
-.process-container {
+.process-container {  
     padding:15px;
     margin:10px;
 }
 button{
     margin: 10px;
+}
+.div-content {
+    position:absolute;
+    top:0px;
 }

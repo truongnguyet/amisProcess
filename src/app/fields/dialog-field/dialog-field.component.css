@@ -1,17 +1,22 @@
-mat-grid-tile {
+.mat-grid-tile {
   background: lightblue;
-  height:500px;
+  height:80vh;
+  overflow:auto;
+  width:100%;
+  padding:10px;
 }
-.mat-grid-tile div {
-    padding: 15px;
-}
+ .mat-figure {
+    align-items: normal !important;
+  }
+
 .container-field {
-    width:600px;
-    height:auto;
-    padding:10px;
+  width: 600px;
+  height: auto;
+  padding: 10px;
+  
 }
 .mat-grid-list {
-    height:500px;
+  height: 80vh;
 }
 .title {
   display: flex;
@@ -56,4 +61,7 @@ li {
 .item-control {
     width:200px;
     height:200px;
+}
+.icon-btn:hover {
+    cursor:pointer;
 }

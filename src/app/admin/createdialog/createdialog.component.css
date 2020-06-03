@@ -30,3 +30,12 @@ mat-dialog-actions {
 .cross-validation-error input {
   border-left: 5px solid red;
 }
+
+
+mat-expansion-panel {
+  width: 400px;
+}
+.error-validate {
+ color:red;
+}
+

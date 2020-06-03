@@ -32,11 +32,11 @@ const homeRoutes: Routes = [
         component: YourProcessComponent
       },
       {
-        path: 'home/setting',
+        path: 'home/setting/:name',
         component: SettingComponent
       },
       {
-        path: 'process-detail',
+        path: 'process-detail/:id',
         component: ProcessDetailComponent
       },
       {
