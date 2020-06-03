@@ -14,9 +14,11 @@ import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { FIELDS } from '../../fields/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { Fields } from '../../fields/fiedls';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ICONS } from '../../process/mock-icons';
 import { FormControl } from '@angular/forms';
+
+import { phaseData } from '../../process/mock-phases';
 
 
 @Component({
@@ -29,16 +31,68 @@ export class SettingComponent implements OnInit {
   limitUser = false;
   fields = FIELDS;
   icons = ICONS;
+  name;
+  description;
+  icon;
+  field;
+
   selectedIcon: string;
   panelOpenState = false;
-  tabs = ['Giai đoạn 1', 'Giai đoạn 2', 'Giai đoạn 3', 'Thành công', 'Thất bại'];
+  processId: number;
   selected = new FormControl(0);
-  count =1;
 
+  tabs = [
+    {
+    phaseId: 1,
+    phaseName: 'Giai đoạn 1',
+    icon: '',
+    description: '',
+    fields: [],
+    processId: 1,
+  },
+  {
+    phaseId: 2,
+    phaseName: 'Giai đoạn 2',
+    icon: '',
+    description: '',
+    fields: [],
+    processId: 1,
+  },
+  {
+    phaseId: 3,
+    phaseName: 'Giai đoạn 3',
+    icon: '',
+    description: '',
+    fields: [],
+    processId: 1,
+  },
+  {
+    phaseId: 4,
+    phaseName: 'Thành công',
+    icon: '',
+    description: '',
+    fields: [],
+    processId: 1,
+  },
+    {
+      phaseId: 5,
+      phaseName: 'Thất bại',
+      icon: '',
+      description: '',
+      fields: [],
+      processId: 1,
+    },
+  ];
+  count = 4;
+  
+  
   constructor(
     private dialog: MatDialog,
     private router: Router,
-  ) { }
+    private route: ActivatedRoute
+  ) {
+    this.processId = parseInt( this.route.snapshot.paramMap.get("id"));
+  }
 
   ngOnInit(): void {
     
@@ -62,21 +116,36 @@ export class SettingComponent implements OnInit {
       }
     });
   }
+
   gotoProcess() {
-    this.router.navigate(['/process-detail'])
+    this.tabs.forEach(e => {
+      phaseData.push(e);
+    })
+    console.log(this.tabs);
+    this.router.navigate(['/process-detail/', this.processId])
   }
 
 
+
   addTab() {
-    this.tabs.splice(this.tabs.length - 2, 0, 'Giai đoạn mới ' + this.count);
+    this.tabs.splice(this.tabs.length - 2, 0, {
+      phaseId: 6,
+      phaseName: 'Giai đoạn mới',
+      icon: '',
+      description: '',
+      fields: [],
+      processId: 1,
+    },);
     this.count++;
   }
   removeTab(index: number) {
     this.tabs.splice(index, 1);
+    this.count--;
+
   }
-  selectIcon(id: string) {
+  selectIcon(tab,id: string) {
+    tab.icon = id;
     this.selectedIcon = id;
-  
   }
 
 }

@@ -1,3 +1,5 @@
+import { Phase } from './phase';
+
 export interface Process {
   id: number;
   nameProcess: string;
@@ -6,4 +8,5 @@ export interface Process {
   status: string;
   modifyBy: string;
   modifyAt: string;
+  phase: Phase[];
 }

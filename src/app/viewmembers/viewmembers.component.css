@@ -7,3 +7,6 @@
 button{
     margin:10px;
 }
+.list-btn:hover {
+  cursor: pointer;
+}

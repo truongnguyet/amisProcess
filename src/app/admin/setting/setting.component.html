@@ -7,9 +7,9 @@
   </div>
   <mat-tab-group [selectedIndex]="selected.value"
                  (selectedIndexChange)="selected.setValue($event)">
-    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.phaseName">
 
-      <div *ngIf="tab === 'Giai đoạn 1' ">
+      <div *ngIf="tab.phaseId == 1 ">
         <div class="setting-container">
           <h2>Cài đặt GĐ 1</h2>
           <div class="setting-item">
@@ -17,29 +17,42 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1">
+              <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1">
             </div>
             <label>
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
             <br />
             <br />
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">Icon</button>
-                <!--<div class="dropdown-menu" *ngFor="let icon of icons">
-                 <i class="material-icons">{{icon.name}}</i>
-                </div>-->
-                <!--<mat-menu #menu="matmenu">
-                  <button mat-menu-item mat-icon *ngfor="let icon of icons">
-                    <i class="material-icons">{{icon.name}}</i>
-                  </button>
-                </mat-menu>-->
+            <div class="div-icon">
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Icon
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Nhấp vào để chọn icon
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <div class="container">
+                    <div class="row" *ngFor="let icon of icons">
+                      <div class="col-sm">
+                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
+                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <div *ngIf="selectedIcon">
+                <i class="material-icons icon-btn"> {{selectedIcon}} </i>
               </div>
-              <i class="material-icons">apps</i>
             </div>
             <br />
             <br />
@@ -63,7 +76,7 @@
 
         </div>
       </div>
-      <div *ngIf="tab === 'Giai đoạn 2' ">
+      <div *ngIf="tab.phaseId === 2 ">
         <div class="setting-container">
           <h2>Cài đặt GĐ 2</h2>
           <div class="setting-item">
@@ -71,13 +84,13 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
             <label>
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
             <br />
             <br />
@@ -97,7 +110,7 @@
                   <div class="container">
                     <div class="row" *ngFor="let icon of icons">
                       <div class="col-sm">
-                        <i class="material-icons icon-btn" (click)="selectIcon(icon.name)"
+                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
                            [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
                       </div>
                     </div>
@@ -108,11 +121,17 @@
                 <i class="material-icons icon-btn"> {{selectedIcon}} </i>
               </div>
             </div>
-            
+
             <br />
             <br />
             <p> (Chưa có trường nào được chọn)</p>
-            <button type="button" class="btn btn-outline-primary">Thêm trường</button>
+            <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
+                <i class="material-icons">{{field.icon}}</i>
+                <span>{{field.nameField}}</span>
+              </button>
+            </mat-menu>
             <br />
             <br />
             <h2>Danh sách người thực hiện</h2>
@@ -142,7 +161,7 @@
 
         </div>
       </div>
-      <div *ngIf="tab === 'Giai đoạn 3' ">
+      <div *ngIf="tab.phaseId === 3 ">
         <div class="setting-container">
           <h2>Cài đặt GĐ 3</h2>
           <div class="setting-item">
@@ -150,32 +169,53 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
             <label>
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
             <br />
             <br />
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item">Action</a>
-                  <a class="dropdown-item">Another action</a>
-                  <a class="dropdown-item">Something else here</a>
-                  <a class="dropdown-item">Separated link</a>
-                </div>
+            <div class="div-icon">
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Icon
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Nhấp vào để chọn icon
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <div class="container">
+                    <div class="row" *ngFor="let icon of icons">
+                      <div class="col-sm">
+                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
+                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <div *ngIf="selectedIcon">
+                <i class="material-icons icon-btn"> {{selectedIcon}} </i>
               </div>
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
             </div>
             <br />
             <br />
             <p> (Chưa có trường nào được chọn)</p>
-            <button type="button" class="btn btn-outline-primary">Thêm trường</button>
+            <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
+                <i class="material-icons">{{field.icon}}</i>
+                <span>{{field.nameField}}</span>
+              </button>
+            </mat-menu>
           </div>
           <br />
           <h2>Danh sách người thực hiện</h2>
@@ -205,7 +245,7 @@
 
         </div>
       </div>
-      <div *ngIf="tab === 'Thành công' ">
+      <div *ngIf="tab.phaseId === 4 ">
         <div class="setting-container">
           <h2>Cài đặt GĐ thành công</h2>
           <div class="setting-item">
@@ -213,27 +253,42 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
             <label>
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
             <br />
             <br />
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item">Action</a>
-                  <a class="dropdown-item">Another action</a>
-                  <a class="dropdown-item">Something else here</a>
-                  <a class="dropdown-item">Separated link</a>
-                </div>
+            <div class="div-icon">
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Icon
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Nhấp vào để chọn icon
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <div class="container">
+                    <div class="row" *ngFor="let icon of icons">
+                      <div class="col-sm">
+                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
+                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <div *ngIf="selectedIcon">
+                <i class="material-icons icon-btn"> {{selectedIcon}} </i>
               </div>
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
             </div>
             <br />
             <br />
@@ -247,7 +302,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="tab === 'Thất bại' ">
+      <div *ngIf="tab.phaseId === 5 ">
         <div class="setting-container">
           <h2>Cài đặt GĐ thất bại</h2>
           <div class="setting-item">
@@ -255,27 +310,42 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
             <label>
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
             <br />
             <br />
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item">Action</a>
-                  <a class="dropdown-item">Another action</a>
-                  <a class="dropdown-item">Something else here</a>
-                  <a class="dropdown-item">Separated link</a>
-                </div>
+            <div class="div-icon">
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Icon
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Nhấp vào để chọn icon
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <div class="container">
+                    <div class="row" *ngFor="let icon of icons">
+                      <div class="col-sm">
+                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
+                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <div *ngIf="selectedIcon">
+                <i class="material-icons icon-btn"> {{selectedIcon}} </i>
               </div>
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
             </div>
             <br />
             <br />
@@ -288,7 +358,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="tab=== 'Giai đoạn mới' ">
+      <div *ngIf="tab.phaseId >= 6 ">
         <div class="setting-container">
           <h2>Cài đặt GĐ </h2>
           <div class="setting-item">
@@ -296,32 +366,53 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
             <label>
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
             <br />
             <br />
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Icon</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item">Action</a>
-                  <a class="dropdown-item">Another action</a>
-                  <a class="dropdown-item">Something else here</a>
-                  <a class="dropdown-item">Separated link</a>
-                </div>
+            <div class="div-icon">
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Icon
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Nhấp vào để chọn icon
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <div class="container">
+                    <div class="row" *ngFor="let icon of icons">
+                      <div class="col-sm">
+                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
+                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <div *ngIf="selectedIcon">
+                <i class="material-icons icon-btn"> {{selectedIcon}} </i>
               </div>
-              <input type="text" class="form-control" aria-label="Text input with dropdown button">
             </div>
             <br />
             <br />
             <p> (Chưa có trường nào được chọn)</p>
-            <button type="button" class="btn btn-outline-primary">Thêm trường</button>
+            <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
+                <i class="material-icons">{{field.icon}}</i>
+                <span>{{field.nameField}}</span>
+              </button>
+            </mat-menu>
             <br />
             <br />
             <h2>Danh sách người thực hiện</h2>
@@ -347,7 +438,7 @@
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>
-          <button type="button" class="btn btn-success">Lưu</button>
+          <button type="button" class="btn btn-success" >Lưu</button>
 
         </div>
 

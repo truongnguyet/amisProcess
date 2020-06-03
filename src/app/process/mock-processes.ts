@@ -8,7 +8,42 @@ export const PROCESS: Process[] = [
     status: 'Đang hoạt động',
     modifyBy: 'Trương Thị Nguyệt',
     modifyAt: '12/12/2020',
-    createdAt:'10/1/2020'
+    createdAt: '10/1/2020',
+    phase: [
+      {
+        phaseId: 1,
+        phaseName: 'Lập đơn',
+        icon: 'access_alarm',
+        description: '',
+        fields: [
+        
+
+        ],
+        processId: 1,
+      },
+      {
+        phaseId: 2,
+        phaseName: 'Phê duyệt',
+        icon: 'access_alarm',
+        description: '',
+        fields: [
+
+
+        ],
+        processId: 1,
+      },
+      {
+        phaseId: 3,
+        phaseName: 'Xác nhận',
+        icon: 'access_alarm',
+        description: '',
+        fields: [
+
+
+        ],
+        processId: 1,
+      }
+    ]
   },
   {
     id: 2,
@@ -17,7 +52,8 @@ export const PROCESS: Process[] = [
     status: 'Tạm ngừng',
     modifyAt: '12/12/2020',
     modifyBy: 'Mai Thị Hoa',
-    createdAt:'10/2/2019'
+    createdAt: '10/2/2019',
+    phase:[]
   },
   {
     id: 3,
@@ -26,7 +62,9 @@ export const PROCESS: Process[] = [
     status: 'Đang hoạt động',
     modifyBy: 'Mai Thị Hoa',
     modifyAt: '23/2/2020',
-    createdAt:'10/1/2018'
+    createdAt: '10/1/2018',
+    phase: []
+
   },
   {
     id: 4,
@@ -35,7 +73,18 @@ export const PROCESS: Process[] = [
     status: 'Tạm ngừng',
     modifyAt: '12/2/2020',
     modifyBy: 'Trương Thị Nguyệt',
-    createdAt:'1/1/2019'
+    createdAt: '1/1/2019',
+    phase: []
+  },
+  {
+    id: 5,
+    nameProcess: 'Quy trình sản xuất 2',
+    createdBy: 'Hỏa Thành An',
+    status: 'Tạm ngừng',
+    modifyAt: '12/2/2020',
+    modifyBy: 'Trương Thị Nguyệt',
+    createdAt: '1/1/2019',
+    phase: []
   }
 
 ];

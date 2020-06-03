@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { phaseData } from '../process/mock-phases';
 
 @Component({
   selector: 'app-process-detail',
@@ -8,7 +9,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 })
 export class ProcessDetailComponent implements OnInit {
 
-  constructor() { }
+  processId;
+  constructor() {
+    this.processId = 1
+    phaseData.find(x => x.processId == this.processId )
+  }
 
   ngOnInit(): void {
   }

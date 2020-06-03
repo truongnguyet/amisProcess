@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { AdminModule } from '../admin/admin.module';
@@ -53,6 +54,7 @@ import { AdminModule } from '../admin/admin.module';
     AdminModule,
     MatTooltipModule,
     MatGridListModule,
+    MatSelectModule
   ],
 
 })
