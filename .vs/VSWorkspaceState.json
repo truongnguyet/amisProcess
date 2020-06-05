@@ -5,12 +5,12 @@
     "\\src\\app",
     "\\src\\app\\admin",
     "\\src\\app\\admin\\createdialog",
-    "\\src\\app\\admin\\setting",
-    "\\src\\app\\home",
+    "\\src\\app\\fields",
+    "\\src\\app\\fields\\dialog-field",
     "\\src\\app\\process",
-    "\\src\\app\\users",
+    "\\src\\app\\process-detail",
     "\\src\\app\\viewmembers"
   ],
-  "SelectedNode": "\\src\\app\\admin\\createdialog\\createdialog.component.html",
+  "SelectedNode": "\\src\\app\\admin\\createdialog\\createdialog.component.ts",
   "PreviewInSolutionExplorer": false
 }
