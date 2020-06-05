@@ -1,11 +1,14 @@
-mat-grid-tile {
+.mat-grid-tile {
   background: lightblue;
-  height:800px;
+  height:80vh;
   overflow:auto;
+  width:100%;
+  padding:10px;
 }
-.mat-grid-tile div {
-    padding: 15px; 
-}
+ .mat-figure {
+    align-items: normal !important;
+  }
+
 .container-field {
   width: 600px;
   height: auto;
@@ -13,7 +16,7 @@ mat-grid-tile {
   
 }
 .mat-grid-list {
-  height: 800px;
+  height: 80vh;
 }
 .title {
   display: flex;

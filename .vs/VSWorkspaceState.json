@@ -11,6 +11,10 @@
     "\\src\\app\\process-detail",
     "\\src\\app\\viewmembers"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\src\\app\\admin\\createdialog\\createdialog.component.ts",
+=======
+  "SelectedNode": "\\src\\app\\admin\\setting\\setting.component.ts",
+>>>>>>> 3341c1c00f642a82bf39eea5b3f3e5bc7817b6c8
   "PreviewInSolutionExplorer": false
 }

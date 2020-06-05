@@ -13,13 +13,18 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { FIELDS } from '../../fields/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
-import { Fields } from '../../fields/fiedls';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ICONS } from '../../process/mock-icons';
-import { FormControl } from '@angular/forms';
 
 import { phaseData } from '../../process/mock-phases';
 
+interface Error {
+  name: boolean;
+  description: boolean;
+  icon: boolean;
+  field: boolean;
+  implementer: boolean;
+}
 
 @Component({
   selector: 'app-setting',
@@ -31,49 +36,54 @@ export class SettingComponent implements OnInit {
   limitUser = false;
   fields = FIELDS;
   icons = ICONS;
-  name;
-  description;
-  icon;
-  field;
+
+  name: string;
+  description: string;
+  
+
 
   selectedIcon: string;
   panelOpenState = false;
   processId: number;
-  selected = new FormControl(0);
+  activeTab = 0;
 
   tabs = [
     {
-    phaseId: 1,
-    phaseName: 'Giai đoạn 1',
-    icon: '',
-    description: '',
-    fields: [],
-    processId: 1,
-  },
-  {
-    phaseId: 2,
-    phaseName: 'Giai đoạn 2',
-    icon: '',
-    description: '',
-    fields: [],
-    processId: 1,
-  },
-  {
-    phaseId: 3,
-    phaseName: 'Giai đoạn 3',
-    icon: '',
-    description: '',
-    fields: [],
-    processId: 1,
-  },
-  {
-    phaseId: 4,
-    phaseName: 'Thành công',
-    icon: '',
-    description: '',
-    fields: [],
-    processId: 1,
-  },
+      phaseId: 1,
+      phaseName: 'Giai đoạn 1',
+      icon: '',
+      description: '',
+      fields: [],
+      processId: 1,
+      implementer: [],
+    },
+    {
+      phaseId: 2,
+      phaseName: 'Giai đoạn 2',
+      icon: '',
+      description: '',
+      fields: [],
+      processId: 1,
+      implementer: [],
+    },
+    {
+      phaseId: 3,
+      phaseName: 'Giai đoạn 3',
+      icon: '',
+      description: '',
+      fields: [],
+      processId: 1,
+      implementer: [],
+    },
+    {
+      phaseId: 4,
+      phaseName: 'Thành công',
+      icon: '',
+      description: '',
+      fields: [],
+      processId: 1,
+      implementer: [],
+    },
     {
       phaseId: 5,
       phaseName: 'Thất bại',
@@ -81,21 +91,22 @@ export class SettingComponent implements OnInit {
       description: '',
       fields: [],
       processId: 1,
+      implementer: [],
     },
   ];
   count = 4;
-  
-  
+
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.processId = parseInt( this.route.snapshot.paramMap.get("id"));
+    this.processId = parseInt(this.route.snapshot.paramMap.get("id"));
   }
 
   ngOnInit(): void {
-    
+
   }
   addUser() {
     this.dialog.open(InviteUserComponent);
@@ -103,8 +114,9 @@ export class SettingComponent implements OnInit {
   onListUser() {
     this.limitUser = true;
   }
-  onCloseListUser() {
+  onCloseListUser(tab) {
     this.limitUser = false;
+    tab.implementer = this.users;
   }
 
   addField(nameField: string, icon: string, description: string) {
@@ -112,7 +124,8 @@ export class SettingComponent implements OnInit {
       data: {
         nameField: nameField,
         icon: icon,
-        description: description
+        description: description,
+
       }
     });
   }
@@ -135,7 +148,8 @@ export class SettingComponent implements OnInit {
       description: '',
       fields: [],
       processId: 1,
-    },);
+      implementer: []
+    });
     this.count++;
   }
   removeTab(index: number) {
@@ -143,9 +157,25 @@ export class SettingComponent implements OnInit {
     this.count--;
 
   }
-  selectIcon(tab,id: string) {
+  selectIcon(tab, id: string) {
     tab.icon = id;
     this.selectedIcon = id;
   }
 
+
+  onSave() {
+   
+    if (this.activeTab < this.tabs.length - 1) {
+      this.activeTab++;
+    }
+  }
+  onSelectTab(tab) {
+    this.activeTab = tab;
+  }
+  selectUser(tab, user) {
+    if (this.limitUser) {
+      tab.implementer.push(user);
+    }
+  }
+ 
 }

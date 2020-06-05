@@ -25,3 +25,6 @@
 i {
     margin:10px;
 }
+.icon-process :hover{
+    cursor:pointer;
+}

@@ -1,6 +1,6 @@
-::ng-deep mat-grid-tile .mat-figure {
+ mat-grid-tile {
   border-right: 2px solid groove;
-  height: 90%;
+  height: 90vh;
 }
 .process-container {  
     padding:15px;

@@ -31,3 +31,9 @@ i{
 mat-expansion-panel {
   width: 400px;
 }
+.list-user :hover {
+    cursor:pointer;
+}
+.error-validate {
+  color: red;
+}

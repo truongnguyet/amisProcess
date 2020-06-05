@@ -20,6 +20,7 @@ export const PROCESS: Process[] = [
 
         ],
         processId: 1,
+        implementer: [] 
       },
       {
         phaseId: 2,
@@ -31,6 +32,7 @@ export const PROCESS: Process[] = [
 
         ],
         processId: 1,
+        implementer: [] 
       },
       {
         phaseId: 3,
@@ -42,8 +44,10 @@ export const PROCESS: Process[] = [
 
         ],
         processId: 1,
+        implementer: [] 
       }
-    ]
+    ],
+    
   },
   {
     id: 2,

@@ -7,7 +7,7 @@
           <h5>{{data.nameField}}</h5>
         </div>
         <p>{{data.description}}</p>
-
+        
         <label>
           Tên trường
         </label>
@@ -40,7 +40,7 @@
         </div>
 
         <button type="button" class="btn btn-danger" mat-dialog-close>Hủy</button>
-        <button type="button" class="btn btn-primary" mat-dialog-close>Lưu</button>
+        <button type="button" class="btn btn-primary" mat-dialog-close (click)="onSaveField()">Lưu</button>
       </div>
     </mat-grid-tile>
     <mat-grid-tile>
