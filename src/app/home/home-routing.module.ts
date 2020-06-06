@@ -9,6 +9,7 @@ import { YourProcessComponent } from '../your-process/your-process.component';
 import { SettingComponent } from '../admin/setting/setting.component';
 import { ProcessDetailComponent } from '../process-detail/process-detail.component';
 import { ViewmembersComponent } from '../viewmembers/viewmembers.component';
+import { PracticeProcessComponent } from '../list-process/practice-process/practice-process.component';
 
 const homeRoutes: Routes = [
   {
@@ -21,7 +22,11 @@ const homeRoutes: Routes = [
       },
       {
         path: 'list',
-        component: ListProcessComponent
+        component: ListProcessComponent,
+      },
+      {
+        path: 'list/practice',
+        component: PracticeProcessComponent,
       },
       {
         path: 'confirm',

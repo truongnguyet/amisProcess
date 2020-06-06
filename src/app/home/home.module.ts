@@ -10,6 +10,8 @@ import { YourProcessComponent } from '../your-process/your-process.component';
 import { ProcessDetailComponent } from '../process-detail/process-detail.component';
 import { DeleteMemberComponent } from '../viewmembers/viewmembers.component';
 import { ViewmembersComponent } from '../viewmembers/viewmembers.component';
+import { PracticeProcessComponent } from '../list-process/practice-process/practice-process.component';
+import { ForwardProcessComponent } from '../list-process/practice-process/practice-process.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -37,7 +39,9 @@ import { AdminModule } from '../admin/admin.module';
     YourProcessComponent,
     ProcessDetailComponent,
     DeleteMemberComponent,
-    ViewmembersComponent
+    ViewmembersComponent,
+    PracticeProcessComponent,
+    ForwardProcessComponent
   ],
   imports: [
     CommonModule,

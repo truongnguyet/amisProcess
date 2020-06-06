@@ -1,0 +1,19 @@
+<div class="container">
+  <h2 mat-dialog-title>Bạn muốn chuyển đến ai</h2>
+  <br />
+  <br />
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Select person</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let user of users" [value]="user.name">
+          {{user.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button  mat-stroked-button color="primary" mat-dialog-close (click)="onForward()">Chuyển tiếp</button>
+  </mat-dialog-actions>
+
+</div>

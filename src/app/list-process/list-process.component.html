@@ -1,2 +1,28 @@
-<p>list-process works!</p>
-<h2>Hello from the list process component</h2>
+<div class="admin-container">
+  <div class="list">
+    <h2>Danh sách các quy trình bạn có thể tham gia:</h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="row">Số thứ tự</th>
+          <th scope="row">Tên quy trình</th>
+          <th scope="row">Người tạo</th>
+          <th scope="row">Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let process of processes" class="list-row" (click)="gotoProcess()">
+        <tr>
+          <td>{{process.id}}</td>
+          <td>{{process.nameProcess}}</td>
+          <td>{{process.createdBy}}</td>
+          <td>
+            {{process.status}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<router-outlet></router-outlet>

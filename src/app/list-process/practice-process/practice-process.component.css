@@ -1,0 +1,15 @@
+.practice-container {
+    padding:20px;
+    margin:10px;
+    width:80vw;
+}
+.positionBtn {
+    float:right;
+}
+mat-dialog-actions {
+  float: right;
+}
+.container {
+    width:400px;
+    height:auto;
+}

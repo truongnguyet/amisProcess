@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PROCESS } from '../process/mock-processes';
 
 @Component({
   selector: 'app-your-process',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./your-process.component.css']
 })
 export class YourProcessComponent implements OnInit {
-
+  processes = PROCESS;
   constructor() { }
 
   ngOnInit(): void {

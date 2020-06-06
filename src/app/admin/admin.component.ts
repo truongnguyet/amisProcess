@@ -12,8 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class AdminComponent implements OnInit {
   processes = PROCESS;
-  dataSource = PROCESS;
-  displayedColumns: string[] = ['position', 'nameProcess', 'createdBy', 'modifyBy','status'];
+ 
 
   constructor(public dialog: MatDialog) { }
 

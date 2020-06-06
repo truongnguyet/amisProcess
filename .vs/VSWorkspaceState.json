@@ -5,16 +5,12 @@
     "\\src\\app",
     "\\src\\app\\admin",
     "\\src\\app\\admin\\createdialog",
+    "\\src\\app\\admin\\setting",
     "\\src\\app\\fields",
     "\\src\\app\\fields\\dialog-field",
-    "\\src\\app\\process",
-    "\\src\\app\\process-detail",
-    "\\src\\app\\viewmembers"
+    "\\src\\app\\home",
+    "\\src\\app\\home\\home"
   ],
-<<<<<<< HEAD
-  "SelectedNode": "\\src\\app\\admin\\createdialog\\createdialog.component.ts",
-=======
-  "SelectedNode": "\\src\\app\\admin\\setting\\setting.component.ts",
->>>>>>> 3341c1c00f642a82bf39eea5b3f3e5bc7817b6c8
+  "SelectedNode": "\\src\\app\\fields\\fiedls.ts",
   "PreviewInSolutionExplorer": false
 }
