@@ -1,0 +1,14 @@
+.admin-container {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 10px;
+}
+
+.list {
+  margin-top: 20px;
+}
+.list-row:hover {
+  cursor: pointer;
+  color: #607D8B;
+  background-color: #DDD;
+}

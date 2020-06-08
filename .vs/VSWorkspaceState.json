@@ -4,13 +4,12 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\admin",
-    "\\src\\app\\admin\\createdialog",
-    "\\src\\app\\admin\\setting",
-    "\\src\\app\\fields",
-    "\\src\\app\\fields\\dialog-field",
     "\\src\\app\\home",
-    "\\src\\app\\home\\home"
+    "\\src\\app\\home\\home",
+    "\\src\\app\\list-process",
+    "\\src\\app\\list-process\\practice-process",
+    "\\src\\app\\process"
   ],
-  "SelectedNode": "\\src\\app\\fields\\fiedls.ts",
+  "SelectedNode": "\\src\\app\\process\\process.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -39,10 +39,7 @@ export class SettingComponent implements OnInit {
 
   name: string;
   description: string;
-  
-
-
-  selectedIcon: string;
+  selectedIcon: boolean;
   panelOpenState = false;
   processId: number;
   activeTab = 0;
@@ -155,11 +152,11 @@ export class SettingComponent implements OnInit {
   removeTab(index: number) {
     this.tabs.splice(index, 1);
     this.count--;
-
   }
+
   selectIcon(tab, id: string) {
+    this.selectedIcon = true;
     tab.icon = id;
-    this.selectedIcon = id;
   }
 
 

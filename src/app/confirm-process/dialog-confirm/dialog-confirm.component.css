@@ -1,0 +1,21 @@
+.mat-grid-tile {
+  background: lightblue;
+  height: 80vh;
+  overflow: auto;
+  width: 100%;
+  padding: 10px;
+}
+.mat-grid-list {
+  height: 80vh;
+}
+.container-field {
+  width: 70vw;
+  height: auto;
+  padding: 10px;
+}
+.button-action {
+    float:right;
+}
+button {
+    margin:10px;
+}

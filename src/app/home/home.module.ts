@@ -12,6 +12,7 @@ import { DeleteMemberComponent } from '../viewmembers/viewmembers.component';
 import { ViewmembersComponent } from '../viewmembers/viewmembers.component';
 import { PracticeProcessComponent } from '../list-process/practice-process/practice-process.component';
 import { ForwardProcessComponent } from '../list-process/practice-process/practice-process.component';
+import { DialogConfirmComponent } from '../confirm-process/dialog-confirm/dialog-confirm.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,9 +25,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { AdminModule } from '../admin/admin.module';
+
 
 
 
@@ -41,7 +45,8 @@ import { AdminModule } from '../admin/admin.module';
     DeleteMemberComponent,
     ViewmembersComponent,
     PracticeProcessComponent,
-    ForwardProcessComponent
+    ForwardProcessComponent,
+    DialogConfirmComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +63,9 @@ import { AdminModule } from '../admin/admin.module';
     AdminModule,
     MatTooltipModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule,
+    MatTableModule
   ],
 
 })
