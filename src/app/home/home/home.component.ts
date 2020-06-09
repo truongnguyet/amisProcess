@@ -23,33 +23,45 @@ import { UserService } from '../../services/user.service';
 export class HomeComponent implements OnInit {
   loading = false;
   users: User[];
-  selected: boolean;
+  selected: string;
+  menuItems = [
+    {
+      value: "home",
+      label:"Quản lí quy trình"
+    },
+    {
+      value: "list",
+      label: "Danh sách quy trình"
+    },
+    {
+      value: "confirm",
+      label: "Quy trình cần thực hiện"
+    },
+    {
+      value: "yours-process",
+      label: "Quy trình của bạn"
+    }]
 
   constructor(
     private router: Router,
     private userService: UserService,
     private authenticationService: AuthenticationService
-  ) { }
+  ) {
+    const url = router.url;
+    const value = url.split("?")[0].split("/")[1];
+    this.selected = !value ? "home" : value;
+
+  }
 
   
-  gotoAdmin() {
-    this.router.navigate(['/home'])
-  }
-  gotoList() {
-    this.router.navigate(['/list'])
-    this.selected = true;
-  }
-  gotoConfirm() {
-    this.router.navigate(['/confirm'])
-    this.selected = true;
-  }
-  gotoYourPro() {
-    this.router.navigate(['/yours-process'])
-    this.selected = true;
+  
+  goto(value: string) {
+    this.selected = value;
+    this.router.navigate(['/', value]);
   }
   viewMember() {
     this.router.navigate(['/process/view-member'])
-    this.selected = true;
+    
   }
 //xoa
   ngOnInit() {

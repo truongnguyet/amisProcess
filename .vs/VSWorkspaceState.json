@@ -4,11 +4,22 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\admin",
+<<<<<<< HEAD
     "\\src\\app\\fields\\dialog-field",
     "\\src\\app\\home",
     "\\src\\app\\models",
     "\\src\\app\\services"
   ],
   "SelectedNode": "\\src\\app\\models\\user.ts",
+=======
+    "\\src\\app\\admin\\createdialog",
+    "\\src\\app\\admin\\setting",
+    "\\src\\app\\confirm-process\\dialog-confirm",
+    "\\src\\app\\fields\\dialog-field",
+    "\\src\\app\\home\\home",
+    "\\src\\app\\your-process"
+  ],
+  "SelectedNode": "\\src\\app\\admin\\admin.module.ts",
+>>>>>>> e35dec01fb6e436db3ee9c52d56ebdd999ce2398
   "PreviewInSolutionExplorer": false
 }

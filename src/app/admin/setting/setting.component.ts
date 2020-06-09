@@ -39,13 +39,11 @@ export class SettingComponent implements OnInit {
 
   name: string;
   description: string;
-  
-
-
-  selectedIcon: string;
+  selectedIcon: boolean;
   panelOpenState = false;
   processId: number;
   activeTab = 0;
+  select =  [];
 
   tabs = [
     {
@@ -155,27 +153,36 @@ export class SettingComponent implements OnInit {
   removeTab(index: number) {
     this.tabs.splice(index, 1);
     this.count--;
-
   }
+
   selectIcon(tab, id: string) {
+    this.selectedIcon = true;
     tab.icon = id;
-    this.selectedIcon = id;
   }
 
 
   onSave() {
-   
     if (this.activeTab < this.tabs.length - 1) {
       this.activeTab++;
     }
+    this.limitUser = false;
   }
   onSelectTab(tab) {
     this.activeTab = tab;
+    this.limitUser = false;
   }
+
   selectUser(tab, user) {
-    if (this.limitUser) {
+  
       tab.implementer.push(user);
-    }
+      const idx = this.select.indexOf(user)
+      if (idx === -1) {
+        this.select.push(user)
+      } else {
+        this.select.splice(idx,1)
+      }
+    
+    
   }
  
 }

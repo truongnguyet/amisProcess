@@ -31,8 +31,9 @@ export class CreatedialogComponent implements OnInit {
   name: string;
   permission: number;
   error: Error;
-  process =  PROCESS;
-
+  process = PROCESS;
+  checked = true;
+  inviteRef: any
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -42,8 +43,13 @@ export class CreatedialogComponent implements OnInit {
   ngOnInit(): void {
   }
   onOpenDialogInviteUser() {
-    this.dialog.open(InviteUserComponent)
+    this.inviteRef = this.dialog.open(InviteUserComponent)
+    this.inviteRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
+  
+
   onChange(value: string) {
     this.name = value;
   }
@@ -78,6 +84,6 @@ export class CreatedialogComponent implements OnInit {
     this.dialog.closeAll();
     this.router.navigate(['/home/setting/', this.name]);
   }
-
+ 
  
 }

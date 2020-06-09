@@ -1,0 +1,29 @@
+<div class="container-field">
+  <mat-grid-list cols="2">
+    <mat-grid-tile>
+      <div>
+        <h2>Chi tiết</h2>
+        <h3>{{data.nameProcess}}</h3>
+        <p>Người tạo: {{data.createdBy}}</p>
+        <p>Thời gian tạo: {{data.createdAt}}</p>
+        <p>Deadline: 8h 20/06/2020</p>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray"/>
+        <div>
+          <h2>Lịch sử</h2>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <h2>Tên giai đoạn</h2>
+        <div class="button-action">
+          <button type="button" class="btn btn-danger" mat-dialog-close>Hủy quy trình</button>
+          <button type="button" class="btn btn-primary" mat-dialog-close>Chuyển tiếp</button>
+        </div>
+        
+      </div>
+
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

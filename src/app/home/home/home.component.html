@@ -1,7 +1,7 @@
 <div class="home-container m10 p10">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span (click)="gotoAdmin()" class="icon-process">Amis Process</span>
+      <span (click)="goto('home')" class="icon-process">Amis Process</span>
       <span class="example-spacer"></span>
       <div class="icon-process">
         <i class="material-icons">settings</i>
@@ -16,19 +16,19 @@
   </mat-toolbar>
   <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
-      <mat-selection-list [multiple]="false">
-        <mat-list-option (click)="gotoAdmin()" class="menu-item">
-          Quản lí quy trình
-        </mat-list-option>
-        <mat-list-option (click)="gotoList()">
-          Danh sách quy trình
-        </mat-list-option>
-        <mat-list-option (click)="gotoConfirm()">
-          Quy trình cần thực hiện
-        </mat-list-option>
-        <mat-list-option (click)="gotoYourPro()">
-          Quy trình của bạn
-        </mat-list-option>
+      <mat-selection-list [multiple]="false" *ngFor="let menuItem of menuItems">
+        <div *ngIf="selected ==menuItem.value " class="menu-item">
+          <mat-list-option (click)="goto(menuItem.value)">
+            {{menuItem.label}}
+          </mat-list-option>
+        </div>
+        <div *ngIf="selected != menuItem.value" >
+          <mat-list-option (click)="goto(menuItem.value)">
+            {{menuItem.label}}
+          </mat-list-option>
+        </div>
+
+
       </mat-selection-list>
     </mat-drawer>
     <mat-drawer-content>
