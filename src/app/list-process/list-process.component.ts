@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PROCESS } from '../process/mock-processes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-process',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-process.component.css']
 })
 export class ListProcessComponent implements OnInit {
+  processes = PROCESS;
+  name: string;
 
-  constructor() { }
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-
+  gotoProcess() {
+    this.router.navigate(['/list/practice/'])
+  }
 }

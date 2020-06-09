@@ -19,6 +19,7 @@ export class DialogFieldComponent implements OnInit {
   editName: string;
   editDes: string;
   users = USERS;
+
   options = [{ index: 1, value: '' }, {index: 2, value: ''}];
   count = 3;
   labelOption: string;
@@ -40,5 +41,7 @@ export class DialogFieldComponent implements OnInit {
     this.options.splice(index, 1);
     this.count--;
   }
-
+  onSaveField() {
+    console.log("this is field added");
+  }
 }

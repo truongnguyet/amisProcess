@@ -40,6 +40,11 @@
   margin: 10px;
 }
 .list {
-    margin-top:20px; 
+  margin-top: 20px;
+}
+.list-row:hover {
+  cursor: pointer;
+  color: #607D8B;
+  background-color: #DDD;
 }
 

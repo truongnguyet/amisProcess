@@ -17,14 +17,20 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1">
+              <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1"  >
             </div>
+            <!--<div *ngIf="error.name" class="error-validate">
+              Bạn chưa nhập tên giai đoạn
+            </div>-->
             <label>
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description" ></textarea>
             </div>
+            <!--<div *ngIf="error.description" class="error-validate">
+              Bạn chưa nhập mô tả
+            </div>-->
             <br />
             <br />
             <div class="div-icon">
@@ -54,6 +60,7 @@
                 <i class="material-icons icon-btn"> {{selectedIcon}} </i>
               </div>
             </div>
+            
             <br />
             <br />
             <p> (Chưa có trường nào được chọn)</p>
@@ -86,12 +93,18 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
+            <!--<div *ngIf="error.name" class="error-validate">
+              Bạn chưa nhập tên giai đoạn
+            </div>-->
             <label>
               Mô tả
             </label>
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
+            <!--<div *ngIf="error.description" class="error-validate">
+              Bạn chưa nhập mô tả
+            </div>-->
             <br />
             <br />
             <div class="div-icon">
@@ -137,11 +150,11 @@
             <h2>Danh sách người thực hiện</h2>
             <br />
             <mat-radio-group aria-label="Select an option">
-              <mat-radio-button value="1" (change)="onCloseListUser()">Tất cả thành viên</mat-radio-button><br />
+              <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
               <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
               <div *ngIf="limitUser == true">
                 <mat-list>
-                  <mat-list-item *ngFor="let user of users">
+                  <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                     <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
                     <div mat-line>{{user.name}}</div>
                   </mat-list-item>
@@ -171,12 +184,18 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
+            <!--<div *ngIf="error.name" class="error-validate">
+              Bạn chưa nhập tên quy trình
+            </div>-->
             <label>
               Mô tả
             </label>
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
+            <!--<div *ngIf="error.description" class="error-validate">
+              Bạn chưa nhập mô tả
+            </div>-->
             <br />
             <br />
             <div class="div-icon">
@@ -221,11 +240,11 @@
           <h2>Danh sách người thực hiện</h2>
           <br />
           <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1" (change)="onCloseListUser()">Tất cả thành viên</mat-radio-button><br />
+            <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
             <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
             <div *ngIf="limitUser == true">
               <mat-list>
-                <mat-list-item *ngFor="let user of users">
+                <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                   <mat-icon mat-list-icon>folder</mat-icon>
                   <div mat-line>{{user.name}}</div>
                 </mat-list-item>
@@ -255,9 +274,15 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
+            <!--<div *ngIf="error.name" class="error-validate">
+              Bạn chưa nhập tên giai đoạn
+            </div>-->
             <label>
               Mô tả
             </label>
+            <!--<div *ngIf="error.description" class="error-validate">
+              Bạn chưa nhập mô tả
+            </div>-->
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
@@ -312,12 +337,18 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
+            <!--<div *ngIf="error.name" class="error-validate">
+              Bạn chưa nhập tên giai đoạn
+            </div>-->
             <label>
               Mô tả
             </label>
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
+            <!--<div *ngIf="error.description" class="error-validate">
+              Bạn chưa nhập mô tả
+            </div>-->
             <br />
             <br />
             <div class="div-icon">
@@ -368,12 +399,18 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
+            <!--<div *ngIf="error.name" class="error-validate">
+              Bạn chưa nhập tên giai đoạn
+            </div>-->
             <label>
               Mô tả
             </label>
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
+            <!--<div *ngIf="error.description" class="error-validate">
+              Bạn chưa nhập mô tả
+            </div>-->
             <br />
             <br />
             <div class="div-icon">
@@ -418,11 +455,11 @@
             <h2>Danh sách người thực hiện</h2>
             <br />
             <mat-radio-group aria-label="Select an option">
-              <mat-radio-button value="1" (change)="onCloseListUser()">Tất cả thành viên</mat-radio-button><br />
+              <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
               <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
               <div *ngIf="limitUser == true">
                 <mat-list>
-                  <mat-list-item *ngFor="let user of users">
+                  <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                     <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
                     <div mat-line>{{user.name}}</div>
                   </mat-list-item>

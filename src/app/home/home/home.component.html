@@ -1,7 +1,7 @@
 <div class="home-container m10 p10">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span>Amis Process</span>
+      <span (click)="gotoAdmin()" class="icon-process">Amis Process</span>
       <span class="example-spacer"></span>
       <div class="icon-process">
         <i class="material-icons">settings</i>
@@ -17,7 +17,7 @@
   <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
       <mat-selection-list [multiple]="false">
-        <mat-list-option (click)="gotoAdmin()">
+        <mat-list-option (click)="gotoAdmin()" class="menu-item">
           Quản lí quy trình
         </mat-list-option>
         <mat-list-option (click)="gotoList()">

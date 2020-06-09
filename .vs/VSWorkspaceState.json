@@ -3,14 +3,12 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\fields",
+    "\\src\\app\\admin",
     "\\src\\app\\fields\\dialog-field",
     "\\src\\app\\home",
-    "\\src\\app\\process",
-    "\\src\\app\\process-detail",
-    "\\src\\app\\users",
-    "\\src\\app\\viewmembers"
+    "\\src\\app\\models",
+    "\\src\\app\\services"
   ],
-  "SelectedNode": "\\src\\app\\process-detail\\process-detail.component.css",
+  "SelectedNode": "\\src\\app\\models\\user.ts",
   "PreviewInSolutionExplorer": false
 }
