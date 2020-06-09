@@ -43,6 +43,7 @@ export class SettingComponent implements OnInit {
   panelOpenState = false;
   processId: number;
   activeTab = 0;
+  select: any;
 
   tabs = [
     {
@@ -161,17 +162,22 @@ export class SettingComponent implements OnInit {
 
 
   onSave() {
-   
     if (this.activeTab < this.tabs.length - 1) {
       this.activeTab++;
     }
+    this.limitUser = false;
   }
   onSelectTab(tab) {
     this.activeTab = tab;
+    this.limitUser = false;
   }
+
   selectUser(tab, user) {
+    
     if (this.limitUser) {
       tab.implementer.push(user);
+      this.select = user;
+      console.log(this.select);
     }
   }
  

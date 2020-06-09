@@ -1,19 +1,21 @@
 <h2 mat-dialog-title>Mời thành viên tham gia vào quy trình của bạn:</h2>
 <mat-dialog-content>
   <form>
-
-    <input type="email" id="email" ><br><br>
-    <input type="email" id="email"><br><br>
-    <input type="email" id="email"><br><br>
-    <input type="submit" value="Thêm người">
+    <!--<div *ngFor="let input of inputs">
+      <input type="email" id="email" [placeholder]="input.index"><br><br>
+    </div>-->
+    <input type="email"  ><br><br>
+    <input type="email"  ><br><br>
+    <input type="email" ><br><br>
+    <button (click)="addUser()">Thêm người</button>
   </form>
   <div class="note">
     <label>Ghi chú:</label><br />
     <input placeholder="Chào mừng ...." type="text" />
   </div>
-  
+
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Hủy</button>
-  <button mat-button [mat-dialog-close]="true" >Mời</button>
+  <button mat-button mat-dialog-close  >Hủy</button>
+  <button mat-button [mat-dialog-close]="true">Mời</button>
 </mat-dialog-actions>

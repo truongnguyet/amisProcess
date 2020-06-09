@@ -19,11 +19,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
   openDialog() {
-    const dialogRef = this.dialog.open(CreatedialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(CreatedialogComponent);
   }
 }
 

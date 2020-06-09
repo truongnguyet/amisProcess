@@ -30,6 +30,8 @@ import { MatTableModule } from '@angular/material/table';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { AdminModule } from '../admin/admin.module';
+import { ListFieldComponent } from '../fields/list-field/list-field.component';
+
 
 
 
@@ -46,7 +48,10 @@ import { AdminModule } from '../admin/admin.module';
     ViewmembersComponent,
     PracticeProcessComponent,
     ForwardProcessComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    ListFieldComponent
+
+
   ],
   imports: [
     CommonModule,

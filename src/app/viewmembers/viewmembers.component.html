@@ -1,7 +1,7 @@
 
   <div class="view-container">
     <h2>Xem thành viên</h2>
-    <h4>Hiện tại có 5 thành viên trong quy trình của bạn</h4>
+    <h4>Hiện tại có {{users.length}} thành viên trong quy trình của bạn</h4>
     <mat-list >
       <mat-list-item *ngFor="let user of users" class="list-btn">
         <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>

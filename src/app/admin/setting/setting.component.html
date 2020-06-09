@@ -75,7 +75,7 @@
           <br />
           <br />
           <button type="button" class="btn btn-danger"
-                  [disabled]="tabs.length === 2"
+                  [disabled]="tabs.length == 2"
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>
@@ -157,6 +157,7 @@
                   <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                     <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
                     <div mat-line>{{user.name}}</div>
+                    <i class="material-icons" *ngIf="select == user" >check</i>
                   </mat-list-item>
                 </mat-list>
                 <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
@@ -166,7 +167,7 @@
           <br />
           <br />
           <button type="button" class="btn btn-danger"
-                  [disabled]="tabs.length === 1"
+                  [disabled]="tabs.length == 2"
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>
@@ -256,7 +257,7 @@
           <br />
           <br />
           <button type="button" class="btn btn-danger"
-                  [disabled]="tabs.length === 1"
+                  [disabled]="tabs.length == 2"
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>
@@ -318,7 +319,7 @@
             <br />
             <br />
             <button type="button" class="btn btn-danger"
-                    [disabled]="tabs.length === 1"
+                    [disabled]="tabs.length == 2 "
                     (click)="removeTab(index)">
               Xóa giai đoạn
             </button>
@@ -381,7 +382,7 @@
             <br />
             <br />
             <button type="button" class="btn btn-danger"
-                    [disabled]="tabs.length === 1"
+                    [disabled]="tabs.length == 2"
                     (click)="removeTab(index)">
               Xóa giai đoạn
             </button>
@@ -471,7 +472,7 @@
           <br />
           <br />
           <button type="button" class="btn btn-danger"
-                  [disabled]="tabs.length === 1"
+                  [disabled]="tabs.length == 2"
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>

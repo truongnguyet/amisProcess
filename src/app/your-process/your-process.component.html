@@ -5,10 +5,11 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="row">Số thứ tự</th>
+          <th scope="row">STT</th>
           <th scope="row">Tên quy trình</th>
           <th scope="row">Thời gian tạo</th>
           <th scope="row">Giai đoạn</th>
+          <th scope="row">Xem chi tiết</th>
         </tr>
       </thead>
       <tbody *ngFor="let process of processes" >
@@ -19,6 +20,7 @@
           <td>
             {{process.status}}
           </td>
+          <td><button>Xem</button></td>
         </tr>
       </tbody>
     </table>

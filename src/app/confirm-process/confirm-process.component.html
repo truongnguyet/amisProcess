@@ -1,12 +1,12 @@
 
 <div class="admin-container">
   <div class="list">
-    <h2>Danh sách quy trình bạn cần xử lí:</h2>
+    <h2>Danh sách quy trình cần xử lí:</h2>
 
     <table matSort (matSortChange)="sortData($event)" class="table table-striped">
       <thead>
         <tr>
-          <th  mat-sort-header="id" scope="row">Số thứ tự</th>
+          <th  mat-sort-header="id" scope="row">STT</th>
           <th  mat-sort-header="nameProcess" scope="row">Tên quy trình</th>
           <th  mat-sort-header="createdBy" scope="row">Thời gian tạo</th>
           <th  mat-sort-header="status" scope="row">Giai đoạn</th>

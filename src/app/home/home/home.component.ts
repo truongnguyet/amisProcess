@@ -23,7 +23,7 @@ import { UserService } from '../../services/user.service';
 export class HomeComponent implements OnInit {
   loading = false;
   users: User[];
-  selected: boolean;
+  selected: string;
 
   constructor(
     private router: Router,
@@ -34,22 +34,23 @@ export class HomeComponent implements OnInit {
   
   gotoAdmin() {
     this.router.navigate(['/home'])
+    this.selected = 'admin';
   }
   gotoList() {
     this.router.navigate(['/list'])
-    this.selected = true;
+    this.selected = 'list';
   }
   gotoConfirm() {
     this.router.navigate(['/confirm'])
-    this.selected = true;
+    this.selected = "confirm";
   }
   gotoYourPro() {
     this.router.navigate(['/yours-process'])
-    this.selected = true;
+    this.selected = "your";
   }
   viewMember() {
     this.router.navigate(['/process/view-member'])
-    this.selected = true;
+    
   }
 //xoa
   ngOnInit() {
