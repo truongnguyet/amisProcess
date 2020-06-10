@@ -1,2 +1,104 @@
-<p>list-field works!</p>
-<h2>hello </h2>
+
+<div class="container" *ngIf="childField.length > 0">
+  <div *ngFor="let child of childField">
+    <h3>{{child.name}}</h3>
+    <p>
+      {{child.description}}
+    </p>
+    <div *ngIf="child.type == 'shortText'">
+
+      <input type="text" class="form-control" style="width: 50%">
+    </div>
+    <div *ngIf="child.type == 'assignees' ">
+      <mat-list>
+        <mat-list-item>
+          <mat-icon mat-list-icon>person</mat-icon>
+          <div mat-line>Hoàng Hữu Hạnh</div>
+          <i class="material-icons">check</i>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>person</mat-icon>
+          <div mat-line>Mai Văn Thành</div>
+          <i class="material-icons">check</i>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>person</mat-icon>
+          <div mat-line>Nguyễn Thị Liên</div>
+        </mat-list-item>
+
+
+      </mat-list>
+    </div>
+    <div *ngIf="child.type=== 'attchment' ">
+      <form>
+        <label for="myfile">Select a file:</label>
+        <input type="file" id="myfile" name="myfile">
+      </form>
+    </div>
+    <div *ngIf="child.type === 'currency' ">
+      <input type="number" id="money" placeholder="0.00" />
+    </div>
+    <!--date-->
+    <div class="item-control" *ngIf="child.type === 'date' ">
+      <form>
+        <input type="date" id="date" name="date">
+      </form>
+    </div>
+    <!--datetime-->
+    <div *ngIf="child.type === 'dateTime' ">
+      <form>
+        <input type="datetime-local" id="datetime" name="datetime">
+      </form>
+    </div>
+    <!--Email-->
+    <div *ngIf="child.type === 'email' ">
+      <form>
+        <input type="email" id="email" name="email" placeholder="Exp@gmail.com">
+      </form>
+    </div>
+    <!--Long Text-->
+    <div *ngIf="child.type === 'longText' ">
+      <textarea class="form-control" aria-label="With textarea"></textarea>
+    </div>
+    <!--PhoneNumber-->
+    <div *ngIf="child.type === 'phone' ">
+      <form>
+        <input type="tel" id="phone" name="phone" placeholder="0965 856 158" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+      </form>
+    </div>
+    <!--Radio-->
+    <div *ngIf="child.type === 'radio' ">
+      <div *ngFor="let option of child.options">
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">{{option.value}}</label><br>
+      </div>
+
+    </div>
+
+
+    <!--Time-->
+    <div *ngIf="child.type === 'time' ">
+      <input type="time" id="appt" name="appt"
+             min="09:00" max="18:00">
+    </div>
+
+    <div *ngIf="child.type === 'checkBox' ">
+      <div *ngFor="let option of child.options">
+        <input type="checkbox" id="male" name="gender" value="male">
+        <label for="male">{{option.value}}</label>
+      </div>
+    </div>
+    <div *ngIf="child.type === 'dropDown' ">
+      <mat-form-field>
+        <mat-label>Chọn select</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let option of child.options" [value]="option">
+            {{option.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+</div>

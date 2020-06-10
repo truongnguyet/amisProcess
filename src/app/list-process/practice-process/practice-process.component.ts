@@ -4,6 +4,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { USERS } from '../../users/mock-users';
 import { Router } from '@angular/router';
+import { ListField } from '../../fields/fieldData';
 
 @Component({
   selector: 'app-practice-process',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./practice-process.component.css']
 })
 export class PracticeProcessComponent implements OnInit {
-  
+  listFields = ListField;
+
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {

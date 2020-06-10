@@ -33,7 +33,7 @@ export class CreatedialogComponent implements OnInit {
   error: Error;
   process = PROCESS;
   checked = true;
-
+  inviteRef: any
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -43,13 +43,16 @@ export class CreatedialogComponent implements OnInit {
   ngOnInit(): void {
   }
   onOpenDialogInviteUser() {
-    
-    this.dialog.open(InviteUserComponent)
+    this.inviteRef = this.dialog.open(InviteUserComponent)
+    this.inviteRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
-
+  
 
   onChange(value: string) {
     this.name = value;
+    this.error.name = false;
   }
   onChangePermission(permission: number) {
     this.permission = permission;

@@ -17,6 +17,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ICONS } from '../../process/mock-icons';
 
 import { phaseData } from '../../process/mock-phases';
+import { FieldInPhase } from '../../fields/fieldData';
+
 
 interface Error {
   name: boolean;
@@ -43,7 +45,10 @@ export class SettingComponent implements OnInit {
   panelOpenState = false;
   processId: number;
   activeTab = 0;
-  select: any;
+  select = [];
+
+
+  parentField = FieldInPhase;
 
   tabs = [
     {
@@ -62,7 +67,7 @@ export class SettingComponent implements OnInit {
       description: '',
       fields: [],
       processId: 1,
-      implementer: [],
+      implementer: USERS,
     },
     {
       phaseId: 3,
@@ -71,7 +76,7 @@ export class SettingComponent implements OnInit {
       description: '',
       fields: [],
       processId: 1,
-      implementer: [],
+      implementer: USERS,
     },
     {
       phaseId: 4,
@@ -109,21 +114,19 @@ export class SettingComponent implements OnInit {
   addUser() {
     this.dialog.open(InviteUserComponent);
   }
-  onListUser() {
+  onListUser(tab) {
     this.limitUser = true;
+    tab.implementer = []
   }
   onCloseListUser(tab) {
     this.limitUser = false;
     tab.implementer = this.users;
   }
 
-  addField(nameField: string, icon: string, description: string) {
+  addField(field) {
     this.dialog.open(DialogFieldComponent, {
       data: {
-        nameField: nameField,
-        icon: icon,
-        description: description,
-
+        field: field
       }
     });
   }
@@ -173,12 +176,15 @@ export class SettingComponent implements OnInit {
   }
 
   selectUser(tab, user) {
-    
     if (this.limitUser) {
-      tab.implementer.push(user);
-      this.select = user;
-      console.log(this.select);
-    }
+      const index = tab.implementer.indexOf(user);
+      if (index === -1) {
+        tab.implementer.push(user);
+      }
+      else {
+        tab.implementer.splice(index, 1);
+      }
+    } 
   }
  
 }

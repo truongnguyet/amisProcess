@@ -34,13 +34,13 @@ export class ConfirmProcessComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
+    
     const data = this.processes.slice();
     if (!sort.active || sort.direction === '') {
       this.shortedData = data;
-      
       return;
     }
-
+    
     this.shortedData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
@@ -51,7 +51,6 @@ export class ConfirmProcessComponent implements OnInit {
         default: return 0;
       }
     });
-    
   }
   confirmProcess(process) {
     this.dialog.open(DialogConfirmComponent, {

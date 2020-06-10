@@ -7,7 +7,7 @@
   </div>
   <mat-tab-group [selectedIndex]="activeTab"
                  (selectedIndexChange)="onSelectTab($event)">
-    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.phaseName"  >
+    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.phaseName">
 
       <div *ngIf="tab.phaseId == 1 ">
         <div class="setting-container">
@@ -17,7 +17,7 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1"  >
+              <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1">
             </div>
             <!--<div *ngIf="error.name" class="error-validate">
               Bạn chưa nhập tên giai đoạn
@@ -26,7 +26,7 @@
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description" ></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
             <!--<div *ngIf="error.description" class="error-validate">
               Bạn chưa nhập mô tả
@@ -60,13 +60,14 @@
                 <i class="material-icons icon-btn"> {{tab.icon}} </i>
               </div>
             </div>
-            
+
             <br />
             <br />
-            <p> (Chưa có trường nào được chọn)</p>
+            <p *ngIf="parentField.length == 0"> (Chưa có trường nào được chọn)</p>
+            <app-list-field [childField]="parentField"></app-list-field>
             <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field)">
                 <i class="material-icons">{{field.icon}}</i>
                 <span>{{field.nameField}}</span>
               </button>
@@ -102,9 +103,7 @@
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
+
             <br />
             <br />
             <div class="div-icon">
@@ -137,10 +136,12 @@
 
             <br />
             <br />
-            <p> (Chưa có trường nào được chọn)</p>
+            <p *ngIf="parentField.length == 0"> (Chưa có trường nào được chọn)</p>
+            <app-list-field [childField]="parentField"></app-list-field>
+
             <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field)">
                 <i class="material-icons">{{field.icon}}</i>
                 <span>{{field.nameField}}</span>
               </button>
@@ -150,14 +151,14 @@
             <h2>Danh sách người thực hiện</h2>
             <br />
             <mat-radio-group aria-label="Select an option">
-              <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
-              <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
+              <mat-radio-button value="1" (change)="onCloseListUser(tab)" [checked]="!limitUser">Tất cả thành viên</mat-radio-button><br />
+              <mat-radio-button value="2" (change)="onListUser(tab)" [checked]="limitUser">Tùy chọn thành viên</mat-radio-button>
               <div *ngIf="limitUser == true">
                 <mat-list>
                   <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                     <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
                     <div mat-line>{{user.name}}</div>
-                    <i class="material-icons" *ngIf="select == user" >check</i>
+                    <i class="material-icons" *ngIf="tab.implementer.indexOf(user) != -1">check</i>
                   </mat-list-item>
                 </mat-list>
                 <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
@@ -186,7 +187,7 @@
               <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
             <!--<div *ngIf="error.name" class="error-validate">
-              Bạn chưa nhập tên quy trình
+              Bạn chưa nhập tên giai đoạn
             </div>-->
             <label>
               Mô tả
@@ -194,9 +195,6 @@
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
             <br />
             <br />
             <div class="div-icon">
@@ -228,10 +226,10 @@
             </div>
             <br />
             <br />
-            <p> (Chưa có trường nào được chọn)</p>
+            <p *ngIf="parentField.length == 0"> (Chưa có trường nào được chọn)</p>
             <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field)">
                 <i class="material-icons">{{field.icon}}</i>
                 <span>{{field.nameField}}</span>
               </button>
@@ -241,13 +239,14 @@
           <h2>Danh sách người thực hiện</h2>
           <br />
           <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
-            <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
+            <mat-radio-button value="1" (change)="onCloseListUser(tab)" [checked]="!limitUser">Tất cả thành viên</mat-radio-button><br />
+            <mat-radio-button value="2" (change)="onListUser(tab)" [checked]="limitUser">Tùy chọn thành viên</mat-radio-button>
             <div *ngIf="limitUser == true">
               <mat-list>
                 <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
-                  <mat-icon mat-list-icon>folder</mat-icon>
+                  <mat-icon mat-list-icon>person</mat-icon>
                   <div mat-line>{{user.name}}</div>
+                  <i class="material-icons" *ngIf="tab.implementer.indexOf(user) != -1">check</i>
                 </mat-list-item>
               </mat-list>
               <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
@@ -281,9 +280,7 @@
             <label>
               Mô tả
             </label>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
+
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
@@ -347,9 +344,7 @@
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
+
             <br />
             <br />
             <div class="div-icon">
@@ -409,9 +404,7 @@
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
+
             <br />
             <br />
             <div class="div-icon">
@@ -443,10 +436,10 @@
             </div>
             <br />
             <br />
-            <p> (Chưa có trường nào được chọn)</p>
+            <p *ngIf="parentField.length == 0"> (Chưa có trường nào được chọn)</p>
             <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
+              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field)">
                 <i class="material-icons">{{field.icon}}</i>
                 <span>{{field.nameField}}</span>
               </button>
@@ -456,13 +449,14 @@
             <h2>Danh sách người thực hiện</h2>
             <br />
             <mat-radio-group aria-label="Select an option">
-              <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
-              <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
+              <mat-radio-button value="1" (change)="onCloseListUser(tab)" [checked]="!limitUser">Tất cả thành viên</mat-radio-button><br />
+              <mat-radio-button value="2" (change)="onListUser(tab)" [checked]="limitUser">Tùy chọn thành viên</mat-radio-button>
               <div *ngIf="limitUser == true">
                 <mat-list>
                   <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                     <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
                     <div mat-line>{{user.name}}</div>
+                    <i class="material-icons" *ngIf="tab.implementer.indexOf(user) != -1">check</i>
                   </mat-list-item>
                 </mat-list>
                 <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
@@ -476,7 +470,7 @@
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>
-          <button type="button" class="btn btn-success" (click)="onSave()" >Lưu</button>
+          <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
 
         </div>
 

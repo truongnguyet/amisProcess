@@ -3,11 +3,11 @@
     <mat-grid-tile>
       <div class="mat-grid-tile div">
         <div class="title">
-          <i class="material-icons">{{data.icon}}</i>
-          <h5>{{data.nameField}}</h5>
+          <i class="material-icons">{{data.field.icon}}</i>
+          <h5>{{data.field.nameField}}</h5>
         </div>
-        <p>{{data.description}}</p>
-        
+        <p>{{data.field.description}}</p>
+
         <label>
           Tên trường
         </label>
@@ -20,7 +20,7 @@
         <div class="input-group mb-3">
           <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editDes">
         </div>
-        <div *ngIf="data.nameField === 'Radio' || data.nameField ==='CheckBox' || data.nameField === 'DropDownSelect' ">
+        <div *ngIf="data.field.nameField === 'Radio' || data.field.nameField ==='CheckBox' || data.field.nameField === 'DropDownSelect' ">
           <label>
             Lựa chọn
           </label>
@@ -36,7 +36,7 @@
           <h4>
             Trường này có bắt buộc không ?
           </h4>
-          <mat-slide-toggle></mat-slide-toggle>
+          <mat-slide-toggle (change)="checkRequired()" [checked]="required"></mat-slide-toggle>
         </div>
 
         <button type="button" class="btn btn-danger" mat-dialog-close>Hủy</button>
@@ -48,52 +48,65 @@
         <h3>{{editName}}</h3>
         <label>{{editDes}}</label>
 
-        <div *ngIf="data.nameField == 'Assignees select' ">
-          <ul>
-            <li *ngFor="let user of users">
-              <span class="badge">{{user.name}}</span>
-            </li>
-          </ul>
+        <div *ngIf="data.field.nameField == 'Assignees select' ">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>person</mat-icon>
+              <div mat-line>Hoàng Hữu Hạnh</div>
+              <i class="material-icons">check</i>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>person</mat-icon>
+              <div mat-line>Mai Văn Thành</div>
+              <i class="material-icons">check</i>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>person</mat-icon>
+              <div mat-line>Nguyễn Thị Liên</div>
+            </mat-list-item>
+
+
+          </mat-list>
         </div>
-        <div *ngIf="data.nameField=== 'Attachment' ">
+        <div *ngIf="data.field.nameField=== 'Attachment' ">
           <form>
             <label for="myfile">Select a file:</label>
             <input type="file" id="myfile" name="myfile">
           </form>
         </div>
-        <div *ngIf="data.nameField === 'Currency' ">
+        <div *ngIf="data.field.nameField === 'Currency' ">
           <input type="number" id="money" placeholder="0.00" />
         </div>
         <!--date-->
-        <div class="item-control" *ngIf="data.nameField === 'Date' ">
+        <div class="item-control" *ngIf="data.field.nameField === 'Date' ">
           <form>
             <input type="date" id="date" name="date">
           </form>
         </div>
         <!--datetime-->
-        <div *ngIf="data.nameField === 'DateTime' ">
+        <div *ngIf="data.field.nameField === 'DateTime' ">
           <form>
             <input type="datetime-local" id="datetime" name="datetime">
           </form>
         </div>
         <!--Email-->
-        <div *ngIf="data.nameField === 'Email' ">
+        <div *ngIf="data.field.nameField === 'Email' ">
           <form>
             <input type="email" id="email" name="email" placeholder="Exp@gmail.com">
           </form>
         </div>
         <!--Long Text-->
-        <div *ngIf="data.nameField === 'LongText' ">
+        <div *ngIf="data.field.nameField === 'LongText' ">
           <textarea class="form-control" aria-label="With textarea"></textarea>
         </div>
         <!--PhoneNumber-->
-        <div *ngIf="data.nameField === 'PhoneNumber' ">
+        <div *ngIf="data.field.nameField === 'PhoneNumber' ">
           <form>
             <input type="tel" id="phone" name="phone" placeholder="0965 856 158" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
           </form>
         </div>
         <!--Radio-->
-        <div *ngIf="data.nameField === 'Radio' ">
+        <div *ngIf="data.field.nameField === 'Radio' ">
           <div *ngFor="let option of options">
             <input type="radio" id="male" name="gender" value="male">
             <label for="male">{{option.value}}</label><br>
@@ -101,23 +114,23 @@
 
         </div>
         <!--ShortText-->
-        <div *ngIf="data.nameField === 'ShortText' ">
+        <div *ngIf="data.field.nameField === 'ShortText' ">
           <input type="text" id="text" name="text">
         </div>
 
         <!--Time-->
-        <div *ngIf="data.nameField === 'Time' ">
+        <div *ngIf="data.field.nameField === 'Time' ">
           <input type="time" id="appt" name="appt"
                  min="09:00" max="18:00">
         </div>
 
-        <div *ngIf="data.nameField === 'CheckBox' ">
+        <div *ngIf="data.field.nameField === 'CheckBox' ">
           <div *ngFor="let option of options">
             <input type="checkbox" id="male" name="gender" value="male">
             <label for="male">{{option.value}}</label>
           </div>
         </div>
-        <div *ngIf="data.nameField === 'DropDownSelect' ">
+        <div *ngIf="data.field.nameField === 'DropDownSelect' ">
           <mat-form-field>
             <mat-label>Chọn select</mat-label>
             <mat-select>

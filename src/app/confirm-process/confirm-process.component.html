@@ -12,7 +12,7 @@
           <th  mat-sort-header="status" scope="row">Giai đoạn</th>
         </tr>
       </thead>
-      <tbody *ngFor="let process of processes" class="list-row" (click)="confirmProcess(process)">
+      <tbody *ngFor="let process of shortedData" class="list-row" (click)="confirmProcess(process)">
         <tr>
           <td>{{process.id}}</td>
           <td>{{process.nameProcess}}</td>
