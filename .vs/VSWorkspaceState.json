@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\admin",
-    "\\src\\app\\admin\\createdialog",
-    "\\src\\app\\admin\\setting",
-    "\\src\\app\\confirm-process\\dialog-confirm",
-    "\\src\\app\\fields\\dialog-field",
-    "\\src\\app\\home\\home",
-    "\\src\\app\\your-process"
+    "\\src\\app\\admin\\invite-user",
+    "\\src\\app\\confirm-process",
+    "\\src\\app\\fields",
+    "\\src\\app\\list-process",
+    "\\src\\app\\list-process\\practice-process",
+    "\\src\\app\\viewmembers"
   ],
-  "SelectedNode": "\\src\\app\\admin\\admin.module.ts",
+  "SelectedNode": "\\src\\app\\list-process\\list-process.component.html",
   "PreviewInSolutionExplorer": false
 }
