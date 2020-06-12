@@ -27,7 +27,7 @@ interface Error {
 })
 
 export class CreatedialogComponent implements OnInit {
-
+  id: number;
   name: string;
   permission: number;
   error: Error;
@@ -72,8 +72,9 @@ export class CreatedialogComponent implements OnInit {
     if (this.error.name || this.error.permission || this.error.authorization) {
       return null;
     }
+    this.id = this.process.length + 1;
     this.process.push({
-      id: 8,
+      id: this.id,
       nameProcess: this.name,
       createdBy: '',
       createdAt: '',
@@ -83,7 +84,7 @@ export class CreatedialogComponent implements OnInit {
       phase: [],
     })
     this.dialog.closeAll();
-    this.router.navigate(['/home/setting/', this.name]);
+    this.router.navigate(['/home/setting/', this.id]);
   }
  
  

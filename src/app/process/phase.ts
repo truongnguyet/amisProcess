@@ -1,4 +1,4 @@
-import { Fields } from '../fields/fiedls';
+import { FieldData } from '../fields/fieldData';
 import { Users } from '../users/users';
 
 export interface Phase {
@@ -6,7 +6,10 @@ export interface Phase {
   phaseName: string;
   icon: string;
   description: string;
-  fields: Fields[];
+  fields: FieldData[];
   processId: number;
   implementer: Users[];
+  isFirstPhase: boolean;
+  isTC: boolean;
+  isTB: boolean;
 }

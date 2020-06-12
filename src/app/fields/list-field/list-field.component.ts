@@ -7,6 +7,8 @@ import { Component, OnInit,Input } from '@angular/core';
 })
 export class ListFieldComponent implements OnInit {
   @Input() childField: Array<any>;
+  @Input() tab: any;
+
   constructor() { }
 
   ngOnInit(): void {

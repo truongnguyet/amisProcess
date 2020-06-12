@@ -1,0 +1,103 @@
+
+<div>
+  <div class="example-button-container">
+    <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạn" (click)="addTab()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-tab-group [selectedIndex]="activeTab"
+                 (selectedIndexChange)="onSelectTab($event)">
+    <mat-tab *ngFor="let tab of process.phase; let index = index" [label]="tab.phaseName">
+      <div class="setting-container">
+        <h2>Cài đặt giai đoạn {{tab.phaseName}}</h2>
+        <div class="setting-item">
+          <label>
+            Tên giai đoạn
+          </label>
+          <div class="input-group mb-3">
+            <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1">
+          </div>
+          <label>
+            Mô tả
+          </label>
+          <div class="input-group">
+            <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
+          </div>
+          <br />
+          <br />
+          <div class="div-icon">
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpenState = true"
+                                   (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Icon
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Nhấp vào để chọn icon
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="container">
+                  <div class="row" *ngFor="let icon of icons">
+                    <div class="col-sm">
+                      <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
+                         [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+            <div>
+              <i class="material-icons icon-btn"> {{tab.icon}} </i>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <!--Chọn trường, giai đoạn cuối thì không hiện phần này-->
+        <div [hidden]="tab.isTC || tab.isTB">
+          <p *ngIf="tab.fields == 0 "> (Chưa có trường nào được chọn)</p>
+          <app-list-field [childField]="tab.fields" [tab]="tab"></app-list-field>
+          <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let field of fields" (click)="addField(tab,field)">
+              <i class="material-icons">{{field.icon}}</i>
+              <span>{{field.nameField}}</span>
+            </button>
+          </mat-menu>
+        </div>
+
+        <br />
+        <br />
+        <!--Chọn người thực hiện-->
+        <div [hidden]="tab.isFirstPhase || tab.isTC || tab.isTB">
+          <h2>Danh sách người thực hiện</h2>
+          <br />
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1" (change)="onCloseListUser(tab)" [checked]="!limitUser">Tất cả thành viên</mat-radio-button><br />
+            <mat-radio-button value="2" (change)="onListUser(tab)" [checked]="limitUser">Tùy chọn thành viên</mat-radio-button>
+            <div *ngIf="limitUser == true">
+              <mat-list>
+                <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
+                  <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
+                  <div mat-line>{{user.name}}</div>
+                  <i class="material-icons" *ngIf="tab.implementer.indexOf(user) != -1">check</i>
+                </mat-list-item>
+              </mat-list>
+              <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
+            </div>
+          </mat-radio-group>
+        </div>
+        <button type="button" class="btn btn-danger"
+                (click)="removePhase(index)"
+                [disabled]="tab.isFirstPhase || tab.isTC || tab.isTB ">
+          Xóa giai đoạn
+        </button>
+        <button type="button" class="btn btn-success" (click)="onSave()" *ngIf="!tab.isTB">Lưu</button>
+        <button type="button" class="btn btn-success" (click)="onSaveAll()" *ngIf="tab.isTB">Lưu</button>
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+</div>

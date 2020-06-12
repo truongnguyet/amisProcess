@@ -59,6 +59,9 @@ export class SettingComponent implements OnInit {
       fields: [],
       processId: 1,
       implementer: [],
+      isTC: false,
+      isTB: false,
+      isFirstPhase: true
     },
     {
       phaseId: 2,
@@ -68,6 +71,9 @@ export class SettingComponent implements OnInit {
       fields: [],
       processId: 1,
       implementer: USERS,
+      isTC: false,
+      isTB: false,
+      isFirstPhase: false
     },
     {
       phaseId: 3,
@@ -77,6 +83,9 @@ export class SettingComponent implements OnInit {
       fields: [],
       processId: 1,
       implementer: USERS,
+      isTC: false,
+      isTB: false,
+      isFirstPhase: false
     },
     {
       phaseId: 4,
@@ -86,6 +95,9 @@ export class SettingComponent implements OnInit {
       fields: [],
       processId: 1,
       implementer: [],
+      isTC: true,
+      isTB: false,
+      isFirstPhase: false
     },
     {
       phaseId: 5,
@@ -95,6 +107,9 @@ export class SettingComponent implements OnInit {
       fields: [],
       processId: 1,
       implementer: [],
+      isTC: false,
+      isTB: true,
+      isFirstPhase: false
     },
   ];
   count = 4;
@@ -106,10 +121,11 @@ export class SettingComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.processId = parseInt(this.route.snapshot.paramMap.get("id"));
+    
   }
 
   ngOnInit(): void {
-
+    
   }
   addUser() {
     this.dialog.open(InviteUserComponent);
@@ -123,12 +139,15 @@ export class SettingComponent implements OnInit {
     tab.implementer = this.users;
   }
 
-  addField(field) {
+  addField(tab,field) {
     this.dialog.open(DialogFieldComponent, {
       data: {
-        field: field
+        field: field,
+        tab: tab
       }
     });
+    tab.fields.push(field);
+    
   }
 
   gotoProcess() {
@@ -143,13 +162,16 @@ export class SettingComponent implements OnInit {
 
   addTab() {
     this.tabs.splice(this.tabs.length - 2, 0, {
-      phaseId: 6,
+      phaseId: this.tabs.length +1,
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
       fields: [],
       processId: 1,
-      implementer: []
+      implementer: [],
+      isFirstPhase: false,
+      isTC: false,
+      isTB: false
     });
     this.count++;
   }
@@ -169,6 +191,7 @@ export class SettingComponent implements OnInit {
       this.activeTab++;
     }
     this.limitUser = false;
+   
   }
   onSelectTab(tab) {
     this.activeTab = tab;
@@ -186,5 +209,6 @@ export class SettingComponent implements OnInit {
       }
     } 
   }
+
  
 }

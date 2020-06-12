@@ -1,0 +1,35 @@
+.setting-container {
+  padding: 30px;
+}
+.setting-item {
+  width: 50%;
+}
+.div-icon {
+  width: 50%;
+}
+.icon-btn:hover {
+  cursor: pointer;
+}
+
+mat-expansion-panel {
+  width: 400px;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+i {
+  margin: 10px;
+}
+.example-button-container {
+  float: right;
+  justify-content: center;
+  width: 120px;
+  margin: 10px;
+}
+button {
+  margin: 10px;
+}
+.list-user :hover {
+  cursor: pointer;
+}

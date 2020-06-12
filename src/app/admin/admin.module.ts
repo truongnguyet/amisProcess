@@ -25,6 +25,7 @@ import { InviteUserComponent } from './invite-user/invite-user.component';
 import { SettingComponent } from './setting/setting.component';
 import { DialogFieldComponent } from '../fields/dialog-field/dialog-field.component';
 import { ListFieldComponent } from '../fields/list-field/list-field.component';
+import { EditProcessComponent } from './edit-process/edit-process.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ListFieldComponent } from '../fields/list-field/list-field.component';
     InviteUserComponent,
     SettingComponent,
     DialogFieldComponent,
-    ListFieldComponent
+    ListFieldComponent,
+    EditProcessComponent
   ],
   imports: [
     CommonModule,

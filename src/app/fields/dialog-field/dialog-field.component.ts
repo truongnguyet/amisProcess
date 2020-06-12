@@ -11,6 +11,7 @@ import { FieldInPhase } from '../fieldData';
 
 export interface Field {
   field: any;
+  tab: any
 }
 
 @Component({
@@ -62,7 +63,7 @@ export class DialogFieldComponent implements OnInit {
       description: this.editDes,
       type: this.data.field.type,
       required: this.required,
-      phaseId: 1,
+      phaseId: this.data.tab.phaseId,
       options: this.options
     })
     console.log(this.listFields)
