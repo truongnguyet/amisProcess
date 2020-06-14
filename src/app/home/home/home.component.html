@@ -17,7 +17,7 @@
   <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
       <mat-selection-list [multiple]="false" *ngFor="let menuItem of menuItems">
-        <div *ngIf="selected ==menuItem.value " class="menu-item">
+        <div *ngIf="selected == menuItem.value " class="menu-item">
           <mat-list-option (click)="goto(menuItem.value)">
             {{menuItem.label}}
           </mat-list-option>
@@ -27,8 +27,6 @@
             {{menuItem.label}}
           </mat-list-option>
         </div>
-
-
       </mat-selection-list>
     </mat-drawer>
     <mat-drawer-content>

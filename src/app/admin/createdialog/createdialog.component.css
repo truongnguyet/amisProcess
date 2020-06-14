@@ -37,5 +37,8 @@ mat-expansion-panel {
 }
 .error-validate {
  color:red;
+ width:100%;
 }
-
+.form-name{
+    width:40%;
+}

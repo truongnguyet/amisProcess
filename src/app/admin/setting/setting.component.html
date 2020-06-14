@@ -7,17 +7,16 @@
   </div>
   <mat-tab-group [selectedIndex]="activeTab"
                  (selectedIndexChange)="onSelectTab($event)">
-    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.phaseName"  >
-
-      <div *ngIf="tab.phaseId == 1 ">
+    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.phaseName">
+      <div>
         <div class="setting-container">
-          <h2>Cài đặt GĐ 1</h2>
+          <h2>Cài đặt {{tab.phaseName}}</h2>
           <div class="setting-item">
             <label>
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1"  >
+              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
             <!--<div *ngIf="error.name" class="error-validate">
               Bạn chưa nhập tên giai đoạn
@@ -26,11 +25,9 @@
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description" ></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
             </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
+
             <br />
             <br />
             <div class="div-icon">
@@ -59,427 +56,55 @@
               <div *ngIf="selectedIcon">
                 <i class="material-icons icon-btn"> {{tab.icon}} </i>
               </div>
+            </div>
+
+            <br />
+            <br />
+            <div [hidden]="tab.isTC || tab.isTB">
+              <p *ngIf="parentField.length == 0"> (Chưa có trường nào được chọn)</p>
+              <app-list-field [childField]="parentField" [tab]="tab"></app-list-field>
+
+              <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let field of fields" (click)="addField(tab,field)">
+                  <i class="material-icons">{{field.icon}}</i>
+                  <span>{{field.nameField}}</span>
+                </button>
+              </mat-menu>
             </div>
             
             <br />
             <br />
-            <p> (Chưa có trường nào được chọn)</p>
-            <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
-                <i class="material-icons">{{field.icon}}</i>
-                <span>{{field.nameField}}</span>
-              </button>
-            </mat-menu>
+            <div [hidden]="tab.isFirstPhase || tab.isTC || tab.isTB">
+              <h2>Danh sách người thực hiện</h2>
+              <br />
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1" (change)="onCloseListUser(tab)" [checked]="!limitUser">Tất cả thành viên</mat-radio-button><br />
+                <mat-radio-button value="2" (change)="onListUser(tab)" [checked]="limitUser">Tùy chọn thành viên</mat-radio-button>
+                <div *ngIf="limitUser == true">
+                  <mat-list>
+                    <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
+                      <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
+                      <div mat-line>{{user.name}}</div>
+                      <i class="material-icons" *ngIf="tab.implementer.indexOf(user) != -1">check</i>
+                    </mat-list-item>
+                  </mat-list>
+                  <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
+                </div>
+              </mat-radio-group>
+            </div>
+            
           </div>
           <br />
           <br />
           <button type="button" class="btn btn-danger"
-                  [disabled]="tabs.length == 2"
+                  [disabled]="tab.isFirstPhase || tab.isTC || tab.isTB"
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>
-          <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
-
-        </div>
-      </div>
-      <div *ngIf="tab.phaseId === 2 ">
-        <div class="setting-container">
-          <h2>Cài đặt GĐ 2</h2>
-          <div class="setting-item">
-            <label>
-              Tên giai đoạn
-            </label>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
-            </div>
-            <!--<div *ngIf="error.name" class="error-validate">
-              Bạn chưa nhập tên giai đoạn
-            </div>-->
-            <label>
-              Mô tả
-            </label>
-            <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
-            </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
-            <br />
-            <br />
-            <div class="div-icon">
-              <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Icon
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Nhấp vào để chọn icon
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-
-                  <div class="container">
-                    <div class="row" *ngFor="let icon of icons">
-                      <div class="col-sm">
-                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
-                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
-                      </div>
-                    </div>
-                  </div>
-                </mat-expansion-panel>
-              </mat-accordion>
-              <div *ngIf="selectedIcon">
-                <i class="material-icons icon-btn"> {{tab.icon}} </i>
-              </div>
-            </div>
-
-            <br />
-            <br />
-            <p> (Chưa có trường nào được chọn)</p>
-            <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
-                <i class="material-icons">{{field.icon}}</i>
-                <span>{{field.nameField}}</span>
-              </button>
-            </mat-menu>
-            <br />
-            <br />
-            <h2>Danh sách người thực hiện</h2>
-            <br />
-            <mat-radio-group aria-label="Select an option">
-              <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
-              <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
-              <div *ngIf="limitUser == true">
-                <mat-list>
-                  <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
-                    <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
-                    <div mat-line>{{user.name}}</div>
-                    <i class="material-icons" *ngIf="select.indexOf(user) != -1" >check</i>
-                  </mat-list-item>
-                </mat-list>
-                <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
-              </div>
-            </mat-radio-group>
-          </div>
-          <br />
-          <br />
-          <button type="button" class="btn btn-danger"
-                  [disabled]="tabs.length == 2"
-                  (click)="removeTab(index)">
-            Xóa giai đoạn
-          </button>
-          <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
-
-        </div>
-      </div>
-      <div *ngIf="tab.phaseId === 3 ">
-        <div class="setting-container">
-          <h2>Cài đặt GĐ 3</h2>
-          <div class="setting-item">
-            <label>
-              Tên giai đoạn
-            </label>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
-            </div>
-            <!--<div *ngIf="error.name" class="error-validate">
-              Bạn chưa nhập tên quy trình
-            </div>-->
-            <label>
-              Mô tả
-            </label>
-            <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
-            </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
-            <br />
-            <br />
-            <div class="div-icon">
-              <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Icon
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Nhấp vào để chọn icon
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-
-                  <div class="container">
-                    <div class="row" *ngFor="let icon of icons">
-                      <div class="col-sm">
-                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
-                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
-                      </div>
-                    </div>
-                  </div>
-                </mat-expansion-panel>
-              </mat-accordion>
-              <div *ngIf="selectedIcon">
-                <i class="material-icons icon-btn"> {{tab.icon}} </i>
-              </div>
-            </div>
-            <br />
-            <br />
-            <p> (Chưa có trường nào được chọn)</p>
-            <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
-                <i class="material-icons">{{field.icon}}</i>
-                <span>{{field.nameField}}</span>
-              </button>
-            </mat-menu>
-          </div>
-          <br />
-          <h2>Danh sách người thực hiện</h2>
-          <br />
-          <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
-            <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
-            <div *ngIf="limitUser == true">
-              <mat-list>
-                <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
-                  <mat-icon mat-list-icon>folder</mat-icon>
-                  <div mat-line>{{user.name}}</div>
-                </mat-list-item>
-              </mat-list>
-              <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
-            </div>
-
-          </mat-radio-group>
-          <br />
-          <br />
-          <button type="button" class="btn btn-danger"
-                  [disabled]="tabs.length == 2"
-                  (click)="removeTab(index)">
-            Xóa giai đoạn
-          </button>
-          <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
-
-        </div>
-      </div>
-      <div *ngIf="tab.phaseId === 4 ">
-        <div class="setting-container">
-          <h2>Cài đặt GĐ thành công</h2>
-          <div class="setting-item">
-            <label>
-              Tên giai đoạn
-            </label>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
-            </div>
-            <!--<div *ngIf="error.name" class="error-validate">
-              Bạn chưa nhập tên giai đoạn
-            </div>-->
-            <label>
-              Mô tả
-            </label>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
-            <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
-            </div>
-            <br />
-            <br />
-            <div class="div-icon">
-              <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Icon
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Nhấp vào để chọn icon
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-
-                  <div class="container">
-                    <div class="row" *ngFor="let icon of icons">
-                      <div class="col-sm">
-                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
-                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
-                      </div>
-                    </div>
-                  </div>
-                </mat-expansion-panel>
-              </mat-accordion>
-              <div *ngIf="selectedIcon">
-                <i class="material-icons icon-btn"> {{tab.icon}} </i>
-              </div>
-            </div>
-            <br />
-            <br />
-            <button type="button" class="btn btn-danger"
-                    [disabled]="tabs.length == 2 "
-                    (click)="removeTab(index)">
-              Xóa giai đoạn
-            </button>
-            <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
-
-          </div>
-        </div>
-      </div>
-      <div *ngIf="tab.phaseId === 5 ">
-        <div class="setting-container">
-          <h2>Cài đặt GĐ thất bại</h2>
-          <div class="setting-item">
-            <label>
-              Tên giai đoạn
-            </label>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
-            </div>
-            <!--<div *ngIf="error.name" class="error-validate">
-              Bạn chưa nhập tên giai đoạn
-            </div>-->
-            <label>
-              Mô tả
-            </label>
-            <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
-            </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
-            <br />
-            <br />
-            <div class="div-icon">
-              <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Icon
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Nhấp vào để chọn icon
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-
-                  <div class="container">
-                    <div class="row" *ngFor="let icon of icons">
-                      <div class="col-sm">
-                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
-                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
-                      </div>
-                    </div>
-                  </div>
-                </mat-expansion-panel>
-              </mat-accordion>
-              <div *ngIf="selectedIcon">
-                <i class="material-icons icon-btn"> {{tab.icon}} </i>
-              </div>
-            </div>
-            <br />
-            <br />
-            <button type="button" class="btn btn-danger"
-                    [disabled]="tabs.length == 2"
-                    (click)="removeTab(index)">
-              Xóa giai đoạn
-            </button>
-            <button type="button" class="btn btn-success" (click)="gotoProcess()">Lưu</button>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="tab.phaseId >= 6 ">
-        <div class="setting-container">
-          <h2>Cài đặt GĐ </h2>
-          <div class="setting-item">
-            <label>
-              Tên giai đoạn
-            </label>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
-            </div>
-            <!--<div *ngIf="error.name" class="error-validate">
-              Bạn chưa nhập tên giai đoạn
-            </div>-->
-            <label>
-              Mô tả
-            </label>
-            <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
-            </div>
-            <!--<div *ngIf="error.description" class="error-validate">
-              Bạn chưa nhập mô tả
-            </div>-->
-            <br />
-            <br />
-            <div class="div-icon">
-              <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Icon
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Nhấp vào để chọn icon
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-
-                  <div class="container">
-                    <div class="row" *ngFor="let icon of icons">
-                      <div class="col-sm">
-                        <i class="material-icons icon-btn" (click)="selectIcon(tab,icon.name)"
-                           [class.selected]="icon.id === selectedIcon"> {{icon.name}} </i>
-                      </div>
-                    </div>
-                  </div>
-                </mat-expansion-panel>
-              </mat-accordion>
-              <div *ngIf="selectedIcon">
-                <i class="material-icons icon-btn"> {{tab.icon}} </i>
-              </div>
-            </div>
-            <br />
-            <br />
-            <p> (Chưa có trường nào được chọn)</p>
-            <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngFor="let field of fields" (click)="addField(field.nameField,field.icon,field.description)">
-                <i class="material-icons">{{field.icon}}</i>
-                <span>{{field.nameField}}</span>
-              </button>
-            </mat-menu>
-            <br />
-            <br />
-            <h2>Danh sách người thực hiện</h2>
-            <br />
-            <mat-radio-group aria-label="Select an option">
-              <mat-radio-button value="1" (change)="onCloseListUser(tab)">Tất cả thành viên</mat-radio-button><br />
-              <mat-radio-button value="2" (change)="onListUser()">Tùy chọn thành viên</mat-radio-button>
-              <div *ngIf="limitUser == true">
-                <mat-list>
-                  <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
-                    <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
-                    <div mat-line>{{user.name}}</div>
-                  </mat-list-item>
-                </mat-list>
-                <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
-              </div>
-            </mat-radio-group>
-          </div>
-          <br />
-          <br />
-          <button type="button" class="btn btn-danger"
-                  [disabled]="tabs.length == 2"
-                  (click)="removeTab(index)">
-            Xóa giai đoạn
-          </button>
-          <button type="button" class="btn btn-success" (click)="onSave()" >Lưu</button>
-
-        </div>
-
+          <button type="button" class="btn btn-success" *ngIf="!tab.isTB" (click)="onSave()">Lưu</button>
+          <button type="button" class="btn btn-success" *ngIf="tab.isTB" (click)="gotoProcess()">Lưu</button>
+         </div>
       </div>
     </mat-tab>
 

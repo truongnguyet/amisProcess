@@ -2,7 +2,7 @@ import { Component, OnInit,Inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Process } from '../../process/process';
-
+import { ListField } from '../../fields/fieldData';
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -10,7 +10,7 @@ import { Process } from '../../process/process';
   styleUrls: ['./dialog-confirm.component.css']
 })
 export class DialogConfirmComponent implements OnInit {
-
+  listFields = ListField;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Process) { }
 

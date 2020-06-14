@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-invite-user',
@@ -11,12 +10,8 @@ export class InviteUserComponent implements OnInit {
   inputs = [{ index: 1, value: '' }, { index: 2, value: '' }, { index: 3, value: '' }];
   count = 4;
  
-  constructor(
-    public dialogRef: MatDialogRef<InviteUserComponent>,
-  ) {}
-  onNoClick(){
-    this.dialogRef.close();
-  }
+  constructor(  ) {}
+ 
 
   ngOnInit(): void {
   }

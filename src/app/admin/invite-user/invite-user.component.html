@@ -1,12 +1,12 @@
 <h2 mat-dialog-title>Mời thành viên tham gia vào quy trình của bạn:</h2>
 <mat-dialog-content>
   <form>
-    <!--<div *ngFor="let input of inputs">
-      <input type="email" id="email" [placeholder]="input.index"><br><br>
-    </div>-->
+    <div *ngFor="let input of inputs">
+      <input type="email" id="email" [placeholder]="input.value"><br><br>
+    </div>
+    <!--<input type="email"  ><br><br>
     <input type="email"  ><br><br>
-    <input type="email"  ><br><br>
-    <input type="email" ><br><br>
+    <input type="email" ><br><br>-->
     <button (click)="addUser()">Thêm người</button>
   </form>
   <div class="note">
@@ -16,6 +16,6 @@
 
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()"  >Hủy</button>
-  <button mat-button (click)="onNoClick()">Mời</button>
+  <button mat-button mat-dialog-close >Hủy</button>
+  <button mat-button mat-dialog-close >Mời</button>
 </mat-dialog-actions>

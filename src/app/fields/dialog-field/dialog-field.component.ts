@@ -1,13 +1,18 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 import { Fields } from '../fiedls';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { USERS } from '../../users/mock-users';
+import { FieldInPhase } from '../fieldData';
 
-
+export interface Field {
+  field: any;
+  tab: any
+}
 
 @Component({
   selector: 'app-dialog-field',
@@ -20,17 +25,24 @@ export class DialogFieldComponent implements OnInit {
   editDes: string;
   users = USERS;
 
-  options = [{ index: 1, value: '' }, {index: 2, value: ''}];
-  count = 3;
+  listFields = FieldInPhase;
+  required = true;
   labelOption: string;
+
+
+  options = [{ index: 1, value: '' }, { index: 2, value: '' }];
+  count = 3;
+
   noDelete = false;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Fields) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Field) {
+  
+  }
 
   ngOnInit(): void {
     console.log(name);
   }
   addOption() {
-    this.options.push({ index: this.count, value:'' });
+    this.options.push({ index: this.count, value: this.labelOption });
     this.count++;
   }
   removeOption(index: number) {
@@ -41,7 +53,20 @@ export class DialogFieldComponent implements OnInit {
     this.options.splice(index, 1);
     this.count--;
   }
-  onSaveField() {
-    console.log("this is field added");
+  checkRequired() {
+    this.required = !this.required;
   }
+  onSaveField() {
+    this.listFields.push({
+      id: 3,
+      name: this.editName,
+      description: this.editDes,
+      type: this.data.field.type,
+      required: this.required,
+      phaseId: this.data.tab.phaseId,
+      options: this.options
+    })
+    console.log(this.listFields)
+  }
+
 }

@@ -1,15 +1,24 @@
 .practice-container {
-    padding:20px;
-    margin:10px;
-    width:80vw;
+  padding: 20px;
+  margin: 10px;
+  width: 70vw;
 }
+
 .positionBtn {
-    float:right;
+  float: right;
+  margin-top:20px;
+  margin-bottom:20px;
 }
+
 mat-dialog-actions {
   float: right;
 }
+
 .container {
-    width:400px;
-    height:auto;
+  width: 400px;
+  height: auto;
 }
+p {
+  color: #959da5;
+}
+

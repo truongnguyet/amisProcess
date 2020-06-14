@@ -16,6 +16,21 @@
     <mat-grid-tile>
       <div>
         <h2>Tên giai đoạn</h2>
+        <div *ngFor="let listField of listFields">
+          <div *ngIf="listField.phaseId == 2">
+            <div *ngIf="listField.type== 'radio' ">
+              <h3>{{listField.name}}</h3>
+              <p>
+                {{listField.description}}
+              </p>
+              <div *ngFor="let option of listField.options">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">{{option.value}}</label><br>
+              </div>
+            </div>
+          </div>
+
+        </div>
         <div class="button-action">
           <button type="button" class="btn btn-danger" mat-dialog-close>Hủy quy trình</button>
           <button type="button" class="btn btn-primary" mat-dialog-close>Chuyển tiếp</button>

@@ -10,6 +10,7 @@ import { SettingComponent } from '../admin/setting/setting.component';
 import { ProcessDetailComponent } from '../process-detail/process-detail.component';
 import { ViewmembersComponent } from '../viewmembers/viewmembers.component';
 import { PracticeProcessComponent } from '../list-process/practice-process/practice-process.component';
+import { EditProcessComponent } from '../admin/edit-process/edit-process.component';
 
 const homeRoutes: Routes = [
   {
@@ -37,7 +38,7 @@ const homeRoutes: Routes = [
         component: YourProcessComponent
       },
       {
-        path: 'home/setting/:name',
+        path: 'home/setting/:id',
         component: SettingComponent
       },
       {
@@ -47,6 +48,10 @@ const homeRoutes: Routes = [
       {
         path: 'process/view-member',
         component: ViewmembersComponent
+      },
+      {
+        path: 'home/edit-process/:id',
+        component: EditProcessComponent
       }
 
     ]

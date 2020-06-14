@@ -50,11 +50,8 @@ export class HomeComponent implements OnInit {
     const url = router.url;
     const value = url.split("?")[0].split("/")[1];
     this.selected = !value ? "home" : value;
-
   }
 
-  
-  
   goto(value: string) {
     this.selected = value;
     this.router.navigate(['/', value]);

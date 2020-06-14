@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-list-field',
@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-field.component.css']
 })
 export class ListFieldComponent implements OnInit {
+  @Input() childField: Array<any>;
+  @Input() tab: any;
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
-
+  child() {
+    console.log("this is child component",this.childField)
+  }
 }
