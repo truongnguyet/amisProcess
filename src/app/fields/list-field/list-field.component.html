@@ -1,129 +1,148 @@
 
-<div class="container" *ngIf="childField.length > 0">
+  <div class="container" *ngIf="childField.length > 0">
 
-  <div *ngFor="let child of childField">
-    <div *ngIf="tab.phaseId == child.phaseId">
-      <h3>{{child.name}}</h3>
-      <p>
-        {{child.description}}
-      </p>
-      <div *ngIf="child.type == 'shortText'">
-        <input type="text" class="form-control" style="width: 50%">
-        <br />
-      </div>
-
-      <div *ngIf="child.type == 'assignees' ">
-        <mat-list>
-          <mat-list-item>
-            <mat-icon mat-list-icon>person</mat-icon>
-            <div mat-line>Hoàng Hữu Hạnh</div>
-            <i class="material-icons">check</i>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon mat-list-icon>person</mat-icon>
-            <div mat-line>Mai Văn Thành</div>
-            <i class="material-icons">check</i>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon mat-list-icon>person</mat-icon>
-            <div mat-line>Nguyễn Thị Liên</div>
-          </mat-list-item>
-        </mat-list>
-        <br />
-      </div>
-
-      <div *ngIf="child.type=== 'attchment' ">
-        <form>
-          <label for="myfile">Select a file:</label>
-          <input type="file" id="myfile" name="myfile">
-        </form>
-        <br />
-      </div>
-
-      <div *ngIf="child.type === 'currency' ">
-        <input type="number" id="money" placeholder="0.00" />
-        <br />
-      </div>
-
-      <!--date-->
-      <div class="item-control" *ngIf="child.type === 'date' ">
-        <form>
-          <input type="date" id="date" name="date">
-        </form>
-        <br />
-      </div>
-
-      <!--datetime-->
-      <div *ngIf="child.type === 'dateTime' ">
-        <form>
-          <input type="datetime-local" id="datetime" name="datetime">
-        </form>
-        <br />
-      </div>
-
-      <!--Email-->
-      <div *ngIf="child.type === 'email' ">
-        <form>
-          <input type="email" id="email" name="email" placeholder="Exp@gmail.com">
-        </form>
-        <br />
-      </div>
-
-      <!--Long Text-->
-      <div *ngIf="child.type === 'longText' ">
-        <textarea class="form-control" aria-label="With textarea"></textarea>
-        <br />
-      </div>
-
-      <!--PhoneNumber-->
-      <div *ngIf="child.type === 'phone' ">
-        <form>
-          <input type="tel" id="phone" name="phone" placeholder="0965 856 158" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-        </form>
-        <br />
-      </div>
-
-      <!--Radio-->
-      <div *ngIf="child.type === 'radio' ">
-        <div *ngFor="let option of child.options">
-          <input type="radio" id="male" name="gender" value="male">
-          <label for="male">{{option.value}}</label><br>
+    <div *ngFor="let child of childField">
+      <div *ngIf="tab.phaseId == child.phaseId">
+        <h3 *ngIf="!child.required">{{child.name}}</h3>
+        <h3 *ngIf="child.required">{{child.name}} (*)</h3>
+        <p>
+          {{child.description}}
+        </p>
+        <i class="material-icons btn" [matMenuTriggerFor]="menu">more_vert</i>
+        <div *ngIf="child.type == 'shortText'">
+          <input type="text" class="form-control" style="width: 50%">
+          <br />
         </div>
-        <br />
-      </div>
 
-
-      <!--Time-->
-      <div *ngIf="child.type === 'time' ">
-        <input type="time" id="appt" name="appt"
-               min="09:00" max="18:00">
-        <br />
-      </div>
-
-      <div *ngIf="child.type === 'checkBox' ">
-        <div *ngFor="let option of child.options">
-          <input type="checkbox" id="male" name="gender" value="male">
-          <label for="male">{{option.value}}</label>
+        <div *ngIf="child.type == 'assignees' ">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>person</mat-icon>
+              <div mat-line>Hoàng Hữu Hạnh</div>
+              <i class="material-icons">check</i>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>person</mat-icon>
+              <div mat-line>Mai Văn Thành</div>
+              <i class="material-icons">check</i>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>person</mat-icon>
+              <div mat-line>Nguyễn Thị Liên</div>
+            </mat-list-item>
+          </mat-list>
+          <br />
         </div>
-        <br />
-      </div>
 
-      <div *ngIf="child.type === 'dropDown' ">
-        <mat-form-field>
-          <mat-label>Chọn select</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let option of child.options" [value]="option">
-              {{option.value}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <br />
-      </div>
+        <div *ngIf="child.type=== 'attchment' ">
+          <form>
+            <label for="myfile">Select a file:</label>
+            <input type="file" id="myfile" name="myfile">
+          </form>
+          <br />
+        </div>
 
+        <div *ngIf="child.type === 'currency' ">
+          <input type="number" id="money" placeholder="0.00" />
+          <br />
+        </div>
+
+        <!--date-->
+        <div class="item-control" *ngIf="child.type === 'date' ">
+          <form>
+            <input type="date" id="date" name="date">
+          </form>
+          <br />
+        </div>
+
+        <!--datetime-->
+        <div *ngIf="child.type === 'dateTime' ">
+          <form>
+            <input type="datetime-local" id="datetime" name="datetime">
+          </form>
+          <br />
+        </div>
+
+        <!--Email-->
+        <div *ngIf="child.type === 'email' ">
+          <form>
+            <input type="email" id="email" name="email" placeholder="Exp@gmail.com">
+          </form>
+          <br />
+        </div>
+
+        <!--Long Text-->
+        <div *ngIf="child.type === 'longText' ">
+          <textarea class="form-control" aria-label="With textarea"></textarea>
+          <br />
+        </div>
+
+        <!--PhoneNumber-->
+        <div *ngIf="child.type === 'phone' ">
+          <form>
+            <input type="tel" id="phone" name="phone" placeholder="0965 856 158" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+          </form>
+          <br />
+        </div>
+
+        <!--Radio-->
+        <div *ngIf="child.type === 'radio' ">
+          <div *ngFor="let option of child.options">
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">{{option.value}}</label><br>
+          </div>
+          <br />
+        </div>
+
+
+        <!--Time-->
+        <div *ngIf="child.type === 'time' ">
+          <input type="time" id="appt" name="appt"
+                 min="09:00" max="18:00">
+          <br />
+        </div>
+
+        <div *ngIf="child.type === 'checkBox' ">
+          <div *ngFor="let option of child.options">
+            <input type="checkbox" id="male" name="gender" value="male">
+            <label for="male">{{option.value}}</label>
+          </div>
+          <br />
+        </div>
+
+        <div *ngIf="child.type === 'dropDown' ">
+          <mat-form-field>
+            <mat-label>Chọn select</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let option of child.options" [value]="option">
+                {{option.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br />
+        </div>
+
+      </div>
     </div>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <i class="material-icons">edit</i>
+        <span>Chỉnh sửa</span>
+      </button>
+      <button mat-menu-item>
+        <i class="material-icons">arrow_upward</i>
+        <span>Di chuyển lên</span>
+      </button>
+      <button mat-menu-item>
+        <i class="material-icons">arrow_downward</i>
+        <span>Di chuyển xuống</span>
+      </button>
+      <button mat-menu-item>
+        <i class="material-icons">delete</i>
+        <span>Xóa</span>
+      </button>
+    </mat-menu>
   </div>
-
-
-</div>
 
 

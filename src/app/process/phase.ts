@@ -12,4 +12,5 @@ export interface Phase {
   isFirstPhase: boolean;
   isTC: boolean;
   isTB: boolean;
+  limitUser: boolean;
 }

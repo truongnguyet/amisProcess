@@ -22,7 +22,7 @@ export const PROCESS: Process[] = [
             name: "Thời gian bắt đầu",
             description: "Nhập thời gian bắt đầu nghỉ",
             type: "date",
-            required: false,
+            required: true,
             phaseId: 1,
           },
           {
@@ -30,7 +30,7 @@ export const PROCESS: Process[] = [
             name: "Thời gian kết thúc",
             description: "Nhập thời gian kết thúc nghỉ",
             type: "date",
-            required: false,
+            required: true,
             phaseId: 1,
           },
           {
@@ -38,7 +38,7 @@ export const PROCESS: Process[] = [
             name: "Lí do",
             description: "Nhập lí do nghỉ",
             type: "longText",
-            required: false,
+            required: true,
             phaseId: 1,
           },
         ],
@@ -46,7 +46,8 @@ export const PROCESS: Process[] = [
         implementer: USERS,
         isFirstPhase: true,
         isTC: false,
-        isTB: false
+        isTB: false,
+        limitUser: false
       },
       {
         phaseId: 2,
@@ -85,7 +86,8 @@ export const PROCESS: Process[] = [
         implementer: USERS,
         isFirstPhase: false,
         isTC: false,
-        isTB: false
+        isTB: false,
+        limitUser: false
       },
       {
         phaseId: 3,
@@ -151,7 +153,8 @@ export const PROCESS: Process[] = [
         ],
         isFirstPhase: false,
         isTC: false,
-        isTB: false
+        isTB: false,
+        limitUser: true
       },
       {
         phaseId: 4,
@@ -163,7 +166,8 @@ export const PROCESS: Process[] = [
         implementer: [],
         isFirstPhase: false,
         isTC: true,
-        isTB: false
+        isTB: false,
+        limitUser: false
       },
       {
         phaseId: 5,
@@ -175,7 +179,8 @@ export const PROCESS: Process[] = [
         implementer: [],
         isFirstPhase: false,
         isTC: false,
-        isTB: true
+        isTB: true,
+        limitUser: false
       }
     ],
 

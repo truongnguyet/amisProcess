@@ -1,4 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -7,18 +10,18 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { USERS } from '../../users/mock-users';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { FIELDS } from '../../fields/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
-import { Router, ActivatedRoute } from '@angular/router';
 import { ICONS } from '../../process/mock-icons';
-
 import { phaseData } from '../../process/mock-phases';
 import { FieldInPhase } from '../../fields/fieldData';
-
+import { PROCESS } from '../../process/mock-processes';
+import { Process } from '../../process/process';
+import { ProcessService } from '../../process/processService';
 
 interface Error {
   name: boolean;
@@ -43,9 +46,10 @@ export class SettingComponent implements OnInit {
   description: string;
   selectedIcon: boolean;
   panelOpenState = false;
-  processId: number;
+
   activeTab = 0;
   select = [];
+  processes: Process;
 
 
   parentField = FieldInPhase;
@@ -61,7 +65,8 @@ export class SettingComponent implements OnInit {
       implementer: [],
       isTC: false,
       isTB: false,
-      isFirstPhase: true
+      isFirstPhase: true,
+      limitUser: false
     },
     {
       phaseId: 2,
@@ -73,7 +78,8 @@ export class SettingComponent implements OnInit {
       implementer: USERS,
       isTC: false,
       isTB: false,
-      isFirstPhase: false
+      isFirstPhase: false,
+      limitUser: false
     },
     {
       phaseId: 3,
@@ -85,7 +91,8 @@ export class SettingComponent implements OnInit {
       implementer: USERS,
       isTC: false,
       isTB: false,
-      isFirstPhase: false
+      isFirstPhase: false,
+      limitUser: false
     },
     {
       phaseId: 4,
@@ -97,7 +104,8 @@ export class SettingComponent implements OnInit {
       implementer: [],
       isTC: true,
       isTB: false,
-      isFirstPhase: false
+      isFirstPhase: false,
+      limitUser: false
     },
     {
       phaseId: 5,
@@ -109,7 +117,8 @@ export class SettingComponent implements OnInit {
       implementer: [],
       isTC: false,
       isTB: true,
-      isFirstPhase: false
+      isFirstPhase: false,
+      limitUser: false
     },
   ];
   count = 4;
@@ -118,51 +127,62 @@ export class SettingComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private processService: ProcessService,
   ) {
-    this.processId = parseInt(this.route.snapshot.paramMap.get("id"));
-    
+
+
   }
 
   ngOnInit(): void {
-    
+    this.getProcess();
   }
+
+  getProcess(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.processService.getProcessById(id)
+      .subscribe(process => this.processes = process);
+    // console.log("lay id", this.processes)
+  }
+
   addUser() {
     this.dialog.open(InviteUserComponent);
   }
   onListUser(tab) {
-    this.limitUser = true;
+    tab.limitUser = true;
     tab.implementer = []
   }
   onCloseListUser(tab) {
-    this.limitUser = false;
+    tab.limitUser = false;
     tab.implementer = this.users;
   }
 
-  addField(tab,field) {
+  addField(tab, field) {
     this.dialog.open(DialogFieldComponent, {
       data: {
         field: field,
         tab: tab
       }
     });
-    tab.fields.push(field);
-    
+    // tab.fields.push(field);
+
   }
 
   gotoProcess() {
     this.tabs.forEach(e => {
       phaseData.push(e);
     })
-    console.log(this.tabs);
-    this.router.navigate(['/process-detail/', this.processId])
+    //console.log(this.tabs);
+    this.processes.phase = this.tabs;
+    console.log("process  sau khi tao",this.processes)
+    this.router.navigate(['/process-detail/', this.processes.id])
   }
 
 
 
   addTab() {
     this.tabs.splice(this.tabs.length - 2, 0, {
-      phaseId: this.tabs.length +1,
+      phaseId: this.tabs.length + 1,
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
@@ -171,7 +191,8 @@ export class SettingComponent implements OnInit {
       implementer: [],
       isFirstPhase: false,
       isTC: false,
-      isTB: false
+      isTB: false,
+      limitUser: false
     });
     this.count++;
   }
@@ -191,7 +212,7 @@ export class SettingComponent implements OnInit {
       this.activeTab++;
     }
     this.limitUser = false;
-   
+
   }
   onSelectTab(tab) {
     this.activeTab = tab;
@@ -199,16 +220,26 @@ export class SettingComponent implements OnInit {
   }
 
   selectUser(tab, user) {
-    if (this.limitUser) {
-      const index = tab.implementer.indexOf(user);
+    if (tab.limitUser) {
+      const index = this.userCheck(tab.implementer, user)
       if (index === -1) {
         tab.implementer.push(user);
       }
       else {
         tab.implementer.splice(index, 1);
       }
-    } 
+    }
+  }
+  userCheck(imply = [], user) {
+    let result = -1
+    imply.forEach((usr, index) => {
+      if (usr.id == user.id) {
+        result = index
+      }
+    })
+
+    return result;
   }
 
- 
+
 }

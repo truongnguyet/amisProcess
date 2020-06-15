@@ -12,6 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+
 import { FIELDS } from '../../fields/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,7 +31,7 @@ export class EditProcessComponent implements OnInit {
   selectedIcon: boolean;
   fields = FIELDS;
   activeTab = 0;
-  limitUser: boolean;
+  
   users = USERS;
 
   constructor(
@@ -44,17 +45,6 @@ export class EditProcessComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProcess();
-    if (this.process) {
-     
-      this.process.phase.forEach(d => {
-        console.log(d.implementer.length)
-        if (d.implementer.length == this.users.length) {
-          this.limitUser = false;
-        }
-        else this.limitUser = true;
-      })
-      console.log("aaaa", this.limitUser)
-    }
   }
 
   getProcess(): void {
@@ -71,16 +61,16 @@ export class EditProcessComponent implements OnInit {
 
   onSelectTab(tab) {
     this.activeTab = tab;
-    //this.limitUser = false;
   }
 
   addField(tab, field) {
     this.dialog.open(DialogFieldComponent, {
       data: {
-        field: field
+        field: field,
+        tab: tab
       }
     });
-    tab.fields.push(field);
+   // tab.fields.push(field);
   }
 
   removePhase(index: number) {
@@ -90,18 +80,17 @@ export class EditProcessComponent implements OnInit {
     this.dialog.open(InviteUserComponent);
   }
   onListUser(tab) {
-    this.limitUser = true;
-    this.process.phase.forEach(d => {
-      d.implementer = tab.implementer
-    })
+    tab.limitUser = true;
+    tab.implementer = [];
+  
   }
   onCloseListUser(tab) {
-    this.limitUser = false;
+    tab.limitUser = false;
     tab.implementer = this.users;
   }
   selectUser(tab, user) {
-    if (this.limitUser) {
-      const index = tab.implementer.indexOf(user);
+    if (tab.limitUser) {
+      const index = this.userCheck(tab.implementer, user)
       if (index === -1) {
         tab.implementer.push(user);
       }
@@ -114,7 +103,7 @@ export class EditProcessComponent implements OnInit {
     if (this.activeTab < this.process.phase.length - 1) {
       this.activeTab++;
     }
-    // this.limitUser = false;
+  //  console.log(this.process)
   }
   onSaveAll() {
     this.router.navigate(['/home'])
@@ -130,8 +119,20 @@ export class EditProcessComponent implements OnInit {
       implementer: [],
       isFirstPhase: false,
       isTC: false,
-      isTB: false
+      isTB: false,
+      limitUser: false
     });
 
+  }
+
+  userCheck(imply =[], user) {
+    let result = -1
+    imply.forEach((usr,index) => {
+      if (usr.id == user.id) {
+        result = index
+      }
+    })
+  
+    return result;
   }
 }

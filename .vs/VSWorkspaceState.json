@@ -5,12 +5,28 @@
     "\\src\\app",
     "\\src\\app\\admin",
     "\\src\\app\\admin\\createdialog",
+<<<<<<< HEAD
     "\\src\\app\\admin\\edit-process",
+=======
+<<<<<<< HEAD
+    "\\src\\app\\admin\\invite-user",
+    "\\src\\app\\confirm-process",
+    "\\src\\app\\fields\\list-field",
+    "\\src\\app\\home\\home"
+  ],
+  "SelectedNode": "\\src\\app\\admin\\invite-user\\invite-user.component.ts",
+=======
+>>>>>>> 5eed4e38d23bec832f829c9bda14fd87cac8bbc1
     "\\src\\app\\admin\\setting",
     "\\src\\app\\fields",
     "\\src\\app\\fields\\list-field",
     "\\src\\app\\list-process\\practice-process"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\src\\app\\fields\\list-field\\list-field.component.html",
+=======
+  "SelectedNode": "\\src\\app\\admin\\setting\\setting.component.ts",
+>>>>>>> 13a58407d27fc638c6a8d8dff31bcad8577f8d26
+>>>>>>> 5eed4e38d23bec832f829c9bda14fd87cac8bbc1
   "PreviewInSolutionExplorer": false
 }
