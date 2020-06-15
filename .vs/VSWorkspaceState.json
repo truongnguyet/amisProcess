@@ -5,11 +5,12 @@
     "\\src\\app",
     "\\src\\app\\admin",
     "\\src\\app\\admin\\createdialog",
+    "\\src\\app\\admin\\edit-process",
     "\\src\\app\\admin\\setting",
-    "\\src\\app\\home",
-    "\\src\\app\\list-process",
+    "\\src\\app\\fields",
+    "\\src\\app\\fields\\list-field",
     "\\src\\app\\list-process\\practice-process"
   ],
-  "SelectedNode": "\\src\\app\\admin\\setting\\setting.component.ts",
+  "SelectedNode": "\\src\\app\\fields\\list-field\\list-field.component.html",
   "PreviewInSolutionExplorer": false
 }
