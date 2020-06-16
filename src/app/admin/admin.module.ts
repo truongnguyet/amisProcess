@@ -58,6 +58,14 @@ import { EditProcessComponent } from './edit-process/edit-process.component';
     MatExpansionModule,
     MatSelectModule
   ],
+  exports: [
+    CreatedialogComponent,
+    InviteUserComponent,
+    SettingComponent,
+    DialogFieldComponent,
+    ListFieldComponent,
+    EditProcessComponent
+  ]
 
 })
 export class AdminModule { }

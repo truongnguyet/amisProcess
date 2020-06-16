@@ -39,7 +39,7 @@ export class DialogFieldComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(name);
+  //  console.log("Data nhan ve ",this.data);
   }
   addOption() {
     this.options.push({ index: this.count, value: this.labelOption });

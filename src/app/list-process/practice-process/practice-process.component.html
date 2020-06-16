@@ -1,34 +1,12 @@
 <div class="practice-container">
-  <h2> Mời bạn nhập vào các trường sau:</h2>
-  <p>
-    (Danh sách các trường mà admin đã tạo)
-  </p>
-  <div *ngFor="let listField of listFields">
-    <div *ngIf="listField.type == 'shortText' ">
-      <h3>
-        {{listField.name}}
-      </h3>
-      <p>
-        {{listField.description}}
-      </p>
-      <input type="text" class="form-control" style="width: 50%">
-    </div>
-    <br />
-    <div *ngIf="listField.type == 'date' ">
-      <h3>{{listField.name}}</h3>
-      <p>
-        {{listField.description}}
-      </p>
-      <input type="date" id="date" name="date">
-    </div>
-    <br />
-    <div *ngIf="listField.type == 'longText' ">
-      <h3>{{listField.name}}</h3>
-      <p>
-        {{listField.description}}
-      </p>
-      <textarea class="form-control" aria-label="With textarea" style="width:50%"></textarea>
-    </div>
+  <div>
+    <h2> Mời bạn nhập vào các trường sau:</h2>
+   
+    <!--<div>
+      <app-list-field [childField]="fields" [tab]="process.phase[0]"></app-list-field>
+    </div>-->
+    
+    <button type="button" class="btn btn-primary positionBtn" (click)="onNext()">OK</button>
   </div>
-  <button type="button" class="btn btn-primary positionBtn" (click)="onNext()">OK</button>
+  
 </div>

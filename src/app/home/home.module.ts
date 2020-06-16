@@ -29,7 +29,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { AdminModule } from '../admin/admin.module';
+
 
 
 
@@ -48,7 +48,7 @@ import { AdminModule } from '../admin/admin.module';
     PracticeProcessComponent,
     ForwardProcessComponent,
     DialogConfirmComponent,
-
+    
 
   ],
   imports: [
@@ -63,13 +63,25 @@ import { AdminModule } from '../admin/admin.module';
     MatButtonModule,
     MatDialogModule,
     MatRadioModule,
-    AdminModule,
     MatTooltipModule,
     MatGridListModule,
     MatSelectModule,
     MatSortModule,
     MatTableModule
   ],
-
+  exports: [
+    HomeComponent,
+    ListProcessComponent,
+    AdminComponent,
+    ConfirmProcessComponent,
+    YourProcessComponent,
+    ProcessDetailComponent,
+    DeleteMemberComponent,
+    ViewmembersComponent,
+    PracticeProcessComponent,
+    ForwardProcessComponent,
+    DialogConfirmComponent,
+    
+  ]
 })
 export class HomeModule { }

@@ -26,7 +26,7 @@ const homeRoutes: Routes = [
         component: ListProcessComponent,
       },
       {
-        path: 'list/practice',
+        path: 'list/practice/:id',
         component: PracticeProcessComponent,
       },
       {

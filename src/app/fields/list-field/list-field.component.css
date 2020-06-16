@@ -1,6 +1,17 @@
 p {
   color: #959da5;
 }
+
 btn {
-    float: right;
+  float: right;
+  display: none;
+}
+
+  btn:hover {
+    display: block;
+  }
+
+.title-field {
+  display: flex;
+  flex-direction: row;
 }

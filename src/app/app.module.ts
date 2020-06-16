@@ -12,6 +12,7 @@ import { HomeModule } from './home/home.module';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminModule } from './admin/admin.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
 
     HomeModule,
+    AdminModule,
     LoginDashboardModule
   ],
   providers: [
