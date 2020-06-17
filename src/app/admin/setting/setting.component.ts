@@ -10,6 +10,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MaterialModule } from '../../material.module';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { USERS } from '../../users/mock-users';
@@ -19,9 +21,12 @@ import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.com
 import { ICONS } from '../../process/mock-icons';
 import { phaseData } from '../../process/mock-phases';
 import { FieldInPhase } from '../../fields/fieldData';
-import { PROCESS } from '../../process/mock-processes';
 import { Process } from '../../process/process';
 import { ProcessService } from '../../process/processService';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { Users } from '../../users/users';
 
 interface Error {
   name: boolean;
@@ -136,6 +141,13 @@ export class SettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProcess();
+
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filter(name) : this.options.slice())
+      );
   }
 
   getProcess(): void {
@@ -172,9 +184,8 @@ export class SettingComponent implements OnInit {
     this.tabs.forEach(e => {
       phaseData.push(e);
     })
-    //console.log(this.tabs);
     this.processes.phase = this.tabs;
-    console.log("process  sau khi tao",this.processes)
+    //console.log("process  sau khi tao",this.processes)
     this.router.navigate(['/process-detail/', this.processes.id])
   }
 
@@ -242,4 +253,21 @@ export class SettingComponent implements OnInit {
   }
 
 
+
+  //Search users
+  myControl = new FormControl();
+  options = USERS;
+  filteredOptions: Observable<Users[]>;
+
+
+  displayFn(user: Users): string {
+    return user && user.name ? user.name : '';
+  }
+
+  private _filter(name: string): Users[] {
+    const filterValue = name.toLowerCase();
+
+    return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+  }
 }
+

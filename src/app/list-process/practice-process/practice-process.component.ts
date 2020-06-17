@@ -34,7 +34,7 @@ export class PracticeProcessComponent implements OnInit {
   ngOnInit(): void {
     this.getProcess();
     this.fields = this.process.phase[0].fields;
-    console.log(this.process.phase[0], this.fields)
+    //console.log("data ve dung ", this.process.phase[0], this.fields.length)
   }
   onNext() {
     this.dialog.open(ForwardProcessComponent);
@@ -43,7 +43,7 @@ export class PracticeProcessComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.processService.getProcessById(id)
       .subscribe(process => this.process = process);
-    console.log("lay id", this.process)
+   // console.log("lay id", this.process)
   }
 
 }
@@ -65,7 +65,7 @@ export class ForwardProcessComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     
-    //this.users = this.process.phase[2].implementer;
+    
   }
  
   onForward() {

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { phaseData } from '../process/mock-phases';
+
+
+import { Process } from '../process/process';
+import { ProcessService } from '../process/processService';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-process-detail',
@@ -9,13 +13,26 @@ import { phaseData } from '../process/mock-phases';
 })
 export class ProcessDetailComponent implements OnInit {
 
-  processId;
-  constructor() {
-    this.processId = 1
-    phaseData.find(x => x.processId == this.processId )
+  processes: Process;
+  constructor(
+    private route: ActivatedRoute,
+    private processService: ProcessService, ) {
+
   }
 
   ngOnInit(): void {
+    this.getProcess();
   }
 
+  getProcess(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.processService.getProcessById(id)
+      .subscribe(process => this.processes = process);
+    console.log("lay id", this.processes)
+  }
+  onPause() {
+    
+      this.processes.status = "Tạm ngừng";
+      console.log(this.processes)
+  }
 }

@@ -13,6 +13,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
+import { ListFieldModule } from './fields/list-field/list-field.module';
+
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { AdminModule } from './admin/admin.module';
 
     HomeModule,
     AdminModule,
-    LoginDashboardModule
+    LoginDashboardModule,
+    ListFieldModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

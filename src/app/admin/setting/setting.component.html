@@ -84,6 +84,21 @@
                 <mat-radio-button value="1" (change)="onCloseListUser(tab)" [checked]="!tab.limitUser">Tất cả thành viên</mat-radio-button><br />
                 <mat-radio-button value="2" (change)="onListUser(tab)" [checked]="tab.limitUser">Tùy chọn thành viên</mat-radio-button>
                 <div *ngIf="tab.limitUser == true">
+                  <!--Search user-->
+                   
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Search</mat-label>
+                      <input type="text" matInput  [matAutocomplete]="auto" [formControl]="myControl">
+                      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option.name}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                  
+
                   <mat-list>
                     <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                       <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>

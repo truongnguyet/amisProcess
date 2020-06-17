@@ -78,7 +78,7 @@ export class CreatedialogComponent implements OnInit {
       nameProcess: this.name,
       createdBy: '',
       createdAt: '',
-      status: '',
+      status: 'Đang hoạt động',
       modifyBy: '',
       modifyAt: '',
       phase: [],
