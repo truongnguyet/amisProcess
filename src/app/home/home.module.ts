@@ -14,24 +14,10 @@ import { PracticeProcessComponent } from '../list-process/practice-process/pract
 import { ForwardProcessComponent } from '../list-process/practice-process/practice-process.component';
 import { DialogConfirmComponent } from '../confirm-process/dialog-confirm/dialog-confirm.component';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { AdminModule } from '../admin/admin.module';
-
-
+import { ListFieldModule } from '../fields/list-field/list-field.module';
+import { MaterialModule } from '../material.module';
 
 
 
@@ -48,28 +34,29 @@ import { AdminModule } from '../admin/admin.module';
     PracticeProcessComponent,
     ForwardProcessComponent,
     DialogConfirmComponent,
-
+    
 
   ],
   imports: [
     CommonModule,
     RouterModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
     HomeRoutingModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatRadioModule,
-    AdminModule,
-    MatTooltipModule,
-    MatGridListModule,
-    MatSelectModule,
-    MatSortModule,
-    MatTableModule
+    MaterialModule,
+    ListFieldModule
   ],
-
+  exports: [
+    HomeComponent,
+    ListProcessComponent,
+    AdminComponent,
+    ConfirmProcessComponent,
+    YourProcessComponent,
+    ProcessDetailComponent,
+    DeleteMemberComponent,
+    ViewmembersComponent,
+    PracticeProcessComponent,
+    ForwardProcessComponent,
+    DialogConfirmComponent,
+    
+  ]
 })
 export class HomeModule { }

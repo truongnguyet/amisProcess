@@ -1,4 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -7,18 +10,23 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MaterialModule } from '../../material.module';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { USERS } from '../../users/mock-users';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { FIELDS } from '../../fields/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
-import { Router, ActivatedRoute } from '@angular/router';
 import { ICONS } from '../../process/mock-icons';
-
 import { phaseData } from '../../process/mock-phases';
 import { FieldInPhase } from '../../fields/fieldData';
-
+import { Process } from '../../process/process';
+import { ProcessService } from '../../process/processService';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { Users } from '../../users/users';
 
 interface Error {
   name: boolean;
@@ -43,9 +51,10 @@ export class SettingComponent implements OnInit {
   description: string;
   selectedIcon: boolean;
   panelOpenState = false;
-  processId: number;
+
   activeTab = 0;
   select = [];
+  processes: Process;
 
 
   parentField = FieldInPhase;
@@ -123,51 +132,68 @@ export class SettingComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private processService: ProcessService,
   ) {
-    this.processId = parseInt(this.route.snapshot.paramMap.get("id"));
-    
+
+
   }
 
   ngOnInit(): void {
-    
+    this.getProcess();
+
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filter(name) : this.options.slice())
+      );
   }
+
+  getProcess(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.processService.getProcessById(id)
+      .subscribe(process => this.processes = process);
+    // console.log("lay id", this.processes)
+  }
+
   addUser() {
     this.dialog.open(InviteUserComponent);
   }
   onListUser(tab) {
-    this.limitUser = true;
+    tab.limitUser = true;
     tab.implementer = []
   }
   onCloseListUser(tab) {
-    this.limitUser = false;
+    tab.limitUser = false;
     tab.implementer = this.users;
   }
 
-  addField(tab,field) {
+  addField(tab, field) {
     this.dialog.open(DialogFieldComponent, {
       data: {
         field: field,
         tab: tab
       }
     });
-    tab.fields.push(field);
-    
+    // tab.fields.push(field);
+
   }
 
   gotoProcess() {
     this.tabs.forEach(e => {
       phaseData.push(e);
     })
-    console.log(this.tabs);
-    this.router.navigate(['/process-detail/', this.processId])
+    this.processes.phase = this.tabs;
+    //console.log("process  sau khi tao",this.processes)
+    this.router.navigate(['/process-detail/', this.processes.id])
   }
 
 
 
   addTab() {
     this.tabs.splice(this.tabs.length - 2, 0, {
-      phaseId: this.tabs.length +1,
+      phaseId: this.tabs.length + 1,
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
@@ -197,7 +223,7 @@ export class SettingComponent implements OnInit {
       this.activeTab++;
     }
     this.limitUser = false;
-   
+
   }
   onSelectTab(tab) {
     this.activeTab = tab;
@@ -205,16 +231,43 @@ export class SettingComponent implements OnInit {
   }
 
   selectUser(tab, user) {
-    if (this.limitUser) {
-      const index = tab.implementer.indexOf(user);
+    if (tab.limitUser) {
+      const index = this.userCheck(tab.implementer, user)
       if (index === -1) {
         tab.implementer.push(user);
       }
       else {
         tab.implementer.splice(index, 1);
       }
-    } 
+    }
+  }
+  userCheck(imply = [], user) {
+    let result = -1
+    imply.forEach((usr, index) => {
+      if (usr.id == user.id) {
+        result = index
+      }
+    })
+
+    return result;
   }
 
- 
+
+
+  //Search users
+  myControl = new FormControl();
+  options = USERS;
+  filteredOptions: Observable<Users[]>;
+
+
+  displayFn(user: Users): string {
+    return user && user.name ? user.name : '';
+  }
+
+  private _filter(name: string): Users[] {
+    const filterValue = name.toLowerCase();
+
+    return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+  }
 }
+

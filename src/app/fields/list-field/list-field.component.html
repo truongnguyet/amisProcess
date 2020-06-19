@@ -3,7 +3,14 @@
 
   <div *ngFor="let child of childField">
     <div *ngIf="tab.phaseId == child.phaseId">
-      <h3>{{child.name}}</h3>
+      <div class="title-field">
+        <h3 *ngIf="!child.required">{{child.name}}</h3>
+        <h3 *ngIf="child.required">{{child.name}} (*)</h3>
+        <div class="hide-icon">
+          <i class="material-icons btn" [matMenuTriggerFor]="menu">more_vert</i>
+        </div>
+
+      </div>
       <p>
         {{child.description}}
       </p>
@@ -121,6 +128,24 @@
       </div>
 
     </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onEdit(tab,child)">
+        <i class="material-icons">edit</i>
+        <span>Chỉnh sửa</span>
+      </button>
+      <button mat-menu-item>
+        <i class="material-icons">arrow_upward</i>
+        <span>Di chuyển lên</span>
+      </button>
+      <button mat-menu-item>
+        <i class="material-icons">arrow_downward</i>
+        <span>Di chuyển xuống</span>
+      </button>
+      <button mat-menu-item (click)="onDelete(tab,child)">
+        <i class="material-icons">delete</i>
+        <span>Xóa</span>
+      </button>
+    </mat-menu>
   </div>
 
 

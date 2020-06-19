@@ -1,3 +1,29 @@
 p {
   color: #959da5;
 }
+
+btn {
+  float: right;
+  display: none;
+}
+
+  btn:hover {
+    display: block;
+  }
+
+.title-field {
+  display: flex;
+  flex-direction: row;
+}
+
+.hide-icon {
+    min-width:50px;
+    min-height:40px;
+}
+.hide-icon i {
+    display:none;
+}
+.hide-icon:hover i{
+    display:block;
+}
+ 

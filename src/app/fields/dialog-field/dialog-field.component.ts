@@ -35,11 +35,11 @@ export class DialogFieldComponent implements OnInit {
 
   noDelete = false;
   constructor(@Inject(MAT_DIALOG_DATA) public data: Field) {
-  
+    
   }
 
   ngOnInit(): void {
-    console.log(name);
+  //  console.log("Data nhan ve ",this.data);
   }
   addOption() {
     this.options.push({ index: this.count, value: this.labelOption });
@@ -57,7 +57,8 @@ export class DialogFieldComponent implements OnInit {
     this.required = !this.required;
   }
   onSaveField() {
-    this.listFields.push({
+
+    this.data.tab.fields.push({
       id: 3,
       name: this.editName,
       description: this.editDes,
@@ -66,7 +67,7 @@ export class DialogFieldComponent implements OnInit {
       phaseId: this.data.tab.phaseId,
       options: this.options
     })
-    console.log(this.listFields)
+    console.log(this.data.tab.fields)
   }
 
 }

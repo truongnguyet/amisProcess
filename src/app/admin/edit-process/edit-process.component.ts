@@ -12,6 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+
 import { FIELDS } from '../../fields/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,7 +31,7 @@ export class EditProcessComponent implements OnInit {
   selectedIcon: boolean;
   fields = FIELDS;
   activeTab = 0;
-  limitUser: boolean;
+  
   users = USERS;
 
   constructor(
@@ -60,16 +61,16 @@ export class EditProcessComponent implements OnInit {
 
   onSelectTab(tab) {
     this.activeTab = tab;
-    //this.limitUser = false;
   }
 
   addField(tab, field) {
     this.dialog.open(DialogFieldComponent, {
       data: {
-        field: field
+        field: field,
+        tab: tab
       }
     });
-    tab.fields.push(field);
+   // tab.fields.push(field);
   }
 
   removePhase(index: number) {
@@ -102,7 +103,7 @@ export class EditProcessComponent implements OnInit {
     if (this.activeTab < this.process.phase.length - 1) {
       this.activeTab++;
     }
-    // this.limitUser = false;
+  //  console.log(this.process)
   }
   onSaveAll() {
     this.router.navigate(['/home'])

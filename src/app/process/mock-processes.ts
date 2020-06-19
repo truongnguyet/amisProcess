@@ -22,7 +22,7 @@ export const PROCESS: Process[] = [
             name: "Thời gian bắt đầu",
             description: "Nhập thời gian bắt đầu nghỉ",
             type: "date",
-            required: false,
+            required: true,
             phaseId: 1,
           },
           {
@@ -30,7 +30,7 @@ export const PROCESS: Process[] = [
             name: "Thời gian kết thúc",
             description: "Nhập thời gian kết thúc nghỉ",
             type: "date",
-            required: false,
+            required: true,
             phaseId: 1,
           },
           {
@@ -38,7 +38,7 @@ export const PROCESS: Process[] = [
             name: "Lí do",
             description: "Nhập lí do nghỉ",
             type: "longText",
-            required: false,
+            required: true,
             phaseId: 1,
           },
         ],

@@ -5,10 +5,20 @@
     "\\src\\app",
     "\\src\\app\\admin",
     "\\src\\app\\admin\\edit-process",
+<<<<<<< HEAD
     "\\src\\app\\admin\\setting",
     "\\src\\app\\fields",
     "\\src\\app\\process"
   ],
   "SelectedNode": "\\src\\app\\admin\\setting\\setting.component.ts",
+=======
+    "\\src\\app\\fields\\list-field",
+    "\\src\\app\\home",
+    "\\src\\app\\list-process",
+    "\\src\\app\\list-process\\practice-process",
+    "\\src\\app\\users"
+  ],
+  "SelectedNode": "\\src\\app\\list-process\\practice-process\\practice-process.component.ts",
+>>>>>>> ca47b1d146527f1a9723e875a1cacc3493bf134c
   "PreviewInSolutionExplorer": false
 }
