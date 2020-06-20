@@ -5,7 +5,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <mat-tab-group [selectedIndex]="activeTab"
+  <mat-tab-group [selectedIndex]="activeTab -1"
                  (selectedIndexChange)="onSelectTab($event)">
     <mat-tab *ngFor="let tab of process.phase; let index = index" [label]="tab.phaseName">
       <div class="setting-container">
@@ -94,8 +94,8 @@
                 [disabled]="tab.isFirstPhase || tab.isTC || tab.isTB ">
           Xóa giai đoạn
         </button>
-        <button type="button" class="btn btn-success" (click)="onSave()" *ngIf="!tab.isTB">Lưu</button>
-        <button type="button" class="btn btn-success" (click)="onSaveAll()" *ngIf="tab.isTB">Lưu</button>
+        <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
+       
       </div>
 
     </mat-tab>

@@ -55,9 +55,9 @@
   </div>
   <hr />
   <div>
-    <mat-grid-list cols="3">
+    <mat-grid-list cols="3" rowHeight="2:1" >
       <mat-grid-tile *ngFor="let phase of process.phase">
-        <mat-card>
+        <mat-card style="width:90%">
           <div>
             <div>
               <i class="material-icons" style="padding:5px">{{phase.icon}}</i>
