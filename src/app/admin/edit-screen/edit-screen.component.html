@@ -56,7 +56,7 @@
   <hr />
   <div>
     <mat-grid-list cols="3" rowHeight="2:1" >
-      <mat-grid-tile *ngFor="let phase of process.phase">
+      <mat-grid-tile *ngFor="let phase of process.phase;let index = index">
         <mat-card style="width:90%">
           <div>
             <div>
@@ -68,7 +68,12 @@
             </h4>
             <hr />
             <div>
-              <button type="button" class="btn btn-primary" (click)="editPhase(phase)">Sửa</button>
+              <button type="button" class="btn btn-outline-danger" (click)="deletePhase(index)" [disabled]="phase.isFirstPhase || phase.isTC || phase.isTB ">
+              <i class="material-icons">delete</i>
+              </button>
+              <button type="button" class="btn btn-outline-primary" (click)="editPhase(phase)">
+              <i class="material-icons">edit</i>
+              </button>
             </div>
           </div>
         </mat-card>

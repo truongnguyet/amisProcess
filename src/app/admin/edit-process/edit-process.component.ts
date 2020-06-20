@@ -78,9 +78,7 @@ export class EditProcessComponent implements OnInit {
     });
   }
 
-  removePhase(index: number) {
-    this.process.phase.splice(index, 1);
-  }
+
   addUser() {
     this.dialog.open(InviteUserComponent);
   }
@@ -105,8 +103,10 @@ export class EditProcessComponent implements OnInit {
     }
   }
   onSave() {
-
     this.router.navigateByUrl('home/edit-process/'+ this.process.id)
+  }
+  onCancel() {
+    this.router.navigateByUrl('home/edit-process/' + this.process.id)
   }
 
   addTab() {

@@ -90,9 +90,9 @@
           </mat-radio-group>
         </div>
         <button type="button" class="btn btn-danger"
-                (click)="removePhase(index)"
-                [disabled]="tab.isFirstPhase || tab.isTC || tab.isTB ">
-          Xóa giai đoạn
+                (click)="onCancel()"
+                >
+          Hủy
         </button>
         <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
        

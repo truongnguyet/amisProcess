@@ -26,14 +26,16 @@ export class EditScreenComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.processService.getProcessById(id)
       .subscribe(process => this.process = process);
-    console.log("lay id", this.process)
+   // console.log("lay id", this.process)
   }
-  editPhase(phase) {
-    console.log("da lay duoc phase", phase)
+  editPhase(phase) {  
     this.router.navigateByUrl('home/edit-process/' + this.process.id + '/' + phase.phaseId);
   }
   onSave() {
     this.router.navigateByUrl('/home')
   }
-
+  deletePhase(index) {
+    this.process.phase.splice(index, 1);
+  }
+  
 }
