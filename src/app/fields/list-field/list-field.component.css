@@ -15,3 +15,15 @@ btn {
   display: flex;
   flex-direction: row;
 }
+
+.hide-icon {
+    min-width:50px;
+    min-height:40px;
+}
+.hide-icon i {
+    display:none;
+}
+.hide-icon:hover i{
+    display:block;
+}
+ 

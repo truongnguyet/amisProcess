@@ -11,6 +11,7 @@ import { ProcessDetailComponent } from '../process-detail/process-detail.compone
 import { ViewmembersComponent } from '../viewmembers/viewmembers.component';
 import { PracticeProcessComponent } from '../list-process/practice-process/practice-process.component';
 import { EditProcessComponent } from '../admin/edit-process/edit-process.component';
+import { EditScreenComponent } from '../admin/edit-screen/edit-screen.component';
 
 const homeRoutes: Routes = [
   {
@@ -50,10 +51,13 @@ const homeRoutes: Routes = [
         component: ViewmembersComponent
       },
       {
-        path: 'home/edit-process/:id',
+        path: 'home/edit-process/:id/:id',
         component: EditProcessComponent
+      },
+      {
+        path: 'home/edit-process/:id',
+        component: EditScreenComponent
       }
-
     ]
 
   }

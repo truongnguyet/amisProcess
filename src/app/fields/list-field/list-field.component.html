@@ -1,12 +1,15 @@
 
 <div class="container" *ngIf="childField.length > 0">
- 
+
   <div *ngFor="let child of childField">
     <div *ngIf="tab.phaseId == child.phaseId">
       <div class="title-field">
         <h3 *ngIf="!child.required">{{child.name}}</h3>
         <h3 *ngIf="child.required">{{child.name}} (*)</h3>
-        <i class="material-icons btn" [matMenuTriggerFor]="menu">more_vert</i>
+        <div class="hide-icon">
+          <i class="material-icons btn" [matMenuTriggerFor]="menu">more_vert</i>
+        </div>
+
       </div>
       <p>
         {{child.description}}

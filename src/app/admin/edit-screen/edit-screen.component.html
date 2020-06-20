@@ -1,0 +1,81 @@
+<div class="edit-container">
+  <form>
+    <label for="name">Tên quy trình </label>
+    <div class="input-group mb-3 form-name">
+      <input type="text"
+             class="form-control"
+             aria-describedby="basic-addon1"
+             required
+             id="name"
+             name="name"
+             [(ngModel)]="process.nameProcess" />
+      <!--(input)="onChange($event.target.value)"-->
+      <!--<div *ngIf="error.name" class="error-validate">
+        Bạn chưa nhập tên quy trình
+      </div>-->
+    </div>
+  </form>
+  <br />
+  <div class="select-container">
+    <p>Permission</p>
+    <div class="select-content">
+      <mat-radio-group aria-label="permission">
+        <mat-radio-button value="public">
+          Public(Ai cũng có thể nhìn thấy quy trình này)
+        </mat-radio-button><br />
+        <mat-radio-button value="private">
+          Private(Chỉ những người được mời vào quy trình mới nhìn thấy quy trình này)
+        </mat-radio-button>
+      </mat-radio-group>
+
+    </div>
+
+  </div>
+  <div class="select-container">
+    <p>Authorization</p>
+    <div class="select-content">
+      <mat-checkbox>Người dùng chỉ có thể chỉnh sửa trong quy trình mà mình tham gia!</mat-checkbox>
+      <br />
+      <mat-checkbox>Quy trình chỉ có thể bị xóa bởi admin</mat-checkbox>
+    </div>
+  </div>
+  <div>
+    <h4>
+      Trạng thái
+    </h4>
+    <mat-form-field>
+      <mat-label>Trạng thái</mat-label>
+      <mat-select [(ngModel)]="process.status">
+        <mat-option *ngFor="let status of statuses" [value]="status.name">
+          {{status.name}}
+        </mat-option>
+
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <hr />
+  <div>
+    <mat-grid-list cols="3">
+      <mat-grid-tile *ngFor="let phase of process.phase">
+        <mat-card>
+          <div>
+            <div>
+              <i class="material-icons" style="padding:5px">{{phase.icon}}</i>
+              <label>{{phase.phaseName}}</label>
+            </div>
+            <h4>
+              {{phase.description}}
+            </h4>
+            <hr />
+            <div>
+              <button type="button" class="btn btn-primary" (click)="editPhase(phase)">Sửa</button>
+            </div>
+          </div>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </div>
+
+  <button type="button" class="btn btn-danger" (click)="onSave()">Lưu</button>
+</div>

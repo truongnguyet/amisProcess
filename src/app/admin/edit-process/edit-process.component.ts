@@ -40,18 +40,19 @@ export class EditProcessComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router
   ) {
-
+    console.log(this.route)
   }
 
   ngOnInit(): void {
-    this.getProcess();
+    
   }
 
   getProcess(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.processService.getProcessById(id)
-      .subscribe(process => this.process = process);
-    console.log("lay id", this.process)
+    
+    //this.processService.getProcessById(id)
+    //  .subscribe(process => this.process = process);
+    //console.log("lay id", this.process)
   }
 
   selectIcon(tab, id: string) {
@@ -70,7 +71,6 @@ export class EditProcessComponent implements OnInit {
         tab: tab
       }
     });
-   // tab.fields.push(field);
   }
 
   removePhase(index: number) {

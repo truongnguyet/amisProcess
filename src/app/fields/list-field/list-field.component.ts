@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFieldComponent } from '../dialog-field/dialog-field.component';
-import { _ } from 'lodash'
+import { remove } from 'lodash'
 import { FIELDS } from '../mock-fields';
 @Component({
   selector: 'app-list-field',
@@ -31,14 +31,6 @@ export class ListFieldComponent implements OnInit {
   }
 
   onDelete(tab, field) {
- 
-    var arr = _.remove(tab.fields, () => {
-      
-      tab.fields.forEach(d => {
-        d.id == field.id
-        return d.id
-      })
-    })
-    console.log(arr)
+    remove(tab.fields, item => item.id == field.id)
   }
 }

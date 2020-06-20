@@ -12,6 +12,7 @@ import { InviteUserComponent } from './invite-user/invite-user.component';
 import { SettingComponent } from './setting/setting.component';
 import { DialogFieldComponent } from '../fields/dialog-field/dialog-field.component';
 import { EditProcessComponent } from './edit-process/edit-process.component';
+import { EditScreenComponent } from './edit-screen/edit-screen.component';
 
 
 
@@ -21,7 +22,8 @@ import { EditProcessComponent } from './edit-process/edit-process.component';
     InviteUserComponent,
     SettingComponent,
     DialogFieldComponent,
-    EditProcessComponent
+    EditProcessComponent,
+    EditScreenComponent
   ],
   imports: [
     CommonModule,
