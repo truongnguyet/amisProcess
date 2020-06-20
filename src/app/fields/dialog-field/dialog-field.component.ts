@@ -3,15 +3,16 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
-import { Fields } from '../fiedls';
+
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { USERS } from '../../users/mock-users';
-import { FieldInPhase } from '../fieldData';
+import _ from "lodash"
 
 export interface Field {
   field: any;
-  tab: any
+  tab: any;
+  fieldData: any;
 }
 
 @Component({
@@ -20,12 +21,12 @@ export interface Field {
   styleUrls: ['./dialog-field.component.css']
 })
 export class DialogFieldComponent implements OnInit {
-  fields: Fields;
+ 
   editName: string;
   editDes: string;
   users = USERS;
 
-  listFields = FieldInPhase;
+ 
   required = true;
   labelOption: string;
 
@@ -39,7 +40,7 @@ export class DialogFieldComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  //  console.log("Data nhan ve ",this.data);
+    console.log("Data nhan ve ",this.data);
   }
   addOption() {
     this.options.push({ index: this.count, value: this.labelOption });
@@ -56,18 +57,32 @@ export class DialogFieldComponent implements OnInit {
   checkRequired() {
     this.required = !this.required;
   }
-  onSaveField() {
+  onSaveField(fieldData) {
+    if (fieldData) {
 
-    this.data.tab.fields.push({
-      id: 3,
-      name: this.editName,
-      description: this.editDes,
-      type: this.data.field.type,
-      required: this.required,
-      phaseId: this.data.tab.phaseId,
-      options: this.options
-    })
-    console.log(this.data.tab.fields)
+      const idx = _.findIndex(this.data.tab.fields, { id: fieldData.id })
+      this.data.tab.fields[idx] = {
+        id: fieldData.id,
+        name: fieldData.name,
+        description: fieldData.description,
+        type: fieldData.type,
+        required: fieldData.required,
+        phaseId: fieldData.phaseId,
+        options: fieldData.options
+      }
+     
+    } else {
+      this.data.tab.fields.push({
+        id: this.data.tab.fields.length +1,
+        name: this.editName,
+        description: this.editDes,
+        type: this.data.field.type,
+        required: this.required,
+        phaseId: this.data.tab.phaseId,
+        options: this.options
+      })
+    }
+  //  console.log(this.data.tab.fields)
   }
 
 }

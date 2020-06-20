@@ -31,7 +31,7 @@ export class EditProcessComponent implements OnInit {
   selectedIcon: boolean;
   fields = FIELDS;
   activeTab = 0;
-  
+
   users = USERS;
 
   constructor(
@@ -45,13 +45,19 @@ export class EditProcessComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProcess();
+    this.getPhase();
   }
 
   getProcess(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = parseInt(this.router.url.split('/')[3]);
     this.processService.getProcessById(id)
       .subscribe(process => this.process = process);
-    console.log("lay id", this.process)
+    // console.log("lay id", this.process)
+  }
+  getPhase(): void {
+    const id = +this.route.snapshot.paramMap.get('id')
+    this.activeTab = id -1;
+    
   }
 
   selectIcon(tab, id: string) {
@@ -70,19 +76,16 @@ export class EditProcessComponent implements OnInit {
         tab: tab
       }
     });
-   // tab.fields.push(field);
   }
 
-  removePhase(index: number) {
-    this.process.phase.splice(index, 1);
-  }
+
   addUser() {
     this.dialog.open(InviteUserComponent);
   }
   onListUser(tab) {
     tab.limitUser = true;
     tab.implementer = [];
-  
+
   }
   onCloseListUser(tab) {
     tab.limitUser = false;
@@ -100,14 +103,12 @@ export class EditProcessComponent implements OnInit {
     }
   }
   onSave() {
-    if (this.activeTab < this.process.phase.length - 1) {
-      this.activeTab++;
-    }
-  //  console.log(this.process)
+    this.router.navigateByUrl('home/edit-process/'+ this.process.id)
   }
-  onSaveAll() {
-    this.router.navigate(['/home'])
+  onCancel() {
+    this.router.navigateByUrl('home/edit-process/' + this.process.id)
   }
+
   addTab() {
     this.process.phase.splice(this.process.phase.length - 2, 0, {
       phaseId: this.process.phase.length + 1,
@@ -125,14 +126,14 @@ export class EditProcessComponent implements OnInit {
 
   }
 
-  userCheck(imply =[], user) {
+  userCheck(imply = [], user) {
     let result = -1
-    imply.forEach((usr,index) => {
+    imply.forEach((usr, index) => {
       if (usr.id == user.id) {
         result = index
       }
     })
-  
+
     return result;
   }
 }

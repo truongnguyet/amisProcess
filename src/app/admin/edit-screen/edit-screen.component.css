@@ -1,0 +1,27 @@
+.select-container {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+}
+
+.select-content {
+  margin-left: 30px;
+}
+
+.select-name {
+  width: 100px;
+  text-align: center;
+}
+.edit-container {
+    margin:10px;
+    padding:20px;
+}
+.form-name {
+  width: 40%;
+}
+.card {
+    width:40%;
+}
+button {
+    margin: 10px;
+}

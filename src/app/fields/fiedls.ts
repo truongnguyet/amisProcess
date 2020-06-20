@@ -3,7 +3,5 @@ export interface Fields {
   nameField: string;
   description: string;
   type: string;
-  phaseId: number;
-  requeried: boolean;
-  option: Array<string>;
+  option?: Array<string>;
 }
