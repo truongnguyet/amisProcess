@@ -11,7 +11,8 @@ import { FieldInPhase } from '../fieldData';
 
 export interface Field {
   field: any;
-  tab: any
+  tab: any;
+  fieldData: any;
 }
 
 @Component({
@@ -20,12 +21,12 @@ export interface Field {
   styleUrls: ['./dialog-field.component.css']
 })
 export class DialogFieldComponent implements OnInit {
-  fields: Fields;
+ 
   editName: string;
   editDes: string;
   users = USERS;
 
-  listFields = FieldInPhase;
+ 
   required = true;
   labelOption: string;
 
@@ -39,7 +40,7 @@ export class DialogFieldComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  //  console.log("Data nhan ve ",this.data);
+    console.log("Data nhan ve ",this.data);
   }
   addOption() {
     this.options.push({ index: this.count, value: this.labelOption });

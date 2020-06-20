@@ -22,10 +22,17 @@ export class ListFieldComponent implements OnInit {
     console.log("this is child component",this.childField)
   }
   onEdit(tab, child) {
+    var fieldChild: any
+    this.field.forEach(d => {
+      if (d.type == child.type) {
+        fieldChild = d
+      }
+    })
     this.dialog.open(DialogFieldComponent, {
       data: {
         tab: tab,
-        field: child
+        field: fieldChild,
+        fieldData: child
       }
     })
   }

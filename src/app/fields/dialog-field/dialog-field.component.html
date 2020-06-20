@@ -11,14 +11,20 @@
         <label>
           Tên trường
         </label>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3" *ngIf="!data.fieldData">
           <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editName">
+        </div>
+        <div class="input-group mb-3" *ngIf="data.fieldData">
+          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="data.fieldData.name">
         </div>
         <label>
           Mô tả
         </label>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3" *ngIf="!data.fieldData">
           <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editDes">
+        </div>
+        <div class="input-group mb-3" *ngIf="data.fieldData">
+          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="data.fieldData.description">
         </div>
         <div *ngIf="data.field.nameField === 'Radio' || data.field.nameField ==='CheckBox' || data.field.nameField === 'DropDownSelect' ">
           <label>
@@ -48,26 +54,6 @@
         <h3>{{editName}}</h3>
         <label>{{editDes}}</label>
 
-        <div *ngIf="data.field.nameField == 'Assignees select' ">
-          <mat-list>
-            <mat-list-item>
-              <mat-icon mat-list-icon>person</mat-icon>
-              <div mat-line>Hoàng Hữu Hạnh</div>
-              <i class="material-icons">check</i>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>person</mat-icon>
-              <div mat-line>Mai Văn Thành</div>
-              <i class="material-icons">check</i>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>person</mat-icon>
-              <div mat-line>Nguyễn Thị Liên</div>
-            </mat-list-item>
-
-
-          </mat-list>
-        </div>
         <div *ngIf="data.field.nameField=== 'Attachment' ">
           <form>
             <label for="myfile">Select a file:</label>
@@ -106,8 +92,15 @@
           </form>
         </div>
         <!--Radio-->
-        <div *ngIf="data.field.nameField === 'Radio' ">
+        <div *ngIf="data.field.nameField === 'Radio' && !data.fieldData ">
           <div *ngFor="let option of options">
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">{{option.value}}</label><br>
+          </div>
+
+        </div>
+        <div *ngIf="data.field.nameField === 'Radio' && data.fieldData">
+          <div *ngFor="let option of data.fieldData.options">
             <input type="radio" id="male" name="gender" value="male">
             <label for="male">{{option.value}}</label><br>
           </div>
