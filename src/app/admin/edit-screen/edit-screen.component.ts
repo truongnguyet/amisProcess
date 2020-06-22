@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Process } from '../../process/process';
-import { ProcessService } from '../../process/processService';
+import { Process } from '../../models/process';
+import { ProcessService } from '../../services/processService';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

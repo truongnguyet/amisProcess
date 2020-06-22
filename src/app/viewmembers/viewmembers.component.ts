@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteUserComponent } from '../admin/invite-user/invite-user.component';
-import { USERS } from '../users/mock-users';
+import { USERS } from '../data/mock-users';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({

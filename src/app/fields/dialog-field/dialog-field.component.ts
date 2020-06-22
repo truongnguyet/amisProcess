@@ -6,7 +6,7 @@ import { MatListModule } from '@angular/material/list';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { USERS } from '../../users/mock-users';
+import { USERS } from '../../data/mock-users';
 import _ from "lodash"
 
 export interface Field {

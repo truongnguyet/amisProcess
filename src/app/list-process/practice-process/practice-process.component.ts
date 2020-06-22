@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
-import { USERS } from '../../users/mock-users';
+import { USERS } from '../../data/mock-users';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ListField } from '../../fields/fieldData';
-import { Process } from '../../process/process';
-import { ProcessService } from '../../process/processService';
+import { ListField } from '../../models/fieldData';
+import { Process } from '../../models/process';
+import { ProcessService } from '../../services/processService';
 
 
 

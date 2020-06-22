@@ -11,7 +11,7 @@ import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { Router } from '@angular/router';
 
 
-import { PROCESS } from '../../process/mock-processes';
+import { PROCESS } from '../../data/mock-processes';
 
 interface Error {
   name: boolean;

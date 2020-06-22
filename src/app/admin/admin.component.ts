@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PROCESS } from '../process/mock-processes';
+import { PROCESS } from '../data/mock-processes';
 import { MatButtonModule } from '@angular/material/button';
 import { CreatedialogComponent } from './createdialog/createdialog.component';
 import { MatDialog } from '@angular/material/dialog';

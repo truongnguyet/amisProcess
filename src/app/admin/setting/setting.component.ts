@@ -14,19 +14,19 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MaterialModule } from '../../material.module';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { USERS } from '../../users/mock-users';
+import { USERS } from '../../data/mock-users';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
-import { FIELDS } from '../../fields/mock-fields';
+import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
-import { ICONS } from '../../process/mock-icons';
-import { phaseData } from '../../process/mock-phases';
-import { FieldInPhase } from '../../fields/fieldData';
-import { Process } from '../../process/process';
-import { ProcessService } from '../../process/processService';
+import { ICONS } from '../../data/mock-icons';
+import { phaseData } from '../../data/mock-phases';
+import { FieldInPhase } from '../../models/fieldData';
+import { Process } from '../../models/process';
+import { ProcessService } from '../../services/processService';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { Users } from '../../users/users';
+import { Users } from '../../models/users';
 
 interface Error {
   name: boolean;

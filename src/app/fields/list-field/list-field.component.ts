@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFieldComponent } from '../dialog-field/dialog-field.component';
 import { remove } from 'lodash'
-import { FIELDS } from '../mock-fields';
+import { FIELDS } from '../../data/mock-fields';
+
 @Component({
   selector: 'app-list-field',
   templateUrl: './list-field.component.html',

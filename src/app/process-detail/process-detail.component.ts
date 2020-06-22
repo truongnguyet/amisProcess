@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 
-import { Process } from '../process/process';
-import { ProcessService } from '../process/processService';
+import { Process } from '../models/process';
+import { ProcessService } from '../services/processService';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

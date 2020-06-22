@@ -1,8 +1,8 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Process } from '../../process/process';
-import { ListField } from '../../fields/fieldData';
+import { Process } from '../../models/process';
+import { ListField } from '../../models/fieldData';
 
 @Component({
   selector: 'app-dialog-confirm',

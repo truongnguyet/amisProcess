@@ -1,5 +1,5 @@
-import { FieldData } from '../fields/fieldData';
-import { Users } from '../users/users';
+import { FieldData } from '../models/fieldData';
+import { Users } from '../models/users';
 
 export interface Phase {
   phaseId: number;
