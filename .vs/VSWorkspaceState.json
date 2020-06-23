@@ -4,39 +4,10 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\admin",
-<<<<<<< HEAD
-    "\\src\\app\\admin\\setting",
-    "\\src\\app\\fields",
-    "\\src\\app\\fields\\list-field",
-    "\\src\\app\\process"
-  ],
-  "SelectedNode": "\\src\\app\\fields\\list-field\\list-field.component.css",
-=======
-<<<<<<< HEAD
-    "\\src\\app\\admin\\setting",
-    "\\src\\app\\confirm-process",
-    "\\src\\app\\fields",
-=======
     "\\src\\app\\admin\\edit-process",
-<<<<<<< HEAD
     "\\src\\app\\admin\\setting",
-    "\\src\\app\\fields",
-    "\\src\\app\\process"
+    "\\src\\app\\fields"
   ],
-  "SelectedNode": "\\src\\app\\admin\\setting\\setting.component.ts",
-=======
->>>>>>> 28a47e4a667194b007a45cbe41b3a32486f35fea
-    "\\src\\app\\fields\\list-field",
-    "\\src\\app\\home",
-    "\\src\\app\\list-process",
-    "\\src\\app\\list-process\\practice-process"
-  ],
-<<<<<<< HEAD
-  "SelectedNode": "\\src\\app\\confirm-process\\dialog-confirm",
-=======
-  "SelectedNode": "\\src\\app\\list-process\\practice-process\\practice-process.component.ts",
->>>>>>> ca47b1d146527f1a9723e875a1cacc3493bf134c
->>>>>>> 28a47e4a667194b007a45cbe41b3a32486f35fea
->>>>>>> e14b3072853792bce8db33f2fd215b6b60dbdb4d
+  "SelectedNode": "\\src\\app\\admin\\edit-process\\edit-process.component.ts",
   "PreviewInSolutionExplorer": false
 }
