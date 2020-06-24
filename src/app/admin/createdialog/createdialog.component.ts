@@ -12,12 +12,14 @@ import { Router } from '@angular/router';
 
 
 import { PROCESS } from '../../data/mock-processes';
+import { Process } from '../../models/process';
+import { ProcessService } from '../../services/processService';
 
 interface Error {
   name: boolean;
   permission: boolean;
   authorization: boolean;
-  
+
 }
 
 @Component({
@@ -34,21 +36,26 @@ export class CreatedialogComponent implements OnInit {
   process = PROCESS;
   checked = true;
   inviteRef: any
+
+  processs: Process[]
   constructor(
     public dialog: MatDialog,
     private router: Router,
+    private processService: ProcessService
 
-  ) {  }
+  ) { }
 
   ngOnInit(): void {
   }
+
+
   onOpenDialogInviteUser() {
     this.inviteRef = this.dialog.open(InviteUserComponent)
     this.inviteRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  
+
 
   onChange(value: string) {
     this.name = value;
@@ -57,6 +64,8 @@ export class CreatedialogComponent implements OnInit {
   onChangePermission(permission: number) {
     this.permission = permission;
   }
+
+
   gotoSetting() {
     this.error = {
       name: false,
@@ -72,20 +81,38 @@ export class CreatedialogComponent implements OnInit {
     if (this.error.name || this.error.permission || this.error.authorization) {
       return null;
     }
-    this.id = this.process.length + 1;
-    this.process.push({
-      id: this.id,
+    //this.id = this.process.length + 1;
+    //this.process.push({
+    //  id: this.id,
+    //  nameProcess: this.name,
+    //  createdBy: '',
+    //  createdAt: '',
+    //  status: 'Đang hoạt động',
+    //  modifyBy: '',
+    //  modifyAt: '',
+    //  phase: [],
+    //})
+    
+
+    //them moi vao database
+
+    var pro = { 
       nameProcess: this.name,
       createdBy: '',
       createdAt: '',
       status: 'Đang hoạt động',
       modifyBy: '',
       modifyAt: '',
-      phase: [],
-    })
+     
+    }
+    this.processService.addProcess(pro as Process)
+      .subscribe(process => {
+        this.process.push(process)
+      })
+    console.log("tao moi thanh cong", this.processs)
     this.dialog.closeAll();
     this.router.navigate(['/home/setting/', this.id]);
   }
- 
- 
+
+
 }

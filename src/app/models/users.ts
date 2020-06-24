@@ -8,4 +8,6 @@ export interface Users {
   address: string;
   role: string;
   position: string;
+  dateOfBirth: string,
+  password: string
 } 

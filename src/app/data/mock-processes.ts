@@ -126,7 +126,9 @@ export const PROCESS: Process[] = [
             email: 'anh@gmail.com',
             position: 'Nhân viên',
             role: 'Staff',
-            address: 'Nghệ An'
+            address: 'Nghệ An',
+            dateOfBirth: "23/02/2986",
+            password:""
           },
           {
             id: 5,
@@ -137,7 +139,9 @@ export const PROCESS: Process[] = [
             email: 'dau@gmail.com',
             position: 'Quản lí',
             role: 'Manage',
-            address: 'Bắc Giang'
+            address: 'Bắc Giang',
+            dateOfBirth: "23/02/2986",
+            password: ""
           },
           {
             id: 6,
@@ -148,7 +152,9 @@ export const PROCESS: Process[] = [
             email: 'hanh@gmail.com',
             position: 'Nhân viên',
             role: 'Staff',
-            address: 'Huế'
+            address: 'Huế',
+            dateOfBirth: "23/02/2986",
+            password: ""
           },
         ],
         isFirstPhase: false,
