@@ -31,9 +31,11 @@ export class AdminComponent implements OnInit {
   }
 
    getAllProcess() {
-     // this.processService.getAllProcess().subscribe(p => this.processes = p)
-     this.processService.getAllProcess().then(p => this.processes = p)
-    console.log("lay tat ca process", this.processes)
+     this.processService.getAllProcess()
+       .subscribe(
+         p => this.processes = p,
+         e => console.log(e)
+       )
   }
 
   openDialog() {

@@ -37,13 +37,31 @@ export class CreatedialogComponent implements OnInit {
   checked = true;
   inviteRef: any
 
-  processs: Process[]
+  processs: Process
+
+  newProcess = {
+    nameProcess: this.name,
+    status: 'Đang hoạt động',
+    createdBy: 'Trương Thị Nguyệt',
+    createdAt: "2020-06-25",
+    modifyBy: '',
+    modifyAt: null,
+  }
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private processService: ProcessService
 
-  ) { }
+  ) {
+    this.name = '';
+    this.error = {
+      name: false,
+      permission: false,
+      authorization: false
+    }
+
+  }
 
   ngOnInit(): void {
   }
@@ -57,30 +75,23 @@ export class CreatedialogComponent implements OnInit {
   }
 
 
-  onChange(value: string) {
-    this.name = value;
-    this.error.name = false;
-  }
+
   onChangePermission(permission: number) {
     this.permission = permission;
   }
 
 
-  gotoSetting() {
-    this.error = {
-      name: false,
-      permission: false,
-      authorization: false
-    }
-    if (!this.name) {
+  gotoSetting(e) {
+    e.preventDefault();
+    
+    if (this.name == "") {
+      console.log('a')
       this.error.name = true;
+      return
     }
-    //if (!this.permission) {
-    //  this.error.permission = true;
-    //}
-    if (this.error.name || this.error.permission || this.error.authorization) {
-      return null;
-    }
+
+    //them moi o client
+
     //this.id = this.process.length + 1;
     //this.process.push({
     //  id: this.id,
@@ -92,26 +103,19 @@ export class CreatedialogComponent implements OnInit {
     //  modifyAt: '',
     //  phase: [],
     //})
-    
+
 
     //them moi vao database
-
-    var pro = { 
-      nameProcess: this.name,
-      createdBy: '',
-      createdAt: '',
-      status: 'Đang hoạt động',
-      modifyBy: '',
-      modifyAt: '',
-     
-    }
-    this.processService.addProcess(pro as Process)
-      .subscribe(process => {
-        this.process.push(process)
-      })
-    console.log("tao moi thanh cong", this.processs)
+    this.newProcess.nameProcess = this.name;
+    this.processService.addProcess(this.newProcess as Process)
+      .subscribe(
+        process => {
+          this.processs = process,
+            this.router.navigate(['/home/setting/', process.id]);
+        }
+      )
     this.dialog.closeAll();
-    this.router.navigate(['/home/setting/', this.id]);
+
   }
 
 

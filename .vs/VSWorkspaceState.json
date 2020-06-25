@@ -3,8 +3,12 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\data"
+    "\\src\\app\\admin",
+    "\\src\\app\\admin\\edit-screen",
+    "\\src\\app\\data",
+    "\\src\\app\\services",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\data\\mock-icons.ts",
+  "SelectedNode": "\\src\\app\\admin\\edit-screen\\edit-screen.component.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -21,18 +21,21 @@ export class ProcessService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  // lấy tất cả process ở client
   getProcess(): Observable<Process[]> {
     return of(PROCESS);
   }
+  //lay process theo id ở client
   getProcessById(id: number): Observable<Process> {
     return of(PROCESS.find(process => process.id === id))
     
   }
 
+  // lấy tất cả process trên database
   getAllProcess() {
-    return this.http.get<Process[]>(`${this.processURL}/getAll`).toPromise();
+    return this.http.get<Process[]>(`${this.processURL}/getAll`)
   }
-
+  //lấy process theo id từ database
   getById(id: number): Observable<Process> {
     const url = `${this.processURL}/${id}`;
     return this.http.get<Process>(url).pipe(
@@ -52,10 +55,12 @@ export class ProcessService {
     };
   }
 
-  addProcess(process: Process): Observable<Process> {
-    return this.http.post<Process>(`${this.processURL}/create`, process, this.httpOptions).pipe(
+  //thêm mới process 
+   addProcess(process: Process): Observable<Process> {
+    return  this.http.post<Process>(`${this.processURL}/create`, process, this.httpOptions).pipe(
       tap((newProcess: Process) => console.log(`added process w/ id=${newProcess.id}`)),
       catchError(this.handleError<Process>('addProcess'))
+     
     );
   }
 
