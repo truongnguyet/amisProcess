@@ -83,9 +83,9 @@ export class CreatedialogComponent implements OnInit {
 
   gotoSetting(e) {
     e.preventDefault();
+   
     
     if (this.name == "") {
-      console.log('a')
       this.error.name = true;
       return
     }

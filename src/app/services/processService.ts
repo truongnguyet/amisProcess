@@ -39,8 +39,8 @@ export class ProcessService {
   getById(id: number): Observable<Process> {
     const url = `${this.processURL}/${id}`;
     return this.http.get<Process>(url).pipe(
-      tap(_ => console.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Process>(`getHero id=${id}`))
+      tap(_ => console.log(`lấy process id=${id}`)),
+      catchError(this.handleError<Process>(`getProcess id=${id}`))
     );
   }
 
@@ -58,9 +58,17 @@ export class ProcessService {
   //thêm mới process 
    addProcess(process: Process): Observable<Process> {
     return  this.http.post<Process>(`${this.processURL}/create`, process, this.httpOptions).pipe(
-      tap((newProcess: Process) => console.log(`added process w/ id=${newProcess.id}`)),
+      tap((newProcess: Process) => {
+        console.log(`added process w/ id=${newProcess.id}`)
+      }),
       catchError(this.handleError<Process>('addProcess'))
-     
+     );
+  }
+  //update process
+  updateProcess(process: Process): Observable<any> {
+    return this.http.put(`${this.processURL}/edit`, process, this.httpOptions).pipe(
+      tap(_ => console.log(`updated process id=${process.id}`)),
+      catchError(this.handleError<any>('update process'))
     );
   }
 

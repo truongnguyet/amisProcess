@@ -12,7 +12,7 @@ export const PROCESS: Process[] = [
     createdAt: '10/1/2020',
     phase: [
       {
-        phaseId: 1,
+        id: 1,
         phaseName: 'Lập đơn',
         icon: 'access_alarm',
         description: 'Bước dành cho toàn bộ nhân viên muốn xin nghỉ',
@@ -50,7 +50,8 @@ export const PROCESS: Process[] = [
         limitUser: false
       },
       {
-        phaseId: 2,
+
+        id: 2,
         phaseName: 'Phê duyệt',
         icon: 'account_box',
         description: 'Bước dành cho quản lí bộ phận của nhân viên muốn xin nghỉ',
@@ -90,7 +91,7 @@ export const PROCESS: Process[] = [
         limitUser: false
       },
       {
-        phaseId: 3,
+        id: 3,
         phaseName: 'Xác nhận',
         icon: 'border_color',
         description: 'Bước dành cho giám đốc bộ phận của nhân viên muốn xin nghỉ',
@@ -163,7 +164,7 @@ export const PROCESS: Process[] = [
         limitUser: true
       },
       {
-        phaseId: 4,
+        id: 4,
         phaseName: 'Thành công',
         icon: 'notifications',
         description: 'Hoàn thành đơn có được phê duyệt hay không',
@@ -176,7 +177,7 @@ export const PROCESS: Process[] = [
         limitUser: false
       },
       {
-        phaseId: 5,
+        id: 5,
         phaseName: 'Thất bại',
         icon: 'notifications',
         description: 'Hoàn thành đơn có được phê duyệt hay không',
