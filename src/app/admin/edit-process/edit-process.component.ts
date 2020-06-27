@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProcessService } from '../../process/processService';
-import { Process } from '../../process/process';
+import { ProcessService } from '../../services/processService';
+import { Process } from '../../models/process';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICONS } from '../../process/mock-icons';
+import { ICONS } from '../../data/mock-icons';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,11 +13,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-import { FIELDS } from '../../fields/mock-fields';
+import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
-import { USERS } from '../../users/mock-users';
+import { USERS } from '../../data/mock-users';
 
 @Component({
   selector: 'app-edit-process',

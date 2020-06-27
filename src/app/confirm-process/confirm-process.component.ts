@@ -4,8 +4,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { PROCESS } from '../process/mock-processes';
-import { Process } from '../process/process';
+import { PROCESS } from '../data/mock-processes';
+import { Process } from '../models/process';
 import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
 
 export interface UserData {

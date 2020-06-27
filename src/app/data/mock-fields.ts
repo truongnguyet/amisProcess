@@ -1,4 +1,4 @@
-import { Fields } from './fiedls';
+import { Fields } from './../models/fiedls';
 
 export const FIELDS: Fields[] = [
   {

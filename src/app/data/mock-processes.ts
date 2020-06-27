@@ -1,5 +1,5 @@
-import { Process } from './process';
-import { USERS } from '../users/mock-users';
+import { Process } from './../models/process';
+import { USERS } from './mock-users';
 
 export const PROCESS: Process[] = [
   {

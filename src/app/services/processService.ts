@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 
-import { Process } from './process';
-import { PROCESS } from './mock-processes';
+import { Process } from '../models/process';
+import { PROCESS } from '../data/mock-processes';
 
 
 @Injectable({

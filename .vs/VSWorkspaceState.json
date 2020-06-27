@@ -4,10 +4,9 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\admin",
-    "\\src\\app\\admin\\edit-process",
-    "\\src\\app\\admin\\setting",
-    "\\src\\app\\fields"
+    "\\src\\app\\data",
+    "\\src\\app\\models"
   ],
-  "SelectedNode": "\\src\\app\\admin\\edit-process\\edit-process.component.ts",
+  "SelectedNode": "\\src\\app\\data\\mock-processes.ts",
   "PreviewInSolutionExplorer": false
 }

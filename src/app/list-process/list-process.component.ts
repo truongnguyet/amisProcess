@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PROCESS } from '../process/mock-processes';
+import { PROCESS } from '../data/mock-processes';
 import { Router } from '@angular/router';
 
 
