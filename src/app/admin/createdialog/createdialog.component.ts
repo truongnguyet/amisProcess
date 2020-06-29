@@ -90,20 +90,6 @@ export class CreatedialogComponent implements OnInit {
       return
     }
 
-    //them moi o client
-
-    //this.id = this.process.length + 1;
-    //this.process.push({
-    //  id: this.id,
-    //  nameProcess: this.name,
-    //  createdBy: '',
-    //  createdAt: '',
-    //  status: 'Đang hoạt động',
-    //  modifyBy: '',
-    //  modifyAt: '',
-    //  phase: [],
-    //})
-
 
     //them moi vao database
     this.newProcess.nameProcess = this.name;

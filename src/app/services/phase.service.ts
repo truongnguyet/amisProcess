@@ -23,6 +23,15 @@ export class PhaseService {
       catchError(this.handleError<Phase>(`getHero id=${id}`))
     );
   }
+  
+  //lay phase co ca field
+  getId(id: number): Observable<Phase> {
+    const url = `${this.phaseURL}/${id}/get`;
+    return this.http.get<Phase>(url).pipe(
+      tap(_ => console.log("OK")),
+      catchError(this.handleError<Phase>(`get Phase id=${id}`))
+    )
+  }
 
   //thêm mới phase
   addPhase(phase: Phase): Observable<Phase> {

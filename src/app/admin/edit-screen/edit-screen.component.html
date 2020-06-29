@@ -54,6 +54,9 @@
     </mat-form-field>
   </div>
   <hr />
+  <div *ngIf="process.phase.length == 0">
+    <h3>Bạn chưa cài đặt cho các giai đoạn của quy trình này!</h3>
+  </div>
   <div>
     <mat-grid-list cols="3" rowHeight="2:1" >
       <mat-grid-tile *ngFor="let phase of process.phase;let index = index">

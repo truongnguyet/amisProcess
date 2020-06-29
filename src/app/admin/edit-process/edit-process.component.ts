@@ -18,6 +18,8 @@ import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.com
 import { MatDialog } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { USERS } from '../../data/mock-users';
+import { PhaseService } from 'src/app/services/phase.service';
+import { Phase } from 'src/app/models/phase';
 
 @Component({
   selector: 'app-edit-process',
@@ -26,6 +28,7 @@ import { USERS } from '../../data/mock-users';
 })
 export class EditProcessComponent implements OnInit {
   process: Process;
+  phase : Phase;
   icons = ICONS;
   panelOpenState = false;
   selectedIcon: boolean;
@@ -38,7 +41,8 @@ export class EditProcessComponent implements OnInit {
     private processService: ProcessService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private phaseService : PhaseService
   ) {
 
   }
@@ -50,9 +54,19 @@ export class EditProcessComponent implements OnInit {
 
   getProcess(): void {
     const id = parseInt(this.router.url.split('/')[3]);
-    this.processService.getProcessById(id)
-      .subscribe(process => this.process = process);
-    // console.log("lay id", this.process)
+    this.processService.getPro(id)
+      .subscribe(process => {
+        process.phase.forEach( e => {
+         e.isFirstPhase =  Boolean(e.isFirstPhase),
+         e.isTb =  Boolean(e.isTb),
+         e.isTc =  Boolean(e.isTc),
+         e.limitUser =  Boolean(e.limitUser)
+        })
+        this.process = process
+        console.log(process)
+      }
+        );
+    
   }
   getPhase(): void {
     const id = +this.route.snapshot.paramMap.get('id')
@@ -119,8 +133,8 @@ export class EditProcessComponent implements OnInit {
       processId: 1,
       implementer: [],
       isFirstPhase: false,
-      isTC: false,
-      isTB: false,
+      isTc: false,
+      isTb: false,
       limitUser: false
     });
 

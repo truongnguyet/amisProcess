@@ -1,5 +1,5 @@
 
-<div>
+<div *ngIf="process">
   <div class="example-button-container">
     <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạn" (click)="addTab()">
       <mat-icon>add</mat-icon>
@@ -7,7 +7,11 @@
   </div>
   <mat-tab-group [selectedIndex]="activeTab"
                  (selectedIndexChange)="onSelectTab($event)">
-    <mat-tab *ngFor="let tab of process.phase; let index = index" [label]="tab.phaseName">
+    <mat-tab *ngFor="let tab of process.phase; let index = index">
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">{{tab.icon}}</mat-icon>
+        {{tab.phaseName}}
+      </ng-template>
       <div class="setting-container">
         <h2>Cài đặt giai đoạn {{tab.phaseName}}</h2>
         <div class="setting-item">
@@ -48,17 +52,14 @@
                 </div>
               </mat-expansion-panel>
             </mat-accordion>
-            <div>
-              <i class="material-icons icon-btn"> {{tab.icon}} </i>
-            </div>
           </div>
         </div>
         <br />
         <br />
         <!--Chọn trường, giai đoạn cuối thì không hiện phần này-->
-        <div [hidden]="tab.isTC || tab.isTB">
-          <p *ngIf="tab.fields == 0 "> (Chưa có trường nào được chọn)</p>
-          <app-list-field [childField]="tab.fields" [tab]="tab"></app-list-field>
+        <div [hidden]="tab.isTc || tab.isTb">
+          <p *ngIf="tab.fieldData.length == 0 "> (Chưa có trường nào được chọn)</p>
+          <app-list-field [childField]="tab.fieldData" [tab]="tab"></app-list-field>
           <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item *ngFor="let field of fields" (click)="addField(tab,field)">
@@ -71,7 +72,7 @@
         <br />
         <br />
         <!--Chọn người thực hiện-->
-        <div [hidden]="tab.isFirstPhase || tab.isTC || tab.isTB">
+        <div [hidden]="tab.isFirstPhase || tab.isTc || tab.isTb">
           <h2>Danh sách người thực hiện</h2>
           <br />
           <mat-radio-group aria-label="Select an option">

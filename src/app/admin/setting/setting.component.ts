@@ -236,8 +236,6 @@ export class SettingComponent implements OnInit {
   onSave(tab) {
    
     tab.processId = this.processes.id;
-
-
     tab.isFirstPhase = Number(tab.isFirstPhase);
     tab.isTC = Number(tab.isTC);
     tab.isTB = Number(tab.isTB);

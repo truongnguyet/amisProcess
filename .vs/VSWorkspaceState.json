@@ -4,12 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\admin",
-    "\\src\\app\\admin\\createdialog",
-    "\\src\\app\\data",
+    "\\src\\app\\admin\\edit-screen",
+    "\\src\\app\\admin\\setting",
+    "\\src\\app\\home",
     "\\src\\app\\models",
     "\\src\\app\\services",
     "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\admin\\admin.component.ts",
+  "SelectedNode": "\\src\\app\\admin\\createdialog\\createdialog.component.ts",
   "PreviewInSolutionExplorer": false
 }

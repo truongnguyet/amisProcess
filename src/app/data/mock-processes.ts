@@ -19,7 +19,7 @@ export const PROCESS: Process[] = [
         fields: [
           {
             id: 1,
-            name: "Thời gian bắt đầu",
+            fieldName: "Thời gian bắt đầu",
             description: "Nhập thời gian bắt đầu nghỉ",
             type: "date",
             required: true,
@@ -27,7 +27,7 @@ export const PROCESS: Process[] = [
           },
           {
             id: 2,
-            name: "Thời gian kết thúc",
+            fieldName: "Thời gian kết thúc",
             description: "Nhập thời gian kết thúc nghỉ",
             type: "date",
             required: true,
@@ -35,7 +35,7 @@ export const PROCESS: Process[] = [
           },
           {
             id: 3,
-            name: "Lí do",
+            fieldName: "Lí do",
             description: "Nhập lí do nghỉ",
             type: "longText",
             required: true,
@@ -45,8 +45,8 @@ export const PROCESS: Process[] = [
         processId: 1,
         implementer: USERS,
         isFirstPhase: true,
-        isTC: false,
-        isTB: false,
+        isTc: false,
+        isTb: false,
         limitUser: false
       },
       {
@@ -58,7 +58,7 @@ export const PROCESS: Process[] = [
         fields: [
           {
             id: 1,
-            name: "Quản lí phê duyệt",
+            fieldName: "Quản lí phê duyệt",
             description: "Quản lí phê duyệt đơn",
             type: "radio",
             required: true,
@@ -76,7 +76,7 @@ export const PROCESS: Process[] = [
           },
           {
             id: 2,
-            name: "Nhận xét",
+            fieldName: "Nhận xét",
             description: "Quản lí nhận xét đơn",
             type: "longText",
             required: false,
@@ -86,8 +86,8 @@ export const PROCESS: Process[] = [
         processId: 1,
         implementer: USERS,
         isFirstPhase: false,
-        isTC: false,
-        isTB: false,
+        isTc: false,
+        isTb: false,
         limitUser: false
       },
       {
@@ -98,7 +98,7 @@ export const PROCESS: Process[] = [
         fields: [
           {
             id: 1,
-            name: "Giám đốc xác nhận",
+            fieldName: "Giám đốc xác nhận",
             description: "Giám đốc xác nhận đơn",
             type: "radio",
             required: true,
@@ -159,8 +159,8 @@ export const PROCESS: Process[] = [
           },
         ],
         isFirstPhase: false,
-        isTC: false,
-        isTB: false,
+        isTc: false,
+        isTb: false,
         limitUser: true
       },
       {
@@ -172,8 +172,8 @@ export const PROCESS: Process[] = [
         processId: 1,
         implementer: [],
         isFirstPhase: false,
-        isTC: true,
-        isTB: false,
+        isTc: true,
+        isTb: false,
         limitUser: false
       },
       {
@@ -185,8 +185,8 @@ export const PROCESS: Process[] = [
         processId: 1,
         implementer: [],
         isFirstPhase: false,
-        isTC: false,
-        isTB: true,
+        isTc: false,
+        isTb: true,
         limitUser: false
       }
     ],

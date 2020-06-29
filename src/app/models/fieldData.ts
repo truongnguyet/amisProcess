@@ -1,6 +1,6 @@
 export interface FieldData  {
   id: number;
-  name: string;
+  fieldName: string;
   description: string;
   type: string;
   required: boolean;
@@ -11,7 +11,7 @@ export interface FieldData  {
 export const ListField: FieldData[] = [
   {
     id: 1,
-    name: "Họ và tên",
+    fieldName: "Họ và tên",
     description: "Nhập đầy đủ họ và tên",
     type: "shortText",
     required: false,
@@ -19,7 +19,7 @@ export const ListField: FieldData[] = [
   },
   {
     id: 2,
-    name: "Email",
+    fieldName: "Email",
     description: "Nhập email của bạn",
     type: "shortText",
     required: true,
@@ -27,7 +27,7 @@ export const ListField: FieldData[] = [
   },
   {
     id: 3,
-    name: "Thời gian bắt đầu",
+    fieldName: "Thời gian bắt đầu",
     description: "Bạn bắt đầu nghỉ khi nào?",
     type: "date",
     required: true,
@@ -35,7 +35,7 @@ export const ListField: FieldData[] = [
   },
   {
     id: 4,
-    name: "Thời gian kết thúc",
+    fieldName: "Thời gian kết thúc",
     description: "Bạn kết thúc kì nghỉ vào ngày nào?",
     type: "date",
     required: true,
@@ -43,7 +43,7 @@ export const ListField: FieldData[] = [
   },
   {
     id: 5,
-    name: "Lí do ",
+    fieldName: "Lí do ",
     description: "Lí do nghỉ phép",
     type: "longText",
     required: true,
@@ -51,7 +51,7 @@ export const ListField: FieldData[] = [
   },
   {
     id: 6,
-    name: "Giám đốc xác nhận",
+    fieldName: "Giám đốc xác nhận",
     description: "Xác nhận đơn xin nghỉ",
     type: "radio",
     required: true,

@@ -17,7 +17,7 @@ export class ListFieldComponent implements OnInit {
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
-  //  console.log("this is child component", this.childField, this.tab)
+  // console.log("this is child component", this.childField)
   }
   child() {
     console.log("this is child component",this.childField)

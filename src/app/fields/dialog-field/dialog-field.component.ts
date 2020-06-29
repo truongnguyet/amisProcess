@@ -8,6 +8,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { USERS } from '../../data/mock-users';
 import _ from "lodash"
+import { FieldService } from 'src/app/services/field.service';
+import { FieldData } from 'src/app/models/fieldData';
 
 export interface Field {
   field: any;
@@ -21,21 +23,34 @@ export interface Field {
   styleUrls: ['./dialog-field.component.css']
 })
 export class DialogFieldComponent implements OnInit {
- 
+
   editName: string;
   editDes: string;
   users = USERS;
 
- 
   required = true;
   labelOption: string;
-
-
   options = [{ index: 1, value: '' }, { index: 2, value: '' }];
   count = 3;
 
+  newField = {
+
+    fieldName: this.editName,
+    description: this.editDes,
+    type: this.data.field.type,
+    required: null,
+    phaseId: this.data.tab.id,
+    options: this.options
+  }
+
+ 
+
   noDelete = false;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Field) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Field,
+    private fieldService : FieldService
+
+    ) {
     
   }
 
@@ -57,9 +72,11 @@ export class DialogFieldComponent implements OnInit {
   checkRequired() {
     this.required = !this.required;
   }
-  onSaveField(fieldData) {
-    if (fieldData) {
 
+  onSaveField(fieldData) {
+    
+
+    if (fieldData) {
       const idx = _.findIndex(this.data.tab.fields, { id: fieldData.id })
       this.data.tab.fields[idx] = {
         id: fieldData.id,
@@ -72,17 +89,25 @@ export class DialogFieldComponent implements OnInit {
       }
      
     } else {
-      this.data.tab.fields.push({
-        id: this.data.tab.fields.length +1,
-        name: this.editName,
+      this.newField = {
+        fieldName : this.editName,
         description: this.editDes,
         type: this.data.field.type,
-        required: this.required,
-        phaseId: this.data.tab.phaseId,
+        required:this.required,
+        phaseId: this.data.tab.id,
         options: this.options
-      })
+      }
+     this.newField.required = Number(this.newField.required)
+     console.log(this.newField)
+      this.fieldService.addField(this.newField as FieldData)
+      .subscribe(
+        field => {
+         console.log("thêm mới field", field)
+        }
+      )
+
     }
-  //  console.log(this.data.tab.fields)
+    console.log(this.data.tab.fields)
   }
 
 }

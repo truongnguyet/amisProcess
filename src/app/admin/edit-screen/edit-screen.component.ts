@@ -27,7 +27,9 @@ export class EditScreenComponent implements OnInit {
     this.processService.getById(id)
       .subscribe(
         process =>
+        
           this.process = process,
+          
         );
 
   }
@@ -35,7 +37,7 @@ export class EditScreenComponent implements OnInit {
     this.processService.getAllProcess().subscribe();
   }
   editPhase(phase) {
-    this.router.navigateByUrl('home/edit-process/' + this.process.id + '/' + phase.phaseId);
+    this.router.navigateByUrl('home/edit-process/' + this.process.id + '/' + phase.id);
   }
   onSave() {
    

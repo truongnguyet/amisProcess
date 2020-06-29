@@ -10,7 +10,7 @@ export interface Phase {
   processId: number;
   implementer: Users[];
   isFirstPhase: boolean;
-  isTC: boolean;
-  isTB: boolean;
+  isTc: boolean;
+  isTb: boolean;
   limitUser: boolean;
 }

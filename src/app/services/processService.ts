@@ -37,11 +37,20 @@ export class ProcessService {
   }
   //lấy process theo id từ database
   getById(id: number): Observable<Process> {
-    const url = `${this.processURL}/${id}`;
+    const url = `${this.processURL}/phase/${id}`;
     return this.http.get<Process>(url).pipe(
       tap(_ => console.log(`lấy process id=${id}`)),
       catchError(this.handleError<Process>(`getProcess id=${id}`))
     );
+  }
+
+  //lay ca phase va field
+  getPro(id : number): Observable<Process> {
+    const url = `${this.processURL}/${id}/get`;
+    return this.http.get<Process>(url).pipe(
+      tap(_ => console.log("")),
+      catchError(this.handleError<Process>(`get lỗi`))
+    )
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

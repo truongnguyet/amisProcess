@@ -33,3 +33,6 @@ button {
 .list-user :hover {
   cursor: pointer;
 }
+.example-tab-icon {
+  margin-right: 8px;
+}
