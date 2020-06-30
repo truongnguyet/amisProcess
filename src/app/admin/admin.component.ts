@@ -16,6 +16,7 @@ import { ProcessService } from '../services/processService';
 export class AdminComponent implements OnInit {
  
   processes: Process[]
+  loading = false;
   
 
   constructor(
@@ -31,11 +32,17 @@ export class AdminComponent implements OnInit {
   }
 
    getAllProcess() {
+     this.loading = true;
      this.processService.getAllProcess()
        .subscribe(
-         p => this.processes = p,
+         p => {
+           this.processes = p,
+           this.loading = false;
+          },
          e => console.log(e)
+         
        )
+       
   }
 
   openDialog() {

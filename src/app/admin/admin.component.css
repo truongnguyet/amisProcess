@@ -47,4 +47,10 @@
   color: #607D8B;
   background-color: #DDD;
 }
+.spiner {
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
 

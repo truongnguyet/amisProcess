@@ -4,9 +4,9 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
+  <mat-spinner *ngIf="loading == true" class="spiner"></mat-spinner>
   <div class="list">
     <h2>Danh sách các quy trình bạn quản lí:</h2>
-    
     <table class="table table-striped">
       <thead>
         <tr>
