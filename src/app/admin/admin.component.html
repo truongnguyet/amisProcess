@@ -16,9 +16,9 @@
           <th scope="row">Trạng thái</th>
         </tr>
       </thead>
-      <tbody *ngFor="let process of processes" class="list-row" (click)="viewProcess(process)">
+      <tbody *ngFor="let process of processes; let index = index" class="list-row" (click)="viewProcess(process)">
         <tr>
-          <td>{{process.id}}</td>
+          <td>{{index +1}}</td>
           <td>{{process.nameProcess}}</td>
           <td>{{process.createdBy}}</td>
           <td>

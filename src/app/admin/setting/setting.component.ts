@@ -13,13 +13,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MaterialModule } from '../../material.module';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import {v4 as uuidv4} from 'uuid';
 import { USERS } from '../../data/mock-users';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { ICONS } from '../../data/mock-icons';
-import { phaseData } from '../../data/mock-phases';
 import { FieldInPhase } from '../../models/fieldData';
 import { Process } from '../../models/process';
 import { ProcessService } from '../../services/processService';
@@ -54,20 +53,18 @@ export class SettingComponent implements OnInit {
   panelOpenState = false;
 
   activeTab = 0;
-  select = [];
   processes: Process;
-
+  parentPhase = FieldInPhase;
   error: Error;
-  parentField = FieldInPhase;
 
   tabs = [
     {
-      
+      id:uuidv4(),
       phaseName: 'Giai đoạn 1',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
+      processId: "",
       implementer: [],
       isTC: false,
       isTB: false,
@@ -75,12 +72,12 @@ export class SettingComponent implements OnInit {
       limitUser: false
     },
     {
-     
+     id:uuidv4(),
       phaseName: 'Giai đoạn 2',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
+      processId: "",
       implementer: USERS,
       isTC: false,
       isTB: false,
@@ -88,12 +85,12 @@ export class SettingComponent implements OnInit {
       limitUser: false
     },
     {
-     
+      id:uuidv4(),
       phaseName: 'Giai đoạn 3',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
+      processId: "",
       implementer: USERS,
       isTC: false,
       isTB: false,
@@ -101,12 +98,12 @@ export class SettingComponent implements OnInit {
       limitUser: false
     },
     {
-      
+      id:uuidv4(),
       phaseName: 'Thành công',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
+      processId: "",
       implementer: [],
       isTC: true,
       isTB: false,
@@ -114,12 +111,12 @@ export class SettingComponent implements OnInit {
       limitUser: false
     },
     {
-      
+      id:uuidv4(),
       phaseName: 'Thất bại',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
+      processId: "",
       implementer: [],
       isTC: false,
       isTB: true,
@@ -171,8 +168,8 @@ export class SettingComponent implements OnInit {
   }
 
   getProcess(): void {
-    const id = parseInt( this.route.snapshot.paramMap.get('id'));
-    this.processService.getById(id)
+    const id =  this.route.snapshot.params.id;
+    this.processService.getPro(id)
       .subscribe( process => this.processes = process);    
   }
 
@@ -195,7 +192,7 @@ export class SettingComponent implements OnInit {
         tab: tab
       }
     });
-    // tab.fields.push(field);
+   
 
   }
 
@@ -208,11 +205,12 @@ export class SettingComponent implements OnInit {
 
   addTab() {
     this.tabs.splice(this.tabs.length - 2, 0, {
+      id:uuidv4(),
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
+      processId: "",
       implementer: [],
       isFirstPhase: false,
       isTC: false,
@@ -240,6 +238,11 @@ export class SettingComponent implements OnInit {
     tab.isTC = Number(tab.isTC);
     tab.isTB = Number(tab.isTB);
     tab.limitUser = Number(tab.limitUser);
+    tab.fieldData = this.parentPhase;
+    tab.fieldData.forEach(a=> {
+      a.required = Number(a.required)
+    })
+
     this.phaseService.addPhase(tab as Phase)
       .subscribe(
         p => {

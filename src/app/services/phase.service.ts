@@ -35,7 +35,7 @@ export class PhaseService {
 
   //thêm mới phase
   addPhase(phase: Phase): Observable<Phase> {
-    return this.http.post<Phase>(`${this.phaseURL}/create`, phase, this.httpOptions).pipe(
+    return this.http.post<Phase>(`${this.phaseURL}/createAll`, phase, this.httpOptions).pipe(
       tap((newPhase: Phase) => console.log(`Created new phase id=${newPhase.id}`)),
       catchError(this.handleError<Phase>('add phase loi'))
     );

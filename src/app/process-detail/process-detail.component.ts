@@ -26,7 +26,7 @@ export class ProcessDetailComponent implements OnInit {
 
   getProcess(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.processService.getProcessById(id)
+    this.processService.getById(id)
       .subscribe(process => this.processes = process);
     console.log("lay id", this.processes)
   }

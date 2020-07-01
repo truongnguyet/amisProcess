@@ -12,6 +12,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import _ from 'lodash';
+import {v4 as uuidv4} from 'uuid';
 
 import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
@@ -28,7 +30,6 @@ import { Phase } from 'src/app/models/phase';
 })
 export class EditProcessComponent implements OnInit {
   process: Process;
-  phase : Phase;
   icons = ICONS;
   panelOpenState = false;
   selectedIcon: boolean;
@@ -49,7 +50,6 @@ export class EditProcessComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProcess();
-    this.getPhase();
   }
 
   getProcess(): void {
@@ -63,16 +63,14 @@ export class EditProcessComponent implements OnInit {
          e.limitUser =  Boolean(e.limitUser)
         })
         this.process = process
-        console.log(process)
+       // console.log(process)
+        const idPhase = this.route.snapshot.paramMap.get('id')  
+        this.activeTab = _.findIndex(process.phase, function(o){ return o.id == idPhase ;});
       }
         );
     
   }
-  getPhase(): void {
-    const id = +this.route.snapshot.paramMap.get('id')
-    this.activeTab = id -1;
-    
-  }
+ 
 
   selectIcon(tab, id: string) {
     this.selectedIcon = true;
@@ -125,7 +123,7 @@ export class EditProcessComponent implements OnInit {
 
   addTab() {
     this.process.phase.splice(this.process.phase.length - 2, 0, {
-      id: this.process.phase.length + 1,
+      id: uuidv4(),
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',

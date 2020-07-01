@@ -1,16 +1,16 @@
 export interface FieldData  {
-  id: number;
+  id: string;
   fieldName: string;
   description: string;
   type: string;
   required: boolean;
   phaseId: number;
-  options?: Array<any>;
+  option?: Array<any>;
 }
 
 export const ListField: FieldData[] = [
   {
-    id: 1,
+    id: "a",
     fieldName: "Họ và tên",
     description: "Nhập đầy đủ họ và tên",
     type: "shortText",
@@ -18,7 +18,7 @@ export const ListField: FieldData[] = [
     phaseId: 1,
   },
   {
-    id: 2,
+    id: "b",
     fieldName: "Email",
     description: "Nhập email của bạn",
     type: "shortText",
@@ -26,7 +26,7 @@ export const ListField: FieldData[] = [
     phaseId: 1
   },
   {
-    id: 3,
+    id: "c",
     fieldName: "Thời gian bắt đầu",
     description: "Bạn bắt đầu nghỉ khi nào?",
     type: "date",
@@ -34,7 +34,7 @@ export const ListField: FieldData[] = [
     phaseId: 1
   },
   {
-    id: 4,
+    id: "d",
     fieldName: "Thời gian kết thúc",
     description: "Bạn kết thúc kì nghỉ vào ngày nào?",
     type: "date",
@@ -42,7 +42,7 @@ export const ListField: FieldData[] = [
     phaseId: 1
   },
   {
-    id: 5,
+    id: "e",
     fieldName: "Lí do ",
     description: "Lí do nghỉ phép",
     type: "longText",
@@ -50,13 +50,13 @@ export const ListField: FieldData[] = [
     phaseId: 1
   },
   {
-    id: 6,
+    id: "f",
     fieldName: "Giám đốc xác nhận",
     description: "Xác nhận đơn xin nghỉ",
     type: "radio",
     required: true,
     phaseId: 2,
-    options: [{ idx: 1, value: 'Đồng ý' }, {idx: 2, value: 'Không đồng ý'}]
+    option: [{ idx: 1, value: 'Đồng ý' }, {idx: 2, value: 'Không đồng ý'}]
   },
 ]
 

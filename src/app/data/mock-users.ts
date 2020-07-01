@@ -2,7 +2,7 @@ import { Users } from './../models/users';
 
 export const USERS: Users[] = [
   {
-    id: 1,
+    id: "a",
     name: 'Nguyễn Văn Thành',
     firstName: 'Nguyễn Văn',
     lastName: 'Thành',
@@ -15,7 +15,7 @@ export const USERS: Users[] = [
     password:""
   },
   {
-    id: 2,
+    id: "b",
     name: 'Phạm Văn Sự',
     firstName: 'Phạm Văn',
     lastName: 'Sự',
@@ -28,7 +28,7 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 3,
+    id: "c",
     name: 'Từ Minh Phương',
     firstName: 'Từ Minh',
     lastName: 'Phương',
@@ -41,7 +41,7 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 4,
+    id: "d",
     name: 'Trịnh Thị Vân Anh',
     firstName: 'Trịnh Thị',
     lastName: 'Vân Anh',
@@ -54,7 +54,7 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 5,
+    id: "e",
     name: 'Hoàng Xuân Dậu',
     firstName: 'Hoàng Xuân',
     lastName: 'Dậu',
@@ -67,7 +67,7 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 6,
+    id: "f",
     name: 'Hoàng Hữu Hạnh',
     firstName: 'Hoàng Hữu',
     lastName: 'Hạnh',
@@ -80,7 +80,7 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 7,
+    id: "g",
     name: 'Trương Thị Nguyệt',
     firstName: 'Trương Thị',
     lastName: 'Nguyệt',

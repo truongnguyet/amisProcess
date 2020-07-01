@@ -16,7 +16,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class ProcessService {
 
   constructor(private http: HttpClient) { }
-  private processURL = `${environment.apiUrl}/Process`
+  private processURL = `${environment.apiUrl}/Process`;
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -25,11 +26,7 @@ export class ProcessService {
   getProcess(): Observable<Process[]> {
     return of(PROCESS);
   }
-  //lay process theo id ở client
-  getProcessById(id: number): Observable<Process> {
-    return of(PROCESS.find(process => process.id === id))
-    
-  }
+ 
 
   // lấy tất cả process trên database
   getAllProcess() {
@@ -45,7 +42,7 @@ export class ProcessService {
   }
 
   //lay ca phase va field
-  getPro(id : number): Observable<Process> {
+  getPro(id : string): Observable<Process> {
     const url = `${this.processURL}/${id}/get`;
     return this.http.get<Process>(url).pipe(
       tap(_ => console.log("")),

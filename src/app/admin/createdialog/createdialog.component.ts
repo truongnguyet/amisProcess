@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { PROCESS } from '../../data/mock-processes';
 import { Process } from '../../models/process';
 import { ProcessService } from '../../services/processService';
+import {v4 as uuidv4} from 'uuid';
 
 interface Error {
   name: boolean;
@@ -29,7 +30,7 @@ interface Error {
 })
 
 export class CreatedialogComponent implements OnInit {
-  id: number;
+  id: string;
   name: string;
   permission: number;
   error: Error;
@@ -40,6 +41,7 @@ export class CreatedialogComponent implements OnInit {
   processs: Process
 
   newProcess = {
+    id:uuidv4(),
     nameProcess: this.name,
     status: 'Đang hoạt động',
     createdBy: 'Trương Thị Nguyệt',

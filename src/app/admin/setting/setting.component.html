@@ -61,7 +61,7 @@
             <br />
             <br />
             <!--Chọn trường, thêm trường , giai đoạn cuối bị ẩn phần này-->
-            <div [hidden]="tab.isTC || tab.isTB">
+            <!-- <div [hidden]="tab.isTC || tab.isTB">
               <p *ngIf="tab.fieldData.length == 0"> (Chưa có trường nào được chọn)</p>
               <app-list-field [childField]="tab.fieldData" [tab]="tab"></app-list-field>
 
@@ -72,8 +72,22 @@
                   <span>{{field.nameField}}</span>
                 </button>
               </mat-menu>
+            </div> -->
+
+            <!--Chọn trường, thêm trường , giai đoạn cuối bị ẩn phần này-->
+            <div [hidden]="tab.isTC || tab.isTB">
+              <p *ngIf="parentPhase.length == 0"> (Chưa có trường nào được chọn)</p>
+              <app-list-field [childField]="parentPhase" [tab]="tab"></app-list-field>
+
+              <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let field of fields" (click)="addField(tab,field)">
+                  <i class="material-icons">{{field.icon}}</i>
+                  <span>{{field.nameField}}</span>
+                </button>
+              </mat-menu>
             </div>
-            
+
             <br />
             <br />
             <!--Chọn người thực hiện, giai đoạn đầu, giai đoạn cuối bị ẩn phần này-->

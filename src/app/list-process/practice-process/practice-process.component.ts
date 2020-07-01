@@ -41,7 +41,7 @@ export class PracticeProcessComponent implements OnInit {
   }
   getProcess(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.processService.getProcessById(id)
+    this.processService.getById(id)
       .subscribe(process => this.process = process);
    // console.log("lay id", this.process)
   }

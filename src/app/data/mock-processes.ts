@@ -3,7 +3,7 @@ import { USERS } from './mock-users';
 
 export const PROCESS: Process[] = [
   {
-    id: 1,
+    id: "a",
     nameProcess: 'Quy trình nghỉ phép',
     createdBy: 'Trương Thị Nguyệt',
     status: 'Đang hoạt động',
@@ -12,13 +12,13 @@ export const PROCESS: Process[] = [
     createdAt: '10/1/2020',
     phase: [
       {
-        id: 1,
+        id: "g",
         phaseName: 'Lập đơn',
         icon: 'access_alarm',
         description: 'Bước dành cho toàn bộ nhân viên muốn xin nghỉ',
         fields: [
           {
-            id: 1,
+            id: "kkm",
             fieldName: "Thời gian bắt đầu",
             description: "Nhập thời gian bắt đầu nghỉ",
             type: "date",
@@ -26,7 +26,7 @@ export const PROCESS: Process[] = [
             phaseId: 1,
           },
           {
-            id: 2,
+            id: "fe",
             fieldName: "Thời gian kết thúc",
             description: "Nhập thời gian kết thúc nghỉ",
             type: "date",
@@ -34,7 +34,7 @@ export const PROCESS: Process[] = [
             phaseId: 1,
           },
           {
-            id: 3,
+            id: "gbs",
             fieldName: "Lí do",
             description: "Nhập lí do nghỉ",
             type: "longText",
@@ -51,19 +51,19 @@ export const PROCESS: Process[] = [
       },
       {
 
-        id: 2,
+        id: "gnh",
         phaseName: 'Phê duyệt',
         icon: 'account_box',
         description: 'Bước dành cho quản lí bộ phận của nhân viên muốn xin nghỉ',
         fields: [
           {
-            id: 1,
+            id: "kjlgd",
             fieldName: "Quản lí phê duyệt",
             description: "Quản lí phê duyệt đơn",
             type: "radio",
             required: true,
             phaseId: 2,
-            options: [
+            option: [
               {
                 index: 1,
                 value: 'Đồng ý'
@@ -75,7 +75,7 @@ export const PROCESS: Process[] = [
             ]
           },
           {
-            id: 2,
+            id: "dfg",
             fieldName: "Nhận xét",
             description: "Quản lí nhận xét đơn",
             type: "longText",
@@ -91,19 +91,19 @@ export const PROCESS: Process[] = [
         limitUser: false
       },
       {
-        id: 3,
+        id: "ggd",
         phaseName: 'Xác nhận',
         icon: 'border_color',
         description: 'Bước dành cho giám đốc bộ phận của nhân viên muốn xin nghỉ',
         fields: [
           {
-            id: 1,
+            id: "gshf",
             fieldName: "Giám đốc xác nhận",
             description: "Giám đốc xác nhận đơn",
             type: "radio",
             required: true,
             phaseId: 3,
-            options: [
+            option: [
               {
                 index: 1,
                 value: 'Đồng ý'
@@ -119,7 +119,7 @@ export const PROCESS: Process[] = [
         processId: 1,
         implementer: [
           {
-            id: 4,
+            id: "hgdgh",
             name: 'Trịnh Thị Vân Anh',
             firstName: 'Trịnh Thị',
             lastName: 'Vân Anh',
@@ -132,7 +132,7 @@ export const PROCESS: Process[] = [
             password:""
           },
           {
-            id: 5,
+            id: "shf",
             name: 'Hoàng Xuân Dậu',
             firstName: 'Hoàng Xuân',
             lastName: 'Dậu',
@@ -145,7 +145,7 @@ export const PROCESS: Process[] = [
             password: ""
           },
           {
-            id: 6,
+            id: "gfh",
             name: 'Hoàng Hữu Hạnh',
             firstName: 'Hoàng Hữu',
             lastName: 'Hạnh',
@@ -164,7 +164,7 @@ export const PROCESS: Process[] = [
         limitUser: true
       },
       {
-        id: 4,
+        id: "gdn",
         phaseName: 'Thành công',
         icon: 'notifications',
         description: 'Hoàn thành đơn có được phê duyệt hay không',
@@ -177,7 +177,7 @@ export const PROCESS: Process[] = [
         limitUser: false
       },
       {
-        id: 5,
+        id: "gfdn",
         phaseName: 'Thất bại',
         icon: 'notifications',
         description: 'Hoàn thành đơn có được phê duyệt hay không',
@@ -193,7 +193,7 @@ export const PROCESS: Process[] = [
 
   },
   {
-    id: 2,
+    id: "gfnbgfn",
     nameProcess: 'Quy trình xin cấp phép tài sản',
     createdBy: 'Trương Thị Nguyệt',
     status: 'Tạm ngừng',
@@ -203,7 +203,7 @@ export const PROCESS: Process[] = [
     phase: []
   },
   {
-    id: 3,
+    id: "gfn",
     nameProcess: 'Quy trình tuyển dụng',
     createdBy: 'Mai Thị Hoa',
     status: 'Đang hoạt động',
@@ -214,7 +214,7 @@ export const PROCESS: Process[] = [
 
   },
   {
-    id: 4,
+    id: "ndgn",
     nameProcess: 'Quy trình sản xuất',
     createdBy: 'Hỏa Thành An',
     status: 'Tạm ngừng',
@@ -224,7 +224,7 @@ export const PROCESS: Process[] = [
     phase: []
   },
   {
-    id: 5,
+    id: "hnd",
     nameProcess: 'Quy trình sản xuất 2',
     createdBy: 'Hỏa Thành An',
     status: 'Tạm ngừng',
