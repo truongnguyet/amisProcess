@@ -25,14 +25,13 @@ export class ProcessDetailComponent implements OnInit {
   }
 
   getProcess(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.processService.getById(id)
-      .subscribe(process => this.processes = process);
-    console.log("lay id", this.processes)
-  }
-  onPause() {
+    const id = this.route.snapshot.params.id;
+    this.processService.getPro(id)
+      .subscribe(process => {
+        this.processes = process
+       // console.log("lay id", this.processes)
+      });
     
-      this.processes.status = "Tạm ngừng";
-      console.log(this.processes)
   }
+ 
 }

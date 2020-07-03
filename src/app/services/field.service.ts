@@ -34,6 +34,15 @@ export class FieldService {
       catchError(this.handleError<any>('update process'))
     );
   }
+
+  //xóa field
+  deleteField(id : string): Observable<any> {
+    return this.http.delete(`${this.fieldURL}/${id}`, this.httpOptions).pipe(
+      tap(_ => console.log("Đã xóa")),
+      catchError(this.handleError<any>("Xóa lỗi"))
+
+    )
+  }
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -43,18 +43,17 @@ export class PhaseService {
 
   // sửa phase
   updatePhase(phase: Phase): Observable<any> {
-    return this.http.put(`${this.phaseURL}/edit`, phase, this.httpOptions).pipe(
+    return this.http.put(`${this.phaseURL}/editPhase`, phase, this.httpOptions).pipe(
       tap(_ => console.log(`updated phase id=${phase.id}`)),
       catchError(this.handleError<any>('update Phase'))
     );
   }
 
   //xóa phase
-  deletePhase(phase: Phase | number): Observable<Phase> {
-    const id = typeof phase === 'number' ? phase : phase.id;
-    const url = `${this.phaseURL}/${id}`;
+  deletePhase(id : string): Observable<Phase> {
+    //const id = typeof phase === 'string' ? phase : phase.id;
 
-    return this.http.delete<Phase>(url, this.httpOptions).pipe(
+    return this.http.delete<Phase>(`${this.phaseURL}/delete/${id}`, this.httpOptions).pipe(
       tap(_ => console.log(`deleted phase id=${id}`)),
       catchError(this.handleError<Phase>('delete Phase'))
     );

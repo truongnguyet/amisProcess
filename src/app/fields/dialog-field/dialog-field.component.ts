@@ -46,7 +46,7 @@ export class DialogFieldComponent implements OnInit {
         data.fieldData.required = Boolean(data.fieldData.required)
       }
     this.idField = uuidv4();
-    this.options = [{ index: 1, id: uuidv4(), value: '', fieldDataId:this.idField }, { index: 2, id: uuidv4, value: '', fieldDataId:this.idField }]
+    this.options = [{ index: 1, id: uuidv4(), value: '', fieldDataId:this.idField }, { index: 2, id: uuidv4(), value: '', fieldDataId:this.idField }]
   }
 
   ngOnInit(): void {
@@ -93,7 +93,7 @@ export class DialogFieldComponent implements OnInit {
   checkRequired(fieldData) {
     if(fieldData){
       fieldData.required = !fieldData.required;
-      console.log(fieldData.required)
+     // console.log(fieldData.required)
     }else{
       this.required = !this.required;
     }
@@ -104,20 +104,23 @@ export class DialogFieldComponent implements OnInit {
     if (fieldData) {
       const idx = _.findIndex(this.data.tab.fieldData, { id: fieldData.id })
       this.data.tab.fieldData[idx] = {
+        id: fieldData.id,
         fieldName: fieldData.fieldName,
         description: fieldData.description,
-        type: fieldData.type,
         required: fieldData.required,
-        phaseId: fieldData.phaseId,
-        option: fieldData.option
+        option: fieldData.option,
+        type: fieldData.type
       }
      
     } else {
-      if(this.data.field.type !== 'radio' || this.data.field.type !== 'dropDown' || this.data.field.type !== 'checkBox' ){
-        this.options = []
-      }
-     
-      this.parentPhase.push({
+     const emptyValue = ['radio','dropDown','checkBox'];
+     if(emptyValue.includes(this.data.field.type)){
+       this.options = this.options;
+     } else {
+       this.options = [];
+     }
+      
+      this.data.tab.fieldData.push({
         id:this.idField,
         fieldName : this.editName,
         description : this.editDes,
@@ -126,10 +129,9 @@ export class DialogFieldComponent implements OnInit {
         phaseId:this.data.tab.id,
         option: this.options
       })
-     //console.log(this.parentPhase)
 
     }
-  //  console.log(this.data.tab.fieldData)
+   console.log(this.data.tab.fieldData)
   }
 
 }

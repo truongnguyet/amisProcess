@@ -22,6 +22,8 @@ import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { USERS } from '../../data/mock-users';
 import { PhaseService } from 'src/app/services/phase.service';
 import { Phase } from 'src/app/models/phase';
+import { Users } from 'src/app/models/users';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-process',
@@ -36,24 +38,26 @@ export class EditProcessComponent implements OnInit {
   fields = FIELDS;
   activeTab = 0;
 
-  users = USERS;
+  users : Users[];
 
   constructor(
     private processService: ProcessService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private router: Router,
-    private phaseService : PhaseService
+    private phaseService : PhaseService,
+    private userService : UserService
   ) {
 
   }
 
   ngOnInit(): void {
     this.getProcess();
+    this.getAllUser();
   }
 
   getProcess(): void {
-    const id = parseInt(this.router.url.split('/')[3]);
+    const id = this.router.url.split('/')[3];
     this.processService.getPro(id)
       .subscribe(process => {
         process.phase.forEach( e => {
@@ -69,6 +73,13 @@ export class EditProcessComponent implements OnInit {
       }
         );
     
+  }
+  getAllUser():void {
+    this.userService.getUsers().toPromise()
+    .then(
+      user => {
+        this.users = user;
+      });
   }
  
 
@@ -114,7 +125,16 @@ export class EditProcessComponent implements OnInit {
       }
     }
   }
-  onSave() {
+  onSave(tab) {
+    tab.isFirstPhase = Number(tab.isFirstPhase);
+    tab.isTc = Number(tab.isTc);
+    tab.isTb = Number(tab.isTb);
+    tab.limitUser = Number(tab.limitUser);
+    tab.fieldData.forEach(a=> {
+      a.required = Number(a.required)
+    })
+    
+    this.phaseService.updatePhase(tab as Phase).subscribe(p => console.log("sửa phase", p));
     this.router.navigateByUrl('home/edit-process/'+ this.process.id)
   }
   onCancel() {
@@ -127,9 +147,9 @@ export class EditProcessComponent implements OnInit {
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
-      fields: [],
-      processId: 1,
-      implementer: [],
+      fieldData: [],
+      processId: "",
+      usersHasPhase: [],
       isFirstPhase: false,
       isTc: false,
       isTb: false,

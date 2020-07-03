@@ -3,7 +3,7 @@ import { Users } from './../models/users';
 export const USERS: Users[] = [
   {
     id: "a",
-    name: 'Nguyễn Văn Thành',
+    fullName: 'Nguyễn Văn Thành',
     firstName: 'Nguyễn Văn',
     lastName: 'Thành',
     phoneNumber: '098676833',
@@ -16,7 +16,7 @@ export const USERS: Users[] = [
   },
   {
     id: "b",
-    name: 'Phạm Văn Sự',
+    fullName: 'Phạm Văn Sự',
     firstName: 'Phạm Văn',
     lastName: 'Sự',
     phoneNumber: '0987654321',
@@ -29,7 +29,7 @@ export const USERS: Users[] = [
   },
   {
     id: "c",
-    name: 'Từ Minh Phương',
+    fullName: 'Từ Minh Phương',
     firstName: 'Từ Minh',
     lastName: 'Phương',
     phoneNumber: '0987123456',
@@ -42,7 +42,7 @@ export const USERS: Users[] = [
   },
   {
     id: "d",
-    name: 'Trịnh Thị Vân Anh',
+    fullName: 'Trịnh Thị Vân Anh',
     firstName: 'Trịnh Thị',
     lastName: 'Vân Anh',
     phoneNumber: '0987678231',
@@ -55,7 +55,7 @@ export const USERS: Users[] = [
   },
   {
     id: "e",
-    name: 'Hoàng Xuân Dậu',
+    fullName: 'Hoàng Xuân Dậu',
     firstName: 'Hoàng Xuân',
     lastName: 'Dậu',
     phoneNumber: '0989786745',
@@ -68,7 +68,7 @@ export const USERS: Users[] = [
   },
   {
     id: "f",
-    name: 'Hoàng Hữu Hạnh',
+    fullName: 'Hoàng Hữu Hạnh',
     firstName: 'Hoàng Hữu',
     lastName: 'Hạnh',
     phoneNumber: '0369852147',
@@ -81,7 +81,7 @@ export const USERS: Users[] = [
   },
   {
     id: "g",
-    name: 'Trương Thị Nguyệt',
+    fullName: 'Trương Thị Nguyệt',
     firstName: 'Trương Thị',
     lastName: 'Nguyệt',
     phoneNumber: '0968541247',

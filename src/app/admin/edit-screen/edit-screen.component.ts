@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Process } from '../../models/process';
 import { ProcessService } from '../../services/processService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PhaseService } from 'src/app/services/phase.service';
 
 @Component({
   selector: 'app-edit-screen',
@@ -15,7 +16,8 @@ export class EditScreenComponent implements OnInit {
   constructor(
     private processService: ProcessService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private phaseService : PhaseService
   ) { }
 
   ngOnInit(): void {
@@ -31,9 +33,7 @@ export class EditScreenComponent implements OnInit {
         );
 
   }
-  getAll() {
-    this.processService.getAllProcess().subscribe();
-  }
+
   editPhase(phase) {
     this.router.navigateByUrl('home/edit-process/' + this.process.id + '/' + phase.id);
   }
@@ -41,14 +41,20 @@ export class EditScreenComponent implements OnInit {
    
     this.processService.updateProcess(this.process as Process)
       .subscribe(p => {
-        console.log("sửa process", p)
+       // console.log("sửa process", p)
       })
     
     this.router.navigateByUrl('/home')
    
   }
-  deletePhase(index) {
+  deletePhase(index, phase) {
     this.process.phase.splice(index, 1);
+    this.phaseService.deletePhase(phase.id).subscribe(p => {
+      console.log("Đã xóa phase",p);
+    })
+  }
+  goBack(){
+    this.router.navigateByUrl('/home');
   }
 
 }

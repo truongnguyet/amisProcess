@@ -16,7 +16,7 @@ export const PROCESS: Process[] = [
         phaseName: 'Lập đơn',
         icon: 'access_alarm',
         description: 'Bước dành cho toàn bộ nhân viên muốn xin nghỉ',
-        fields: [
+        fieldData: [
           {
             id: "kkm",
             fieldName: "Thời gian bắt đầu",
@@ -42,8 +42,8 @@ export const PROCESS: Process[] = [
             phaseId: 1,
           },
         ],
-        processId: 1,
-        implementer: USERS,
+        processId: "a",
+        usersHasPhase: USERS,
         isFirstPhase: true,
         isTc: false,
         isTb: false,
@@ -55,7 +55,7 @@ export const PROCESS: Process[] = [
         phaseName: 'Phê duyệt',
         icon: 'account_box',
         description: 'Bước dành cho quản lí bộ phận của nhân viên muốn xin nghỉ',
-        fields: [
+        fieldData: [
           {
             id: "kjlgd",
             fieldName: "Quản lí phê duyệt",
@@ -83,8 +83,8 @@ export const PROCESS: Process[] = [
             phaseId: 2,
           },
         ],
-        processId: 1,
-        implementer: USERS,
+        processId: "v",
+        usersHasPhase: USERS,
         isFirstPhase: false,
         isTc: false,
         isTb: false,
@@ -95,7 +95,7 @@ export const PROCESS: Process[] = [
         phaseName: 'Xác nhận',
         icon: 'border_color',
         description: 'Bước dành cho giám đốc bộ phận của nhân viên muốn xin nghỉ',
-        fields: [
+        fieldData: [
           {
             id: "gshf",
             fieldName: "Giám đốc xác nhận",
@@ -116,11 +116,11 @@ export const PROCESS: Process[] = [
           },
 
         ],
-        processId: 1,
-        implementer: [
+        processId: "d",
+        usersHasPhase: [
           {
             id: "hgdgh",
-            name: 'Trịnh Thị Vân Anh',
+            fullName: 'Trịnh Thị Vân Anh',
             firstName: 'Trịnh Thị',
             lastName: 'Vân Anh',
             phoneNumber: '0987678231',
@@ -133,7 +133,7 @@ export const PROCESS: Process[] = [
           },
           {
             id: "shf",
-            name: 'Hoàng Xuân Dậu',
+            fullName: 'Hoàng Xuân Dậu',
             firstName: 'Hoàng Xuân',
             lastName: 'Dậu',
             phoneNumber: '0989786745',
@@ -146,7 +146,7 @@ export const PROCESS: Process[] = [
           },
           {
             id: "gfh",
-            name: 'Hoàng Hữu Hạnh',
+            fullName: 'Hoàng Hữu Hạnh',
             firstName: 'Hoàng Hữu',
             lastName: 'Hạnh',
             phoneNumber: '0369852147',
@@ -168,9 +168,9 @@ export const PROCESS: Process[] = [
         phaseName: 'Thành công',
         icon: 'notifications',
         description: 'Hoàn thành đơn có được phê duyệt hay không',
-        fields: [],
-        processId: 1,
-        implementer: [],
+        fieldData: [],
+        processId: "d",
+        usersHasPhase: [],
         isFirstPhase: false,
         isTc: true,
         isTb: false,
@@ -181,9 +181,9 @@ export const PROCESS: Process[] = [
         phaseName: 'Thất bại',
         icon: 'notifications',
         description: 'Hoàn thành đơn có được phê duyệt hay không',
-        fields: [],
-        processId: 1,
-        implementer: [],
+        fieldData: [],
+        processId: "d",
+        usersHasPhase: [],
         isFirstPhase: false,
         isTc: false,
         isTb: true,

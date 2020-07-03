@@ -82,7 +82,7 @@
               <mat-list>
                 <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                   <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
-                  <div mat-line>{{user.name}}</div>
+                  <div mat-line>{{user.fullName}}</div>
                   <i class="material-icons" *ngIf="userCheck(tab.implementer,user) != -1">check</i>
                 </mat-list-item>
               </mat-list>
@@ -95,7 +95,7 @@
                 >
           Hủy
         </button>
-        <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
+        <button type="button" class="btn btn-success" (click)="onSave(tab)">Lưu</button>
        
       </div>
 

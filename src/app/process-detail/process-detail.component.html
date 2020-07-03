@@ -1,7 +1,4 @@
 <div class="process-container">
-  <button type="button" class="btn btn-primary" (click)="onPause()">
-    Tạm ngừng quy trình
-  </button>
   <mat-grid-list cols="5" *ngIf="processes">
     <div *ngFor="let phase of processes.phase">
       <mat-grid-tile [ngStyle]="{'border-right': '1px solid gray'}"   >

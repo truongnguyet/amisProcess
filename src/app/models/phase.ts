@@ -6,9 +6,9 @@ export interface Phase {
   phaseName: string;
   icon: string;
   description: string;
-  fields: FieldData[];
-  processId: number;
-  implementer: Users[];
+  fieldData: FieldData[];
+  processId: string;
+  usersHasPhase: Users[];
   isFirstPhase: boolean;
   isTc: boolean;
   isTb: boolean;
