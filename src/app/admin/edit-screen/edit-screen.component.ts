@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EditScreenComponent implements OnInit {
   process: Process;
-  statuses = [{ id: 1, name: 'Đang hoạt động' }, {id: 2, name: 'Tạm ngừng'}]
+  statuses = [{ id: 1, name: 'Đang hoạt động' }, { id: 2, name: 'Tạm ngừng' }]
 
   constructor(
     private processService: ProcessService,
@@ -22,20 +22,33 @@ export class EditScreenComponent implements OnInit {
     this.getProcess();
   }
 
-  getProcess(): void {
+  getProcess() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.processService.getProcessById(id)
-      .subscribe(process => this.process = process);
-   // console.log("lay id", this.process)
+    this.processService.getById(id)
+      .subscribe(
+        process =>
+          this.process = process,
+        );
+
   }
-  editPhase(phase) {  
+  getAll() {
+    this.processService.getAllProcess().subscribe();
+  }
+  editPhase(phase) {
     this.router.navigateByUrl('home/edit-process/' + this.process.id + '/' + phase.phaseId);
   }
   onSave() {
+   
+    this.processService.updateProcess(this.process as Process)
+      .subscribe(p => {
+        console.log("sửa process", p)
+      })
+    
     this.router.navigateByUrl('/home')
+   
   }
   deletePhase(index) {
     this.process.phase.splice(index, 1);
   }
-  
+
 }

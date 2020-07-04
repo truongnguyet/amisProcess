@@ -10,7 +10,9 @@ export const USERS: Users[] = [
     email: 'thanh@gmail.com',
     position: 'Nhân viên',
     role: 'Staff',
-    address:'Thanh Hóa'
+    address: 'Thanh Hóa',
+    dateOfBirth: "23/02/1987",
+    password:""
   },
   {
     id: 2,
@@ -21,7 +23,9 @@ export const USERS: Users[] = [
     email: 'su@gmail.com',
     position: 'Nhân viên',
     role: 'Staff',
-    address: 'Ninh Bình'
+    address: 'Ninh Bình',
+    dateOfBirth: "23/02/1987",
+    password: ""
   },
   {
     id: 3,
@@ -32,7 +36,9 @@ export const USERS: Users[] = [
     email: 'phuong@gmail.com',
     position: 'Quản lí',
     role: 'Manage',
-    address: 'Hà Nội'
+    address: 'Hà Nội',
+    dateOfBirth: "23/02/1987",
+    password: ""
   },
   {
     id: 4,
@@ -43,7 +49,9 @@ export const USERS: Users[] = [
     email: 'anh@gmail.com',
     position: 'Nhân viên',
     role: 'Staff',
-    address: 'Nghệ An'
+    address: 'Nghệ An',
+    dateOfBirth: "23/02/1987",
+    password: ""
   },
   {
     id: 5,
@@ -54,7 +62,9 @@ export const USERS: Users[] = [
     email: 'dau@gmail.com',
     position: 'Quản lí',
     role: 'Manage',
-    address: 'Bắc Giang'
+    address: 'Bắc Giang',
+    dateOfBirth: "23/02/1987",
+    password: ""
   },
   {
     id: 6,
@@ -65,7 +75,9 @@ export const USERS: Users[] = [
     email: 'hanh@gmail.com',
     position: 'Nhân viên',
     role: 'Staff',
-    address: 'Huế'
+    address: 'Huế',
+    dateOfBirth: "23/02/1987",
+    password: ""
   },
   {
     id: 7,
@@ -76,7 +88,9 @@ export const USERS: Users[] = [
     email: 'nguyet@gmail.com',
     position: 'QA',
     role: 'Admin',
-    address: 'Thanh Hóa'
+    address: 'Thanh Hóa',
+    dateOfBirth: "18/04/1999",
+    password: ""
   },
 
 ];

@@ -5,6 +5,8 @@ import { CreatedialogComponent } from './createdialog/createdialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
+import { Process } from '../models/process';
+import { ProcessService } from '../services/processService';
 
 @Component({
   selector: 'app-admin',
@@ -12,18 +14,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  processes = PROCESS;
+ 
+  processes: Process[]
   
 
   constructor(
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private processService: ProcessService
   ) {
     
   }
 
   ngOnInit(): void {
+    this.getAllProcess();
   }
+
+   getAllProcess() {
+     this.processService.getAllProcess()
+       .subscribe(
+         p => this.processes = p,
+         e => console.log(e)
+       )
+  }
+
   openDialog() {
     this.dialog.open(CreatedialogComponent);
   }

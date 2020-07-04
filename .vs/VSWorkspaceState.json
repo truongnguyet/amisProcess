@@ -1,12 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\app",
-    "\\src\\app\\admin",
-    "\\src\\app\\data",
-    "\\src\\app\\models"
+    ""
   ],
-  "SelectedNode": "\\src\\app\\data\\mock-processes.ts",
   "PreviewInSolutionExplorer": false
 }

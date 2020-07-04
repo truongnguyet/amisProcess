@@ -62,8 +62,8 @@
             <br />
             <!--Chọn trường, thêm trường , giai đoạn cuối bị ẩn phần này-->
             <div [hidden]="tab.isTC || tab.isTB">
-              <p *ngIf="tab.fields.length == 0"> (Chưa có trường nào được chọn)</p>
-              <app-list-field [childField]="tab.fields" [tab]="tab"></app-list-field>
+              <p *ngIf="tab.fieldData.length == 0"> (Chưa có trường nào được chọn)</p>
+              <app-list-field [childField]="tab.fieldData" [tab]="tab"></app-list-field>
 
               <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
               <mat-menu #menu="matMenu">
@@ -119,8 +119,8 @@
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>
-          <button type="button" class="btn btn-success" *ngIf="!tab.isTB" (click)="onSave()">Lưu</button>
-          <button type="button" class="btn btn-success" *ngIf="tab.isTB" (click)="gotoProcess()">Lưu</button>
+          <button type="button" class="btn btn-success"  (click)="onSave(tab)">Lưu</button>
+          <button type="button" class="btn btn-primary" *ngIf="tab.isTB" >Hoàn thành</button>
          </div>
       </div>
     </mat-tab>

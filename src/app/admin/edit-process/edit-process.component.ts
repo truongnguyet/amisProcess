@@ -111,7 +111,7 @@ export class EditProcessComponent implements OnInit {
 
   addTab() {
     this.process.phase.splice(this.process.phase.length - 2, 0, {
-      phaseId: this.process.phase.length + 1,
+      id: this.process.phase.length + 1,
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',

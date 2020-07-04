@@ -27,13 +27,13 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Users } from '../../models/users';
+import { PhaseService } from '../../services/phase.service';
+import { Phase } from '../../models/phase';
 
 interface Error {
   name: boolean;
   description: boolean;
   icon: boolean;
-  field: boolean;
-  implementer: boolean;
 }
 
 @Component({
@@ -47,8 +47,9 @@ export class SettingComponent implements OnInit {
   fields = FIELDS;
   icons = ICONS;
 
-  name: string;
+  phaseName: string;
   description: string;
+  icon: string;
   selectedIcon: boolean;
   panelOpenState = false;
 
@@ -56,16 +57,16 @@ export class SettingComponent implements OnInit {
   select = [];
   processes: Process;
 
-
+  error: Error;
   parentField = FieldInPhase;
 
   tabs = [
     {
-      phaseId: 1,
+      
       phaseName: 'Giai đoạn 1',
       icon: '',
       description: '',
-      fields: [],
+      fieldData: [],
       processId: 1,
       implementer: [],
       isTC: false,
@@ -74,11 +75,11 @@ export class SettingComponent implements OnInit {
       limitUser: false
     },
     {
-      phaseId: 2,
+     
       phaseName: 'Giai đoạn 2',
       icon: '',
       description: '',
-      fields: [],
+      fieldData: [],
       processId: 1,
       implementer: USERS,
       isTC: false,
@@ -87,11 +88,11 @@ export class SettingComponent implements OnInit {
       limitUser: false
     },
     {
-      phaseId: 3,
+     
       phaseName: 'Giai đoạn 3',
       icon: '',
       description: '',
-      fields: [],
+      fieldData: [],
       processId: 1,
       implementer: USERS,
       isTC: false,
@@ -100,11 +101,11 @@ export class SettingComponent implements OnInit {
       limitUser: false
     },
     {
-      phaseId: 4,
+      
       phaseName: 'Thành công',
       icon: '',
       description: '',
-      fields: [],
+      fieldData: [],
       processId: 1,
       implementer: [],
       isTC: true,
@@ -113,11 +114,11 @@ export class SettingComponent implements OnInit {
       limitUser: false
     },
     {
-      phaseId: 5,
+      
       phaseName: 'Thất bại',
       icon: '',
       description: '',
-      fields: [],
+      fieldData: [],
       processId: 1,
       implementer: [],
       isTC: false,
@@ -128,14 +129,33 @@ export class SettingComponent implements OnInit {
   ];
   count = 4;
 
+  newPhase = {
+    phaseName: this.phaseName,
+    description: this.description,
+    icon: this.icon,
+    processId: 0,
+    isTC: false,
+    isTB: false,
+    isFirstPhase: false,
+    limitUser: false
+  }
+
 
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
     private processService: ProcessService,
+    private phaseService: PhaseService
   ) {
-
+    this.phaseName = '';
+    this.description = '';
+    
+    this.error = {
+      name: false,
+      description: false,
+      icon: false
+    }
 
   }
 
@@ -151,10 +171,9 @@ export class SettingComponent implements OnInit {
   }
 
   getProcess(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.processService.getProcessById(id)
-      .subscribe(process => this.processes = process);
-    // console.log("lay id", this.processes)
+    const id = parseInt( this.route.snapshot.paramMap.get('id'));
+    this.processService.getById(id)
+      .subscribe( process => this.processes = process);    
   }
 
   addUser() {
@@ -181,10 +200,6 @@ export class SettingComponent implements OnInit {
   }
 
   gotoProcess() {
-    this.tabs.forEach(e => {
-      phaseData.push(e);
-    })
-    this.processes.phase = this.tabs;
     //console.log("process  sau khi tao",this.processes)
     this.router.navigate(['/process-detail/', this.processes.id])
   }
@@ -193,11 +208,10 @@ export class SettingComponent implements OnInit {
 
   addTab() {
     this.tabs.splice(this.tabs.length - 2, 0, {
-      phaseId: this.tabs.length + 1,
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
-      fields: [],
+      fieldData: [],
       processId: 1,
       implementer: [],
       isFirstPhase: false,
@@ -207,6 +221,7 @@ export class SettingComponent implements OnInit {
     });
     this.count++;
   }
+
   removeTab(index: number) {
     this.tabs.splice(index, 1);
     this.count--;
@@ -218,7 +233,22 @@ export class SettingComponent implements OnInit {
   }
 
 
-  onSave() {
+  onSave(tab) {
+   
+    tab.processId = this.processes.id;
+
+
+    tab.isFirstPhase = Number(tab.isFirstPhase);
+    tab.isTC = Number(tab.isTC);
+    tab.isTB = Number(tab.isTB);
+    tab.limitUser = Number(tab.limitUser);
+    this.phaseService.addPhase(tab as Phase)
+      .subscribe(
+        p => {
+          console.log("phase tao moi",p); 
+        }
+      )
+
     if (this.activeTab < this.tabs.length - 1) {
       this.activeTab++;
     }

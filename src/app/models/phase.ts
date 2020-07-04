@@ -2,7 +2,7 @@ import { FieldData } from '../models/fieldData';
 import { Users } from '../models/users';
 
 export interface Phase {
-  phaseId: number;
+  id: number;
   phaseName: string;
   icon: string;
   description: string;

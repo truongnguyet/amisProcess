@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Tạo mới quy trình</h2>
 <mat-dialog-content class="mat-typography">
 
-  <form>
+  
     <label for="name">Tên quy trình </label>
     <div class="input-group mb-3 form-name">
       <input type="text"
@@ -9,14 +9,15 @@
              aria-describedby="basic-addon1"
              required
              id="name"
-             name="name"
-             (input)="onChange($event.target.value)" />
-      
-      <!--<div *ngIf="error.name" class="error-validate">
+             name="name" 
+             [(ngModel)]="name" />
+           
+
+      <div *ngIf="error.name" class="error-validate">
         Bạn chưa nhập tên quy trình
-      </div>-->
+      </div>
     </div>
-  </form>
+
   <br />
 
 
@@ -60,7 +61,7 @@
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Hủy</button>
   <button mat-button
-          cdkFocusInitial (click)="gotoSetting()">
+          cdkFocusInitial (click)="gotoSetting($event)">
     Tạo mới
   </button>
 </mat-dialog-actions>
