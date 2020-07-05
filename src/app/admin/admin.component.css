@@ -47,4 +47,19 @@
   color: #607D8B;
   background-color: #DDD;
 }
+.spiner {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
 
+.icon-btn:hover{
+  cursor:pointer;
+}
+.bottom-page {
+  float: right;
+  margin: 15px;
+}

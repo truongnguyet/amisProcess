@@ -33,7 +33,7 @@ export class PracticeProcessComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProcess();
-    this.fields = this.process.phase[0].fields;
+    this.fields = this.process.phase[0].fieldData;
     //console.log("data ve dung ", this.process.phase[0], this.fields.length)
   }
   onNext() {
@@ -41,7 +41,7 @@ export class PracticeProcessComponent implements OnInit {
   }
   getProcess(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.processService.getProcessById(id)
+    this.processService.getById(id)
       .subscribe(process => this.process = process);
    // console.log("lay id", this.process)
   }

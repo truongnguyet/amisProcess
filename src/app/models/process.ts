@@ -1,7 +1,7 @@
 import { Phase } from './phase';
 
 export interface Process {
-  id: number;
+  id: string;
   nameProcess: string;
   createdBy: string;
   createdAt: string;

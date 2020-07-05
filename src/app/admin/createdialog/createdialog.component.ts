@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { PROCESS } from '../../data/mock-processes';
 import { Process } from '../../models/process';
 import { ProcessService } from '../../services/processService';
+import {v4 as uuidv4} from 'uuid';
+import * as moment from 'moment';
 
 interface Error {
   name: boolean;
@@ -29,7 +31,7 @@ interface Error {
 })
 
 export class CreatedialogComponent implements OnInit {
-  id: number;
+  id: string;
   name: string;
   permission: number;
   error: Error;
@@ -40,10 +42,11 @@ export class CreatedialogComponent implements OnInit {
   processs: Process
 
   newProcess = {
+    id:uuidv4(),
     nameProcess: this.name,
     status: 'Đang hoạt động',
     createdBy: 'Trương Thị Nguyệt',
-    createdAt: "2020-06-25",
+    createdAt:moment().format("YYYY-DD-MM"),
     modifyBy: '',
     modifyAt: null,
   }
@@ -66,7 +69,6 @@ export class CreatedialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   onOpenDialogInviteUser() {
     this.inviteRef = this.dialog.open(InviteUserComponent)
     this.inviteRef.afterClosed().subscribe(result => {
@@ -74,36 +76,16 @@ export class CreatedialogComponent implements OnInit {
     });
   }
 
-
-
   onChangePermission(permission: number) {
     this.permission = permission;
   }
 
-
   gotoSetting(e) {
     e.preventDefault();
-   
-    
     if (this.name == "") {
       this.error.name = true;
       return
     }
-
-    //them moi o client
-
-    //this.id = this.process.length + 1;
-    //this.process.push({
-    //  id: this.id,
-    //  nameProcess: this.name,
-    //  createdBy: '',
-    //  createdAt: '',
-    //  status: 'Đang hoạt động',
-    //  modifyBy: '',
-    //  modifyAt: '',
-    //  phase: [],
-    //})
-
 
     //them moi vao database
     this.newProcess.nameProcess = this.name;
@@ -115,8 +97,11 @@ export class CreatedialogComponent implements OnInit {
         }
       )
     this.dialog.closeAll();
-
   }
 
-
+  onKeydown(event){
+  if(event.key === "Enter"){
+    this.gotoSetting(event);
+  }
+  }
 }

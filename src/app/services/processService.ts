@@ -8,6 +8,7 @@ import { PROCESS } from '../data/mock-processes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
+import { PageResult } from '../models/pageResult';
 
 
 @Injectable({
@@ -16,33 +17,46 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class ProcessService {
 
   constructor(private http: HttpClient) { }
-  private processURL = `${environment.apiUrl}/Process`
+  private processURL = `${environment.apiUrl}/Process`;
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  // lấy tất cả process ở client
-  getProcess(): Observable<Process[]> {
-    return of(PROCESS);
-  }
-  //lay process theo id ở client
-  getProcessById(id: number): Observable<Process> {
-    return of(PROCESS.find(process => process.id === id))
-    
-  }
 
   // lấy tất cả process trên database
   getAllProcess() {
     return this.http.get<Process[]>(`${this.processURL}/getAll`)
   }
+
+  //phân trang
+  getProcess(index : number):Observable<PageResult>{
+    const url = `${this.processURL}/page/${index}`;
+    return this.http.get<PageResult>(url).pipe(
+      tap(_=> console.log(`Đã lấy trang thứ ${index}`)),
+      catchError(this.handleError<PageResult>("Lỗi"))
+    )
+
+  }
   //lấy process theo id từ database
   getById(id: number): Observable<Process> {
-    const url = `${this.processURL}/${id}`;
+    const url = `${this.processURL}/phase/${id}`;
     return this.http.get<Process>(url).pipe(
       tap(_ => console.log(`lấy process id=${id}`)),
       catchError(this.handleError<Process>(`getProcess id=${id}`))
     );
   }
+
+  //lay ca phase va field
+  getPro(id : string): Observable<Process> {
+    const url = `${this.processURL}/${id}/get`;
+    return this.http.get<Process>(url).pipe(
+      tap(_ => console.log("")),
+      catchError(this.handleError<Process>(`get lỗi`))
+    )
+  }
+
+
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

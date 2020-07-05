@@ -4,9 +4,9 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
+  <mat-spinner *ngIf="loading == true" class="spiner"></mat-spinner>
   <div class="list">
     <h2>Danh sách các quy trình bạn quản lí:</h2>
-    
     <table class="table table-striped">
       <thead>
         <tr>
@@ -16,9 +16,9 @@
           <th scope="row">Trạng thái</th>
         </tr>
       </thead>
-      <tbody *ngFor="let process of processes" class="list-row" (click)="viewProcess(process)">
+      <tbody *ngFor="let process of processes; let index = index" class="list-row" (click)="viewProcess(process)">
         <tr>
-          <td>{{process.id}}</td>
+          <td>{{page * perPage + index +1}}</td>
           <td>{{process.nameProcess}}</td>
           <td>{{process.createdBy}}</td>
           <td>
@@ -27,6 +27,10 @@
         </tr>
       </tbody>
     </table>
+<div class="bottom-page">
+  <i class="material-icons icon-btn" (click)=onPrevious() disabled="!total || !hasNext || loading">navigate_before</i>
+  <i class="material-icons icon-btn" (click)=onNext() disabled="!total || !hasPrev ||loading" >navigate_next</i>
+</div>
   </div>
 
 </div>

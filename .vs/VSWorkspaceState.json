@@ -1,6 +1,19 @@
 {
   "ExpandedNodes": [
+<<<<<<< HEAD
     ""
+=======
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\admin",
+    "\\src\\app\\admin\\edit-screen",
+    "\\src\\app\\admin\\setting",
+    "\\src\\app\\home",
+    "\\src\\app\\models",
+    "\\src\\app\\services",
+    "\\src\\environments"
+>>>>>>> a816cc66e09a6155d1db063e85b875d4a375bd0f
   ],
   "PreviewInSolutionExplorer": false
 }

@@ -19,33 +19,49 @@ export class PhaseService {
   getById(id: number): Observable<Phase> {
     const url = `${this.phaseURL}/${id}`;
     return this.http.get<Phase>(url).pipe(
-      tap(_ => console.log("Đã lấy phase")),
+      tap(_ => console.log()),
       catchError(this.handleError<Phase>(`getHero id=${id}`))
     );
+  }
+  
+  //lay phase co ca field
+  getId(id: number): Observable<Phase> {
+    const url = `${this.phaseURL}/${id}/get`;
+    return this.http.get<Phase>(url).pipe(
+      tap(_ => console.log("OK")),
+      catchError(this.handleError<Phase>(`get Phase id=${id}`))
+    )
+  }
+  //lấy user của phase
+  getUserOfPhase(id: string): Observable<Phase> {
+    const url = `${this.phaseURL}/${id}`;
+    return this.http.get<Phase>(url).pipe(
+      tap(_ => console.log()),
+      catchError(this.handleError<Phase>(`get Phase id=${id}`))
+    )
   }
 
   //thêm mới phase
   addPhase(phase: Phase): Observable<Phase> {
-    return this.http.post<Phase>(`${this.phaseURL}/create`, phase, this.httpOptions).pipe(
-      tap((newPhase: Phase) => console.log(`Created new phase id=${newPhase.id}`)),
+    return this.http.post<Phase>(`${this.phaseURL}/createAll`, phase, this.httpOptions).pipe(
+      tap((newPhase: Phase) => console.log()),
       catchError(this.handleError<Phase>('add phase loi'))
     );
   }
 
   // sửa phase
   updatePhase(phase: Phase): Observable<any> {
-    return this.http.put(`${this.phaseURL}/edit`, phase, this.httpOptions).pipe(
+    return this.http.put(`${this.phaseURL}/editPhase`, phase, this.httpOptions).pipe(
       tap(_ => console.log(`updated phase id=${phase.id}`)),
       catchError(this.handleError<any>('update Phase'))
     );
   }
 
   //xóa phase
-  deletePhase(phase: Phase | number): Observable<Phase> {
-    const id = typeof phase === 'number' ? phase : phase.id;
-    const url = `${this.phaseURL}/${id}`;
+  deletePhase(id : string): Observable<Phase> {
+    //const id = typeof phase === 'string' ? phase : phase.id;
 
-    return this.http.delete<Phase>(url, this.httpOptions).pipe(
+    return this.http.delete<Phase>(`${this.phaseURL}/delete/${id}`, this.httpOptions).pipe(
       tap(_ => console.log(`deleted phase id=${id}`)),
       catchError(this.handleError<Phase>('delete Phase'))
     );

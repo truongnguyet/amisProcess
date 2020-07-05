@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogFieldComponent } from '../dialog-field/dialog-field.component';
 import { remove } from 'lodash'
 import { FIELDS } from '../../data/mock-fields';
+import { FieldService } from 'src/app/services/field.service';
 
 @Component({
   selector: 'app-list-field',
@@ -14,10 +15,13 @@ export class ListFieldComponent implements OnInit {
   @Input() tab: any;
 
   field = FIELDS;
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private fieldService: FieldService
+    ) { }
 
   ngOnInit(): void {
-  //  console.log("this is child component", this.childField, this.tab)
+  // console.log("this is child component", this.childField)
   }
   child() {
     console.log("this is child component",this.childField)
@@ -39,6 +43,7 @@ export class ListFieldComponent implements OnInit {
   }
 
   onDelete(tab, field) {
-    remove(tab.fields, item => item.id == field.id)
+    remove(tab.fieldData, item => item.id == field.id);
+    this.fieldService.deleteField(field.id).subscribe();
   }
 }

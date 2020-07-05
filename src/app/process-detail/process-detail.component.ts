@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
-
+import _ from 'lodash';
 
 import { Process } from '../models/process';
 import { ProcessService } from '../services/processService';
@@ -25,14 +25,14 @@ export class ProcessDetailComponent implements OnInit {
   }
 
   getProcess(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.processService.getProcessById(id)
-      .subscribe(process => this.processes = process);
-    console.log("lay id", this.processes)
-  }
-  onPause() {
+    const id = this.route.snapshot.params.id;
+    this.processService.getPro(id)
+      .subscribe(process => {
+        process.phase = _.orderBy(process.phase, 'index','des')
+        this.processes = process
+      
+      });
     
-      this.processes.status = "Tạm ngừng";
-      console.log(this.processes)
   }
+ 
 }

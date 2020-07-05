@@ -1,19 +1,18 @@
 
-<div class="container" *ngIf="childField.length > 0">
+<div class="container form-field" *ngIf="childField.length > 0">
 
   <div *ngFor="let child of childField">
-    <div *ngIf="tab.phaseId == child.phaseId">
+    <div *ngIf="tab.id == child.phaseId">
       <div class="title-field">
-        <h3 *ngIf="!child.required">{{child.name}}</h3>
-        <h3 *ngIf="child.required">{{child.name}} (*)</h3>
+        <h3 *ngIf="!child.required">{{child.fieldName}}</h3>
+        <h3 *ngIf="child.required">{{child.fieldName}} (*)</h3>
         <div class="hide-icon">
           <i class="material-icons btn" [matMenuTriggerFor]="menu">more_vert</i>
         </div>
-
       </div>
-      <p>
+      <span>
         {{child.description}}
-      </p>
+      </span>
       <div *ngIf="child.type == 'shortText'">
         <input type="text" class="form-control" style="width: 50%">
         <br />
@@ -73,9 +72,9 @@
 
       <!--Radio-->
       <div *ngIf="child.type === 'radio' ">
-        <div *ngFor="let option of child.options">
-          <input type="radio" id="male" name="gender" value="male">
-          <label for="male">{{option.value}}</label><br>
+        <div *ngFor="let opti of child.option">
+          <input type="radio" id="male" name="gender" value="opti.value">
+          <label for="male">{{opti.value}}</label><br>
         </div>
         <br />
       </div>
@@ -89,9 +88,9 @@
       </div>
 
       <div *ngIf="child.type === 'checkBox' ">
-        <div *ngFor="let option of child.options">
-          <input type="checkbox" id="male" name="gender" value="male">
-          <label for="male">{{option.value}}</label>
+        <div *ngFor="let opti of child.option">
+          <input type="checkbox" id="male" name="gender" value="opti.value">
+          <label for="male">{{opti.value}}</label>
         </div>
         <br />
       </div>
@@ -100,8 +99,8 @@
         <mat-form-field>
           <mat-label>Chọn select</mat-label>
           <mat-select>
-            <mat-option *ngFor="let option of child.options" [value]="option">
-              {{option.value}}
+            <mat-option *ngFor="let opti of child.option" [value]="opti">
+              {{opti.value}}
             </mat-option>
           </mat-select>
         </mat-form-field>

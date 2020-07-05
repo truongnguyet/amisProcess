@@ -12,12 +12,18 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import _ from 'lodash';
+import {v4 as uuidv4} from 'uuid';
 
 import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { USERS } from '../../data/mock-users';
+import { PhaseService } from 'src/app/services/phase.service';
+import { Phase } from 'src/app/models/phase';
+import { Users } from 'src/app/models/users';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-process',
@@ -31,42 +37,65 @@ export class EditProcessComponent implements OnInit {
   selectedIcon: boolean;
   fields = FIELDS;
   activeTab = 0;
-
-  users = USERS;
+  users : Users[];
 
   constructor(
     private processService: ProcessService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private router: Router
-  ) {
+    private router: Router,
+    private phaseService : PhaseService,
+    private userService : UserService
+  ) 
+  {
+    
 
   }
 
   ngOnInit(): void {
-    this.getProcess();
-    this.getPhase();
+    this.getProcess()
+    this.getAllUser();
   }
 
   getProcess(): void {
-    const id = parseInt(this.router.url.split('/')[3]);
-    this.processService.getProcessById(id)
-      .subscribe(process => this.process = process);
-    // console.log("lay id", this.process)
-  }
-  getPhase(): void {
-    const id = +this.route.snapshot.paramMap.get('id')
-    this.activeTab = id -1;
+    const id = this.router.url.split('/')[3];
+    this.processService.getPro(id)
+      .subscribe(process => {
+        process.phase = _.orderBy(process.phase,'index','des')
+        process.phase.forEach( e => {
+         e.isFirstPhase =  Boolean(e.isFirstPhase),
+         e.isTb =  Boolean(e.isTb),
+         e.isTc =  Boolean(e.isTc),
+         e.limitUser =  Boolean(e.limitUser)
+        })
+        this.process = process
+       // console.log(process)
+        const idPhase = this.route.snapshot.paramMap.get('id')  
+        this.activeTab = _.findIndex(process.phase, function(o){ return o.id == idPhase ;});
+        
+      }
+        );
     
   }
+  getAllUser():void {
+    this.userService.getUsers().toPromise()
+    .then(
+      user => {
+        this.users = user;
+      });
+  }
+  
+ 
 
   selectIcon(tab, id: string) {
     this.selectedIcon = true;
     tab.icon = id;
   }
 
-  onSelectTab(tab) {
+  onSelectTab(tab) { 
     this.activeTab = tab;
+    const tabId = this.process.phase[tab].id;
+    
   }
 
   addField(tab, field) {
@@ -93,16 +122,29 @@ export class EditProcessComponent implements OnInit {
   }
   selectUser(tab, user) {
     if (tab.limitUser) {
-      const index = this.userCheck(tab.implementer, user)
+      const index = this.userCheck(tab.usersHasPhase, user)
       if (index === -1) {
-        tab.implementer.push(user);
+        tab.usersHasPhase.push({
+          usersId: user.id,
+          phaseId: tab.id
+        });
       }
       else {
-        tab.implementer.splice(index, 1);
+        tab.usersHasPhase.splice(index, 1);
       }
+      
     }
   }
-  onSave() {
+  onSave(tab) {
+    tab.isFirstPhase = Number(tab.isFirstPhase);
+    tab.isTc = Number(tab.isTc);
+    tab.isTb = Number(tab.isTb);
+    tab.limitUser = Number(tab.limitUser);
+    tab.fieldData.forEach(a=> {
+      a.required = Number(a.required)
+    })
+    
+    this.phaseService.updatePhase(tab as Phase).subscribe(p => console.log("sửa phase", p));
     this.router.navigateByUrl('home/edit-process/'+ this.process.id)
   }
   onCancel() {
@@ -111,29 +153,34 @@ export class EditProcessComponent implements OnInit {
 
   addTab() {
     this.process.phase.splice(this.process.phase.length - 2, 0, {
-      id: this.process.phase.length + 1,
+      id: uuidv4(),
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
-      fields: [],
-      processId: 1,
-      implementer: [],
+      fieldData: [],
+      processId: "",
+      usersHasPhase: [],
       isFirstPhase: false,
-      isTC: false,
-      isTB: false,
-      limitUser: false
+      isTc: false,
+      isTb: false,
+      limitUser: false,
+      index:3,
     });
+    this.activeTab = this.process.phase.length - 3;
 
   }
 
   userCheck(imply = [], user) {
     let result = -1
     imply.forEach((usr, index) => {
-      if (usr.id == user.id) {
+      if (usr.usersId == user.id) {
         result = index
       }
     })
 
     return result;
+  }
+  onChange(event){
+    console.log(event)
   }
 }

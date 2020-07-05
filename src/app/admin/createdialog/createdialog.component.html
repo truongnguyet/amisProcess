@@ -10,9 +10,11 @@
              required
              id="name"
              name="name" 
-             [(ngModel)]="name" />
-           
-
+             [(ngModel)]="name" 
+             autofocus
+             (keydown)="onKeydown($event)"
+             />
+          
       <div *ngIf="error.name" class="error-validate">
         Bạn chưa nhập tên quy trình
       </div>
@@ -61,7 +63,7 @@
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Hủy</button>
   <button mat-button
-          cdkFocusInitial (click)="gotoSetting($event)">
+           (click)="gotoSetting($event)">
     Tạo mới
   </button>
 </mat-dialog-actions>

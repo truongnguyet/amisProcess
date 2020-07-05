@@ -7,8 +7,12 @@
   </div>
   <mat-tab-group [selectedIndex]="activeTab"
                  (selectedIndexChange)="onSelectTab($event)">
-    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.phaseName">
-      <div>
+    <mat-tab *ngFor="let tab of tabs; let index = index" >
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">{{tab.icon}}</mat-icon>
+        {{tab.phaseName}}
+      </ng-template>
+      
         <div class="setting-container">
           <h2>Cài đặt {{tab.phaseName}}</h2>
           <div class="setting-item">
@@ -53,13 +57,24 @@
                   </div>
                 </mat-expansion-panel>
               </mat-accordion>
-              <div *ngIf="selectedIcon">
-                <i class="material-icons icon-btn"> {{tab.icon}} </i>
-              </div>
-            </div>
+              
 
             <br />
             <br />
+            <!--Chọn trường, thêm trường , giai đoạn cuối bị ẩn phần này-->
+            <!-- <div [hidden]="tab.isTC || tab.isTB">
+              <p *ngIf="tab.fieldData.length == 0"> (Chưa có trường nào được chọn)</p>
+              <app-list-field [childField]="tab.fieldData" [tab]="tab"></app-list-field>
+
+              <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let field of fields" (click)="addField(tab,field)">
+                  <i class="material-icons">{{field.icon}}</i>
+                  <span>{{field.nameField}}</span>
+                </button>
+              </mat-menu>
+            </div> -->
+
             <!--Chọn trường, thêm trường , giai đoạn cuối bị ẩn phần này-->
             <div [hidden]="tab.isTC || tab.isTB">
               <p *ngIf="tab.fieldData.length == 0"> (Chưa có trường nào được chọn)</p>
@@ -73,7 +88,7 @@
                 </button>
               </mat-menu>
             </div>
-            
+
             <br />
             <br />
             <!--Chọn người thực hiện, giai đoạn đầu, giai đoạn cuối bị ẩn phần này-->
@@ -84,28 +99,31 @@
                 <mat-radio-button value="1" (change)="onCloseListUser(tab)" [checked]="!tab.limitUser">Tất cả thành viên</mat-radio-button><br />
                 <mat-radio-button value="2" (change)="onListUser(tab)" [checked]="tab.limitUser">Tùy chọn thành viên</mat-radio-button>
                 <div *ngIf="tab.limitUser == true">
-                  <!--Search user-->
-                   
-                  <form class="example-form">
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Search</mat-label>
-                      <input type="text" matInput  [matAutocomplete]="auto" [formControl]="myControl">
-                      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{option.name}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </form>
-                  
 
+                  <!-- Search user  -->
+                  <!-- <div *ngIf = "userSearch.length > 0">
+                    <form class="example-form">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Search</mat-label>
+                        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto"  [(ngModel)]="searchText" >
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let option of userSearch | async" [value]="option">
+                            {{option.fullName}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </form>
+            
+                  </div> -->
+                  
                   <mat-list>
                     <mat-list-item *ngFor="let user of users" class="list-user" (click)="selectUser(tab,user)">
                       <mat-icon mat-list-icon><i class="material-icons">person</i></mat-icon>
-                      <div mat-line>{{user.name}}</div>
-                      <i class="material-icons" *ngIf="userCheck(tab.implementer,user) != -1">check</i>
+                      <div mat-line>{{user.fullName}}</div>
+                      <i class="material-icons" *ngIf="userCheck(tab.usersHasPhase,user) != -1">check</i>
                     </mat-list-item>
                   </mat-list>
+
                   <button type="button" class="btn btn-outline-primary" (click)="addUser()">Thêm người</button>
                 </div>
               </mat-radio-group>
@@ -119,8 +137,7 @@
                   (click)="removeTab(index)">
             Xóa giai đoạn
           </button>
-          <button type="button" class="btn btn-success"  (click)="onSave(tab)">Lưu</button>
-          <button type="button" class="btn btn-primary" *ngIf="tab.isTB" >Hoàn thành</button>
+          <button type="button" class="btn btn-success" (click)="onSave(tab,index)">Lưu</button>
          </div>
       </div>
     </mat-tab>

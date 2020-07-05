@@ -12,10 +12,10 @@
           Tên trường
         </label>
         <div class="input-group mb-3" *ngIf="!data.fieldData">
-          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editName">
+          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editName" autofocus>
         </div>
         <div class="input-group mb-3" *ngIf="data.fieldData">
-          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="data.fieldData.name">
+          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="data.fieldData.fieldName" autofocus>
         </div>
         <label>
           Mô tả
@@ -30,13 +30,12 @@
           <label>
             Lựa chọn
           </label>
-          <div class="input-group mb-3" *ngFor="let option of data.fieldData.options">
-            <input type="text" class="form-control" aria-describedby="basic-addon1" [placeholder]="option.index" [(ngModel)]="option.value">
-            <i class="material-icons icon-btn" (click)="removeOption(option.index -1)"
+          <div class="input-group mb-3" *ngFor="let opti of data.fieldData.option">
+            <input type="text" class="form-control" aria-describedby="basic-addon1" [placeholder]="opti.index" [(ngModel)]="opti.value">
+            <i class="material-icons icon-btn" (click)="removeOption(opti.index -1, data.fieldData)"
                disabled="noDelete">delete</i>
-
           </div>
-          <i class="material-icons icon-btn" (click)="addOption()">add_circle</i>
+          <i class="material-icons icon-btn" (click)="addOption(data.fieldData)">add_circle</i>
         </div>
         <div *ngIf="(data.field.nameField === 'Radio' || data.field.nameField ==='CheckBox' || data.field.nameField === 'DropDownSelect') && !data.fieldData ">
           <label>
@@ -44,17 +43,22 @@
           </label>
           <div class="input-group mb-3" *ngFor="let option of options">
             <input type="text" class="form-control" aria-describedby="basic-addon1" [placeholder]="option.index" [(ngModel)]="option.value">
-            <i class="material-icons icon-btn" (click)="removeOption(option.index -1)"
+            <i class="material-icons icon-btn" (click)="removeOption(option.index -1, data.fieldData)"
                disabled="noDelete">delete</i>
-
           </div>
-          <i class="material-icons icon-btn" (click)="addOption()">add_circle</i>
+          <i class="material-icons icon-btn" (click)="addOption(data.fieldData)">add_circle</i>
         </div>
+
         <div class="title">
           <h4>
             Trường này có bắt buộc không ?
           </h4>
-          <mat-slide-toggle (change)="checkRequired()" [checked]="required"></mat-slide-toggle>
+          <div *ngIf="data.fieldData">
+            <mat-slide-toggle (change)="checkRequired(data.fieldData)" [checked]="data.fieldData.required"></mat-slide-toggle>
+          </div>
+          <div *ngIf="!data.fieldData">
+            <mat-slide-toggle (change)="checkRequired(data.fieldData)" [checked]="required"></mat-slide-toggle>
+          </div>
         </div>
 
         <button type="button" class="btn btn-danger" mat-dialog-close>Hủy</button>
@@ -66,7 +70,7 @@
 
         <h3 *ngIf="!data.fieldData">{{editName}}</h3>
         <label *ngIf="!data.fieldData">{{editDes}}</label>
-        <h3 *ngIf="data.fieldData">{{data.fieldData.name}}</h3>
+        <h3 *ngIf="data.fieldData">{{data.fieldData.fieldName}}</h3>
         <label *ngIf="data.fieldData">{{data.fieldData.description}}</label>
 
 
@@ -116,9 +120,9 @@
 
         </div>
         <div *ngIf="data.field.nameField === 'Radio' && data.fieldData">
-          <div *ngFor="let option of data.fieldData.options">
+          <div *ngFor="let opti of data.fieldData.option">
             <input type="radio" id="male" name="gender" value="male">
-            <label for="male">{{option.value}}</label><br>
+            <label for="male">{{opti.value}}</label><br>
           </div>
 
         </div>
@@ -134,23 +138,23 @@
         </div>
 
         <div *ngIf="data.field.nameField === 'CheckBox' && data.fieldData">
-          <div *ngFor="let option of data.fieldData.options">
+          <div *ngFor="let opti of data.fieldData.option">
             <input type="checkbox" id="male" name="gender" value="male">
-            <label for="male">{{option.value}}</label>
+            <label for="male">{{opti.value}}</label>
           </div>
         </div>
         <div *ngIf="data.field.nameField === 'CheckBox' && !data.fieldData">
-          <div *ngFor="let option of options">
+          <div *ngFor="let opti of options">
             <input type="checkbox" id="male" name="gender" value="male">
-            <label for="male">{{option.value}}</label>
+            <label for="male">{{opti.value}}</label>
           </div>
         </div>
         <div *ngIf="data.field.nameField === 'DropDownSelect' && data.fieldData ">
           <mat-form-field>
             <mat-label>Chọn select</mat-label>
             <mat-select>
-              <mat-option *ngFor="let option of data.fieldData.options" [value]="option">
-                {{option.value}}
+              <mat-option *ngFor="let opti of data.fieldData.option" [value]="opti">
+                {{opti.value}}
               </mat-option>
             </mat-select>
           </mat-form-field>

@@ -26,4 +26,8 @@ btn {
 .hide-icon:hover i{
     display:block;
 }
+.form-field{
+  margin-left: 0;
+  padding-left: 0;
+}
  

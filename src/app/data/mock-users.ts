@@ -2,8 +2,8 @@ import { Users } from './../models/users';
 
 export const USERS: Users[] = [
   {
-    id: 1,
-    name: 'Nguyễn Văn Thành',
+    id: "a",
+    fullName: 'Nguyễn Văn Thành',
     firstName: 'Nguyễn Văn',
     lastName: 'Thành',
     phoneNumber: '098676833',
@@ -15,8 +15,8 @@ export const USERS: Users[] = [
     password:""
   },
   {
-    id: 2,
-    name: 'Phạm Văn Sự',
+    id: "b",
+    fullName: 'Phạm Văn Sự',
     firstName: 'Phạm Văn',
     lastName: 'Sự',
     phoneNumber: '0987654321',
@@ -28,8 +28,8 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 3,
-    name: 'Từ Minh Phương',
+    id: "c",
+    fullName: 'Từ Minh Phương',
     firstName: 'Từ Minh',
     lastName: 'Phương',
     phoneNumber: '0987123456',
@@ -41,8 +41,8 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 4,
-    name: 'Trịnh Thị Vân Anh',
+    id: "d",
+    fullName: 'Trịnh Thị Vân Anh',
     firstName: 'Trịnh Thị',
     lastName: 'Vân Anh',
     phoneNumber: '0987678231',
@@ -54,8 +54,8 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 5,
-    name: 'Hoàng Xuân Dậu',
+    id: "e",
+    fullName: 'Hoàng Xuân Dậu',
     firstName: 'Hoàng Xuân',
     lastName: 'Dậu',
     phoneNumber: '0989786745',
@@ -67,8 +67,8 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 6,
-    name: 'Hoàng Hữu Hạnh',
+    id: "f",
+    fullName: 'Hoàng Hữu Hạnh',
     firstName: 'Hoàng Hữu',
     lastName: 'Hạnh',
     phoneNumber: '0369852147',
@@ -80,8 +80,8 @@ export const USERS: Users[] = [
     password: ""
   },
   {
-    id: 7,
-    name: 'Trương Thị Nguyệt',
+    id: "g",
+    fullName: 'Trương Thị Nguyệt',
     firstName: 'Trương Thị',
     lastName: 'Nguyệt',
     phoneNumber: '0968541247',

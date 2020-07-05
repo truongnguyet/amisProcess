@@ -1,6 +1,6 @@
 export interface Users {
-  id: number;
-  name: string;//fullName
+  id: string;
+  fullName: string;//fullName
   lastName: string;
   firstName: string;
   phoneNumber: string;

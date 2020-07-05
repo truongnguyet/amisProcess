@@ -2,15 +2,16 @@ import { FieldData } from '../models/fieldData';
 import { Users } from '../models/users';
 
 export interface Phase {
-  id: number;
+  id: string;
   phaseName: string;
   icon: string;
   description: string;
-  fields: FieldData[];
-  processId: number;
-  implementer: Users[];
+  fieldData: FieldData[];
+  processId: string;
+  usersHasPhase: Users[];
   isFirstPhase: boolean;
-  isTC: boolean;
-  isTB: boolean;
+  isTc: boolean;
+  isTb: boolean;
   limitUser: boolean;
+  index: number;
 }

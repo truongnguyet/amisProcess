@@ -14,13 +14,12 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MaterialModule } from '../../material.module';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import {v4 as uuidv4} from 'uuid';
 import { USERS } from '../../data/mock-users';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { ICONS } from '../../data/mock-icons';
-import { phaseData } from '../../data/mock-phases';
-import { FieldInPhase } from '../../models/fieldData';
 import { Process } from '../../models/process';
 import { ProcessService } from '../../services/processService';
 import { FormControl } from '@angular/forms';
@@ -29,6 +28,7 @@ import { startWith, map } from 'rxjs/operators';
 import { Users } from '../../models/users';
 import { PhaseService } from '../../services/phase.service';
 import { Phase } from '../../models/phase';
+import { UserService } from 'src/app/services/user.service';
 
 interface Error {
   name: boolean;
@@ -42,7 +42,8 @@ interface Error {
   styleUrls: ['./setting.component.css']
 })
 export class SettingComponent implements OnInit {
-  users = USERS;
+ // myControl = new FormControl();
+
   limitUser = false;
   fields = FIELDS;
   icons = ICONS;
@@ -54,99 +55,96 @@ export class SettingComponent implements OnInit {
   panelOpenState = false;
 
   activeTab = 0;
-  select = [];
   processes: Process;
-
+  users: Users[];
   error: Error;
-  parentField = FieldInPhase;
+
+  filteredOptions: Observable<Users[]>;
+  searchText: string;
+  userSearch : Users[];
+  usersHasPhase : Array<any>[];
 
   tabs = [
     {
-      
+      id:uuidv4(),
       phaseName: 'Giai đoạn 1',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
-      implementer: [],
+      processId: "",
+      usersHasPhase: [],
       isTC: false,
       isTB: false,
       isFirstPhase: true,
-      limitUser: false
+      limitUser: false,
+      index: 1
     },
     {
-     
+     id:uuidv4(),
       phaseName: 'Giai đoạn 2',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
-      implementer: USERS,
+      processId: "",
+      usersHasPhase: this.usersHasPhase,
       isTC: false,
       isTB: false,
       isFirstPhase: false,
-      limitUser: false
+      limitUser: false,
+      index: 2
     },
     {
-     
+      id:uuidv4(),
       phaseName: 'Giai đoạn 3',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
-      implementer: USERS,
+      processId: "",
+      usersHasPhase: this.usersHasPhase,
       isTC: false,
       isTB: false,
       isFirstPhase: false,
-      limitUser: false
+      limitUser: false,
+      index: 3
     },
     {
-      
+      id:uuidv4(),
       phaseName: 'Thành công',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
-      implementer: [],
+      processId: "",
+      usersHasPhase: [],
       isTC: true,
       isTB: false,
       isFirstPhase: false,
-      limitUser: false
+      limitUser: false,
+      index: 4
     },
     {
-      
+      id:uuidv4(),
       phaseName: 'Thất bại',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
-      implementer: [],
+      processId: "",
+      usersHasPhase: [],
       isTC: false,
       isTB: true,
       isFirstPhase: false,
-      limitUser: false
+      limitUser: false,
+      index: 5
     },
   ];
   count = 4;
-
-  newPhase = {
-    phaseName: this.phaseName,
-    description: this.description,
-    icon: this.icon,
-    processId: 0,
-    isTC: false,
-    isTB: false,
-    isFirstPhase: false,
-    limitUser: false
-  }
-
 
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
     private processService: ProcessService,
-    private phaseService: PhaseService
+    private phaseService: PhaseService,
+    private userService : UserService
   ) {
     this.phaseName = '';
     this.description = '';
@@ -161,19 +159,26 @@ export class SettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProcess();
+    this.getAllUser();
 
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.options.slice())
-      );
+    // this.filteredOptions = this.myControl.valueChanges
+    // .pipe(
+    //   startWith(''),
+    //   map(value => this.searchUser(value))
+    // );
   }
 
   getProcess(): void {
-    const id = parseInt( this.route.snapshot.paramMap.get('id'));
-    this.processService.getById(id)
+    const id =  this.route.snapshot.params.id;
+    this.processService.getPro(id)
       .subscribe( process => this.processes = process);    
+  }
+  getAllUser(){
+    this.userService.getUsers().toPromise()
+    .then(
+      user => {
+        this.users = user;
+      });
   }
 
   addUser() {
@@ -181,11 +186,12 @@ export class SettingComponent implements OnInit {
   }
   onListUser(tab) {
     tab.limitUser = true;
-    tab.implementer = []
+    tab.usersHasPhase = []
   }
   onCloseListUser(tab) {
     tab.limitUser = false;
-    tab.implementer = this.users;
+    tab.usersHasPhase = this.usersHasPhase;
+    
   }
 
   addField(tab, field) {
@@ -195,29 +201,25 @@ export class SettingComponent implements OnInit {
         tab: tab
       }
     });
-    // tab.fields.push(field);
+  
 
   }
-
-  gotoProcess() {
-    //console.log("process  sau khi tao",this.processes)
-    this.router.navigate(['/process-detail/', this.processes.id])
-  }
-
 
 
   addTab() {
     this.tabs.splice(this.tabs.length - 2, 0, {
+      id:uuidv4(),
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
       fieldData: [],
-      processId: 1,
-      implementer: [],
+      processId: "",
+      usersHasPhase: [],
       isFirstPhase: false,
       isTC: false,
       isTB: false,
-      limitUser: false
+      limitUser: false,
+      index: 3
     });
     this.count++;
   }
@@ -233,26 +235,37 @@ export class SettingComponent implements OnInit {
   }
 
 
-  onSave(tab) {
+  onSave(tab,index) {
    
     tab.processId = this.processes.id;
-
-
     tab.isFirstPhase = Number(tab.isFirstPhase);
     tab.isTC = Number(tab.isTC);
     tab.isTB = Number(tab.isTB);
     tab.limitUser = Number(tab.limitUser);
+    tab.fieldData.forEach(a=> {
+      a.required = Number(a.required)
+    })
+    tab.index = index;
+
+   if(tab.limitUser == false){
+     tab.usersHasPhase = this.users.map( d => ({usersId: d.id,phaseId: tab.id}) )
+   }
+   
     this.phaseService.addPhase(tab as Phase)
       .subscribe(
         p => {
-          console.log("phase tao moi",p); 
+         // console.log("phase tao moi",p); 
         }
       )
+      this.limitUser = false;
 
     if (this.activeTab < this.tabs.length - 1) {
       this.activeTab++;
     }
-    this.limitUser = false;
+
+    if(tab.isTB){
+      this.router.navigate(['/home/edit-process/', this.processes.id])
+    }
 
   }
   onSelectTab(tab) {
@@ -262,42 +275,37 @@ export class SettingComponent implements OnInit {
 
   selectUser(tab, user) {
     if (tab.limitUser) {
-      const index = this.userCheck(tab.implementer, user)
+      const index = this.userCheck(tab.usersHasPhase, user)
       if (index === -1) {
-        tab.implementer.push(user);
+        tab.usersHasPhase.push({
+          usersId: user.id,
+          phaseId: tab.id
+        });
       }
       else {
-        tab.implementer.splice(index, 1);
+        tab.usersHasPhase.splice(index, 1);
       }
+      
     }
   }
   userCheck(imply = [], user) {
     let result = -1
     imply.forEach((usr, index) => {
-      if (usr.id == user.id) {
+      if (usr.usersId == user.id) {
         result = index
       }
     })
 
     return result;
   }
+  //search user
 
-
-
-  //Search users
-  myControl = new FormControl();
-  options = USERS;
-  filteredOptions: Observable<Users[]>;
-
-
-  displayFn(user: Users): string {
-    return user && user.name ? user.name : '';
-  }
-
-  private _filter(name: string): Users[] {
-    const filterValue = name.toLowerCase();
-
-    return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
-  }
+   searchUser = (input) =>{
+    if(!input)
+        return []
+    if(!this.userSearch.length)
+        return []
+    return this.userSearch.filter(user=>user.fullName.toLowerCase().includes(input.toLowerCase()))
+}
 }
 
