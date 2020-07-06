@@ -47,7 +47,7 @@ export class SettingComponent implements OnInit {
   limitUser = false;
   fields = FIELDS;
   icons = ICONS;
-
+  loading = false;
   phaseName: string;
   description: string;
   icon: string;
@@ -169,9 +169,13 @@ export class SettingComponent implements OnInit {
   }
 
   getProcess(): void {
+    this.loading = true;
     const id =  this.route.snapshot.params.id;
     this.processService.getPro(id)
-      .subscribe( process => this.processes = process);    
+      .subscribe( process => {
+        this.processes = process;
+        this.loading = false;
+      });    
   }
   getAllUser(){
     this.userService.getUsers().toPromise()
@@ -201,7 +205,6 @@ export class SettingComponent implements OnInit {
         tab: tab
       }
     });
-  
 
   }
 

@@ -14,7 +14,9 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
 import { ListFieldModule } from './fields/list-field/list-field.module';
-
+ 
+import { ToastrModule } from 'ngx-toastr';
+import { DialogCommonModule } from './dialog-common/dialog-common.module';
 
 
 @NgModule({
@@ -29,11 +31,17 @@ import { ListFieldModule } from './fields/list-field/list-field.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
 
     HomeModule,
     AdminModule,
     LoginDashboardModule,
-    ListFieldModule
+    ListFieldModule,
+    DialogCommonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

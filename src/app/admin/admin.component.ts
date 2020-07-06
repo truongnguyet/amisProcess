@@ -34,20 +34,6 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.getProcessPage();
   }
-
-   getAllProcess() {
-     this.loading = true;
-     this.processService.getAllProcess()
-       .subscribe(
-         p => {
-           this.processes = p,
-           this.loading = false;
-          },
-         e => console.log(e)
-         
-       )
-       
-  }
   getProcessPage (){
     this.loading = true;
     this.processService.getProcess(this.page)

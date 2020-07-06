@@ -13,6 +13,7 @@ import _ from "lodash";
 export class EditScreenComponent implements OnInit {
   process: Process;
   statuses = [{ id: 1, name: 'Đang hoạt động' }, { id: 2, name: 'Tạm ngừng' }]
+  loading = false;
 
   constructor(
     private processService: ProcessService,
@@ -26,12 +27,14 @@ export class EditScreenComponent implements OnInit {
   }
 
   getProcess() {
+    this.loading = true;
     const id = this.route.snapshot.params.id;
     this.processService.getPro(id)
       .subscribe(
         process =>{
          process.phase = _.orderBy(process.phase,"index",'des');
-         this.process = process
+         this.process = process;
+         this.loading = false;
         }  
         );
 

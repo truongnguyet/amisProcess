@@ -38,10 +38,9 @@ export class FieldService {
   //xóa field
   deleteField(id : string): Observable<any> {
     return this.http.delete(`${this.fieldURL}/${id}`, this.httpOptions).pipe(
-      tap(_ => console.log("Đã xóa")),
-      catchError(this.handleError<any>("Xóa lỗi"))
-
-    )
+      tap(_ => console.log(`delete phase id=${id}`)),
+      catchError(this.handleError<any>('update process'))
+    );
   }
   
   private handleError<T>(operation = 'operation', result?: T) {

@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import _ from 'lodash';
 import {v4 as uuidv4} from 'uuid';
+import { ToastrService } from 'ngx-toastr';
 
 import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
@@ -38,6 +39,7 @@ export class EditProcessComponent implements OnInit {
   fields = FIELDS;
   activeTab = 0;
   users : Users[];
+  loading = false;
 
   constructor(
     private processService: ProcessService,
@@ -45,7 +47,8 @@ export class EditProcessComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private phaseService : PhaseService,
-    private userService : UserService
+    private userService : UserService,
+    private toastr: ToastrService
   ) 
   {
     
@@ -58,6 +61,7 @@ export class EditProcessComponent implements OnInit {
   }
 
   getProcess(): void {
+    this.loading =true;
     const id = this.router.url.split('/')[3];
     this.processService.getPro(id)
       .subscribe(process => {
@@ -72,7 +76,7 @@ export class EditProcessComponent implements OnInit {
        // console.log(process)
         const idPhase = this.route.snapshot.paramMap.get('id')  
         this.activeTab = _.findIndex(process.phase, function(o){ return o.id == idPhase ;});
-        
+        this.loading = false;
       }
         );
     
@@ -146,6 +150,22 @@ export class EditProcessComponent implements OnInit {
     
     this.phaseService.updatePhase(tab as Phase).subscribe(p => console.log("sửa phase", p));
     this.router.navigateByUrl('home/edit-process/'+ this.process.id)
+  }
+  onSaveFiled(tab){
+    console.log(tab.fieldData)
+    tab.isFirstPhase = Number(tab.isFirstPhase);
+    tab.isTc = Number(tab.isTc);
+    tab.isTb = Number(tab.isTb);
+    tab.limitUser = Number(tab.limitUser);
+    tab.fieldData.forEach(a=> {
+      a.required = Number(a.required)
+    })
+    this.phaseService.updateField(tab as Phase).toPromise().then(
+      p=> {
+        console.log(p)
+       // this.toastr.success("Lưu thành công");
+      }
+    )
   }
   onCancel() {
     this.router.navigateByUrl('home/edit-process/' + this.process.id)

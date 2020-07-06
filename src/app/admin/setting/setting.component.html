@@ -1,5 +1,6 @@
 
 <div>
+  <mat-spinner *ngIf="loading == true" class="spiner"></mat-spinner>
   <div class="example-button-container">
     <button mat-fab color="warn" aria-label="add process" matTooltip="Thêm giai đoạn" (click)="addTab()">
       <mat-icon>add</mat-icon>

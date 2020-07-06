@@ -28,6 +28,8 @@
       </tbody>
     </table>
 <div class="bottom-page">
+  <p>Items per page: {{perPage}}</p>
+  <p>{{page * perPage +1}} - {{page * perPage +10}}  of {{total}}</p>
   <i class="material-icons icon-btn" (click)=onPrevious() disabled="!total || !hasNext || loading">navigate_before</i>
   <i class="material-icons icon-btn" (click)=onNext() disabled="!total || !hasPrev ||loading" >navigate_next</i>
 </div>

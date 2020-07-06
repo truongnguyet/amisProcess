@@ -102,8 +102,7 @@ export class DialogFieldComponent implements OnInit {
 
   onSaveField(fieldData) {   
     if (fieldData) {
-      const idx = _.findIndex(this.data.tab.fieldData, { id: fieldData.id })
-      this.data.tab.fieldData[idx] = {
+      fieldData = {
         id: fieldData.id,
         fieldName: fieldData.fieldName,
         description: fieldData.description,
@@ -111,8 +110,8 @@ export class DialogFieldComponent implements OnInit {
         option: fieldData.option,
         type: fieldData.type
       }
-     
-    } else {
+      }
+     else {
      const emptyValue = ['radio','dropDown','checkBox'];
      if(emptyValue.includes(this.data.field.type)){
        this.options = this.options;
@@ -131,7 +130,7 @@ export class DialogFieldComponent implements OnInit {
       })
 
     }
-   console.log(this.data.tab.fieldData)
+  
   }
 
 }

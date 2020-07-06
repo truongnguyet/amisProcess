@@ -37,7 +37,8 @@ export class CreatedialogComponent implements OnInit {
   error: Error;
   process = PROCESS;
   checked = true;
-  inviteRef: any
+  inviteRef: any;
+  loading = false;
 
   processs: Process
 
@@ -82,6 +83,7 @@ export class CreatedialogComponent implements OnInit {
 
   gotoSetting(e) {
     e.preventDefault();
+    this.loading = true;
     if (this.name == "") {
       this.error.name = true;
       return
@@ -94,6 +96,7 @@ export class CreatedialogComponent implements OnInit {
         process => {
           this.processs = process,
             this.router.navigate(['/home/setting/', process.id]);
+            this.loading = false;
         }
       )
     this.dialog.closeAll();

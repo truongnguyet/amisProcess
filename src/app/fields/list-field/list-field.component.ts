@@ -4,6 +4,7 @@ import { DialogFieldComponent } from '../dialog-field/dialog-field.component';
 import { remove } from 'lodash'
 import { FIELDS } from '../../data/mock-fields';
 import { FieldService } from 'src/app/services/field.service';
+import { DialogCommonComponent } from 'src/app/dialog-common/dialog-common/dialog-common.component';
 
 @Component({
   selector: 'app-list-field',
@@ -43,7 +44,15 @@ export class ListFieldComponent implements OnInit {
   }
 
   onDelete(tab, field) {
-    remove(tab.fieldData, item => item.id == field.id);
-    this.fieldService.deleteField(field.id).subscribe();
+    this.dialog.open(DialogCommonComponent, {
+      data: {
+        title: "trường",
+        onNext: this.fieldService.deleteField(field.id).subscribe(
+          p=> console.log(p)
+        )
+      }
+    });
+    remove(tab.fieldData, item => item.id == field.id); 
   }
+  
 }
