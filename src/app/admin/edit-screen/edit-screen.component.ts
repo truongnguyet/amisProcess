@@ -4,6 +4,8 @@ import { ProcessService } from '../../services/processService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhaseService } from 'src/app/services/phase.service';
 import _ from "lodash";
+import {MatDialog} from '@angular/material/dialog';
+import { DialogCommonComponent } from 'src/app/dialog-common/dialog-common/dialog-common.component';
 
 @Component({
   selector: 'app-edit-screen',
@@ -19,7 +21,7 @@ export class EditScreenComponent implements OnInit {
     private processService: ProcessService,
     private route: ActivatedRoute,
     private router: Router,
-    private phaseService : PhaseService
+    private dialog : MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -54,10 +56,14 @@ export class EditScreenComponent implements OnInit {
    
   }
   deletePhase(index, phase) {
-    this.process.phase.splice(index, 1);
-    this.phaseService.deletePhase(phase.id).subscribe(p => {
-      console.log("Đã xóa phase",p);
+    this.dialog.open(DialogCommonComponent, {
+      data: {
+        title: "giai đoạn",
+        item: phase
+      }
     })
+ 
+ 
   }
   goBack(){
     this.router.navigateByUrl('/home');

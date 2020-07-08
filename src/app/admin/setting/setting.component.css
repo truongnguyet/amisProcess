@@ -33,9 +33,6 @@ mat-expansion-panel {
 .list-user :hover {
     cursor:pointer;
 }
-.error-validate {
-  color: red;
-}
 .spiner {
     width: 100px;
     height: 100px;
@@ -44,3 +41,7 @@ mat-expansion-panel {
     top: 50%;
     transform: translate(-50%,-50%);
   }
+  .error-validate {
+    color:red;
+    width:100%;
+   }

@@ -20,13 +20,13 @@
             Tên giai đoạn
           </label>
           <div class="input-group mb-3">
-            <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1" (change)="onChange($event)" autofocus>
+            <input type="text" [(ngModel)]="tab.phaseName" class="form-control" aria-describedby="basic-addon1" (keyup)="onKey($event)" autofocus>
           </div>
           <label>
             Mô tả
           </label>
           <div class="input-group">
-            <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
+            <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description" (keyup)="onKey($event)"></textarea>
           </div>
           <br />
           <br />
@@ -55,10 +55,21 @@
             </mat-accordion>
           </div>
         </div>
+        <!-- Nếu có thay đổi thì hiện nút để lưu hoặc hủy -->
+        <div [hidden]="!changePhase">
+          <button mat-stroked-button color="secondary" (click)="onCancel()"> 
+            <i class="material-icons">cancel</i>
+          </button>
+          <button mat-stroked-button color="primary" (click)="onSave(tab)">
+            <i class="material-icons">save</i>
+          </button>
+        </div>
+       
         <br />
         <br />
         <!--Chọn trường, giai đoạn cuối thì không hiện phần này-->
         <div [hidden]="tab.isTc || tab.isTb">
+          <hr />
           <p *ngIf="tab.fieldData.length == 0 "> (Chưa có trường nào được chọn)</p>
           <app-list-field [childField]="tab.fieldData" [tab]="tab"></app-list-field>
           <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
@@ -69,13 +80,22 @@
             </button>
           </mat-menu>
           <br />
-          <button type="button" class="btn btn-primary" (click)="onSaveFiled(tab)">Lưu</button>
+          <!-- Nếu có thay đổi thì hiện nút để lưu hoặc hủy -->
+        <div [hidden]="!changeField">
+          <button mat-stroked-button color="secondary" (click)="onCancel()"> 
+            <i class="material-icons">cancel</i>
+          </button>
+          <button mat-stroked-button color="primary" (click)="onSaveFiled(tab)">
+            <i class="material-icons">save</i>
+          </button>
+        </div>
         </div>
 
         <br />
         <br />
         <!--Chọn người thực hiện-->
         <div [hidden]="tab.isFirstPhase || tab.isTc || tab.isTb">
+          <hr />
           <h2>Danh sách người thực hiện</h2>
           <br />
           <mat-radio-group aria-label="Select an option">
@@ -93,12 +113,19 @@
             </div>
           </mat-radio-group>
         </div>
-        
+         <!-- Nếu có thay đổi thì hiện nút để lưu hoặc hủy -->
+         <div [hidden]="!changeUser">
+          <button mat-stroked-button color="secondary" (click)="onCancel()"> 
+            <i class="material-icons">cancel</i>
+          </button>
+          <button mat-stroked-button color="primary" (click)="onSaveFiled(tab)">
+            <i class="material-icons">save</i>
+          </button>
+        </div>
         <button type="button" class="btn btn-danger"
-                (click)="onCancel()" >
+                (click)="goBack()" >
           Quay lại
         </button>
-        <!-- <button type="button" class="btn btn-success" (click)="onSave(tab)">Lưu</button> -->
        
       </div>
 

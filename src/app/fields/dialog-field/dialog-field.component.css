@@ -64,3 +64,7 @@ li {
 .icon-btn:hover {
     cursor:pointer;
 }
+.error-validate {
+  color:red;
+  width:100%;
+ }

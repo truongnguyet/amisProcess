@@ -18,6 +18,10 @@ export interface Field {
   tab: any;
   fieldData: any;
 }
+export interface Error {
+  fieldName: boolean;
+  optionValue: boolean;
+}
 
 @Component({
   selector: 'app-dialog-field',
@@ -35,7 +39,7 @@ export class DialogFieldComponent implements OnInit {
   labelOption: string;
   options = [];
   count = 3;
-
+  error: Error;
 
   noDelete = false;
   constructor(
@@ -47,6 +51,11 @@ export class DialogFieldComponent implements OnInit {
       }
     this.idField = uuidv4();
     this.options = [{ index: 1, id: uuidv4(), value: '', fieldDataId:this.idField }, { index: 2, id: uuidv4(), value: '', fieldDataId:this.idField }]
+    this.editName ='';
+    this.error = {
+      fieldName: false,
+      optionValue: false
+    }
   }
 
   ngOnInit(): void {
@@ -102,6 +111,10 @@ export class DialogFieldComponent implements OnInit {
 
   onSaveField(fieldData) {   
     if (fieldData) {
+      if(fieldData.fieldName == ""){
+        this.error.fieldName = true;
+        return
+      }
       fieldData = {
         id: fieldData.id,
         fieldName: fieldData.fieldName,
@@ -112,9 +125,20 @@ export class DialogFieldComponent implements OnInit {
       }
       }
      else {
+      if(this.editName == ""){
+        this.error.fieldName = true;
+        return
+      }
+
      const emptyValue = ['radio','dropDown','checkBox'];
      if(emptyValue.includes(this.data.field.type)){
        this.options = this.options;
+       this.options.map( a => {
+         if(a.value == ''){
+           this.error.optionValue = true;
+           return
+         }
+       })
      } else {
        this.options = [];
      }

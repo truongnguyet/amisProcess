@@ -5,6 +5,8 @@ import { remove } from 'lodash'
 import { FIELDS } from '../../data/mock-fields';
 import { FieldService } from 'src/app/services/field.service';
 import { DialogCommonComponent } from 'src/app/dialog-common/dialog-common/dialog-common.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-field',
@@ -18,15 +20,14 @@ export class ListFieldComponent implements OnInit {
   field = FIELDS;
   constructor(
     private dialog: MatDialog,
-    private fieldService: FieldService
+    private fieldService: FieldService,
+    private router : Router
     ) { }
 
   ngOnInit(): void {
   // console.log("this is child component", this.childField)
   }
-  child() {
-    console.log("this is child component",this.childField)
-  }
+ 
   onEdit(tab, child) {
     var fieldChild: any
     this.field.forEach(d => {
@@ -47,12 +48,9 @@ export class ListFieldComponent implements OnInit {
     this.dialog.open(DialogCommonComponent, {
       data: {
         title: "trường",
-        onNext: this.fieldService.deleteField(field.id).subscribe(
-          p=> console.log(p)
-        )
+        item: field
       }
     });
-    remove(tab.fieldData, item => item.id == field.id); 
   }
   
 }

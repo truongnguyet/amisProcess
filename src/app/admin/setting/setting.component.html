@@ -23,14 +23,17 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
             </div>
-            <!--<div *ngIf="error.name" class="error-validate">
+            <div *ngIf="error.phaseName" class="error-validate">
               Bạn chưa nhập tên giai đoạn
-            </div>-->
+            </div>
             <label>
               Mô tả
             </label>
             <div class="input-group">
               <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
+            </div>
+            <div *ngIf="error.description" class="error-validate">
+              Bạn chưa nhập mô tả giai đoạn
             </div>
 
             <br />
@@ -58,23 +61,9 @@
                   </div>
                 </mat-expansion-panel>
               </mat-accordion>
-              
 
             <br />
             <br />
-            <!--Chọn trường, thêm trường , giai đoạn cuối bị ẩn phần này-->
-            <!-- <div [hidden]="tab.isTC || tab.isTB">
-              <p *ngIf="tab.fieldData.length == 0"> (Chưa có trường nào được chọn)</p>
-              <app-list-field [childField]="tab.fieldData" [tab]="tab"></app-list-field>
-
-              <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item *ngFor="let field of fields" (click)="addField(tab,field)">
-                  <i class="material-icons">{{field.icon}}</i>
-                  <span>{{field.nameField}}</span>
-                </button>
-              </mat-menu>
-            </div> -->
 
             <!--Chọn trường, thêm trường , giai đoạn cuối bị ẩn phần này-->
             <div [hidden]="tab.isTC || tab.isTB">

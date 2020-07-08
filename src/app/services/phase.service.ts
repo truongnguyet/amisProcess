@@ -59,8 +59,6 @@ export class PhaseService {
 
   //xóa phase
   deletePhase(id : string): Observable<Phase> {
-    //const id = typeof phase === 'string' ? phase : phase.id;
-
     return this.http.delete<Phase>(`${this.phaseURL}/delete/${id}`, this.httpOptions).pipe(
       tap(_ => console.log(`deleted phase id=${id}`)),
       catchError(this.handleError<Phase>('delete Phase'))

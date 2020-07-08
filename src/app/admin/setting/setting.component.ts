@@ -31,9 +31,8 @@ import { Phase } from '../../models/phase';
 import { UserService } from 'src/app/services/user.service';
 
 interface Error {
-  name: boolean;
+  phaseName: boolean;
   description: boolean;
-  icon: boolean;
 }
 
 @Component({
@@ -146,13 +145,10 @@ export class SettingComponent implements OnInit {
     private phaseService: PhaseService,
     private userService : UserService
   ) {
-    this.phaseName = '';
-    this.description = '';
-    
+   
     this.error = {
-      name: false,
+      phaseName: false,
       description: false,
-      icon: false
     }
 
   }
@@ -239,7 +235,14 @@ export class SettingComponent implements OnInit {
 
 
   onSave(tab,index) {
-   
+    if (tab.phaseName == "") {
+      this.error.phaseName = true;
+      return
+    }
+    if(tab.description == ""){
+      this.error.description = true;
+      return
+    }
     tab.processId = this.processes.id;
     tab.isFirstPhase = Number(tab.isFirstPhase);
     tab.isTC = Number(tab.isTC);
@@ -261,6 +264,8 @@ export class SettingComponent implements OnInit {
         }
       )
       this.limitUser = false;
+      this.error.description = false;
+      this.error.phaseName = false;
 
     if (this.activeTab < this.tabs.length - 1) {
       this.activeTab++;
@@ -301,6 +306,7 @@ export class SettingComponent implements OnInit {
 
     return result;
   }
+
   //search user
 
    searchUser = (input) =>{

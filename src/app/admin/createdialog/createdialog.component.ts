@@ -82,13 +82,13 @@ export class CreatedialogComponent implements OnInit {
   }
 
   gotoSetting(e) {
+    
     e.preventDefault();
-    this.loading = true;
     if (this.name == "") {
       this.error.name = true;
       return
     }
-
+    this.loading = true;
     //them moi vao database
     this.newProcess.nameProcess = this.name;
     this.processService.addProcess(this.newProcess as Process)

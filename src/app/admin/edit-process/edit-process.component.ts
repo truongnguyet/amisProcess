@@ -40,6 +40,9 @@ export class EditProcessComponent implements OnInit {
   activeTab = 0;
   users : Users[];
   loading = false;
+  changePhase =false;
+  changeField = false;
+  changeUser = false;
 
   constructor(
     private processService: ProcessService,
@@ -94,11 +97,12 @@ export class EditProcessComponent implements OnInit {
   selectIcon(tab, id: string) {
     this.selectedIcon = true;
     tab.icon = id;
+    this.changePhase = true;
   }
 
   onSelectTab(tab) { 
     this.activeTab = tab;
-    const tabId = this.process.phase[tab].id;
+    this.changePhase = false;
     
   }
 
@@ -109,6 +113,7 @@ export class EditProcessComponent implements OnInit {
         tab: tab
       }
     });
+    this.changeField = true;
   }
 
 
@@ -138,6 +143,7 @@ export class EditProcessComponent implements OnInit {
       }
       
     }
+    this.changeUser = true;
   }
   onSave(tab) {
     tab.isFirstPhase = Number(tab.isFirstPhase);
@@ -148,11 +154,14 @@ export class EditProcessComponent implements OnInit {
       a.required = Number(a.required)
     })
     
-    this.phaseService.updatePhase(tab as Phase).subscribe(p => console.log("sửa phase", p));
-    this.router.navigateByUrl('home/edit-process/'+ this.process.id)
+    this.phaseService.updatePhase(tab as Phase).subscribe(
+      p =>{ 
+        this.changePhase = false;
+        this.ngOnInit();
+      }
+      );
   }
   onSaveFiled(tab){
-    console.log(tab.fieldData)
     tab.isFirstPhase = Number(tab.isFirstPhase);
     tab.isTc = Number(tab.isTc);
     tab.isTb = Number(tab.isTb);
@@ -162,13 +171,20 @@ export class EditProcessComponent implements OnInit {
     })
     this.phaseService.updateField(tab as Phase).toPromise().then(
       p=> {
-        console.log(p)
-       // this.toastr.success("Lưu thành công");
+      this.changeField = false;
+       this.ngOnInit();
       }
     )
+    
   }
-  onCancel() {
+  goBack() {
     this.router.navigateByUrl('home/edit-process/' + this.process.id)
+  }
+  onCancel(){
+    this.changeField =false;
+    this.changePhase = false;
+    this.changeUser =false;
+    this.ngOnInit();  
   }
 
   addTab() {
@@ -200,7 +216,7 @@ export class EditProcessComponent implements OnInit {
 
     return result;
   }
-  onChange(event){
-    console.log(event)
+  onKey(e){
+    this.changePhase = true;
   }
 }
