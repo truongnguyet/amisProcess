@@ -71,6 +71,12 @@ export class PhaseService {
       catchError(this.handleError<any>('Lỗi update'))
     )
   }
+  updateUser(phase : Phase):Observable<any> {
+    return this.http.put(`${this.phaseURL}/editUser`,phase,this.httpOptions).pipe(
+      tap(),
+      catchError(this.handleError<any>('Lỗi update'))
+    )
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
