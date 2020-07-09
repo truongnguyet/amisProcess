@@ -47,3 +47,11 @@ h2 {
     flex:1;
     height:100vh;
 }
+.spiner {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}

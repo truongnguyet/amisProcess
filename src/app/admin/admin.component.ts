@@ -3,9 +3,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { CreatedialogComponent } from './createdialog/createdialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { Process } from '../models/process';
 import { ProcessService } from '../services/processService';
+import { Sort } from '@angular/material/sort';
 
 
 @Component({
@@ -28,7 +30,8 @@ export class AdminComponent implements OnInit {
     private router: Router,
     private processService: ProcessService
   ) {
-    
+    if(this.processes)
+    this.processes = this.processes.slice();
   }
 
   ngOnInit(): void {
@@ -81,7 +84,29 @@ export class AdminComponent implements OnInit {
     this.page = this.page -1;
     this.getProcessPage()
   }
+
+  sortData(sort: Sort) {
+    
+    const data = this.processes.slice();
+    if (!sort.active || sort.direction === '') {
+      this.processes = data;
+      return;
+    }
+    
+    this.processes = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'nameProcess': return compare(a.nameProcess, b.nameProcess, isAsc);
+        case 'createdBy': return compare(a.createdBy, b.createdBy, isAsc);
+        case 'status': return compare(a.status, b.status, isAsc);
+        default: return 0;
+      }
+    });
+  }
+  
 }
 
-
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
 

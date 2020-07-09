@@ -22,7 +22,7 @@ import { UserService } from '../../services/user.service';
 })
 export class HomeComponent implements OnInit {
   loading = false;
-  users: User[];
+  users: User;
   selected: string;
   menuItems = [
     {
@@ -60,13 +60,15 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/process/view-member'])
     
   }
-//xoa
+
   ngOnInit() {
     this.loading = true;
-    this.userService.getAll().pipe(first()).subscribe(users => {
+   var currentUser =  this.authenticationService.currentUserValue;
+
+    this.userService.getById(currentUser.id).pipe(first()).subscribe(users => {
       this.loading = false;
-    //  this.users = users;
-    });
+     this.users = users;
+   });
   }
 
   logout() {

@@ -5,15 +5,25 @@
     </button>
   </div>
   <mat-spinner *ngIf="loading == true" class="spiner"></mat-spinner>
+
   <div class="list">
     <h2>Danh sách các quy trình bạn quản lí:</h2>
-    <table class="table table-striped">
+    <!-- Search process -->
+    <div class="input-group mb-3 search-div">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="material-icons">search</i></span>
+      </div>
+      <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+    </div>
+
+   
+      <table matSort (matSortChange)="sortData($event)" class="table table-striped">
       <thead>
         <tr>
           <th scope="row">STT</th>
-          <th scope="row">Tên quy trình</th>
-          <th scope="row">Người tạo</th>
-          <th scope="row">Trạng thái</th>
+          <th scope="row" mat-sort-header="nameProcess">Tên quy trình</th>
+          <th scope="row" mat-sort-header="createdBy">Người tạo</th>
+          <th scope="row" mat-sort-header="status">Trạng thái</th>
         </tr>
       </thead>
       <tbody *ngFor="let process of processes; let index = index" class="list-row" (click)="viewProcess(process)">
@@ -27,12 +37,14 @@
         </tr>
       </tbody>
     </table>
+
 <div class="bottom-page">
-  <p>Items per page: {{perPage}}</p>
-  <p>{{page * perPage +1}} - {{page * perPage +10}}  of {{total}}</p>
-  <i class="material-icons icon-btn" (click)=onPrevious() disabled="!total || !hasNext || loading">navigate_before</i>
-  <i class="material-icons icon-btn" (click)=onNext() disabled="!total || !hasPrev ||loading" >navigate_next</i>
+  <p class="item-bottom">Items per page: {{perPage}}</p>
+  <p class="item-bottom">{{page * perPage +1}} - {{page * perPage +10}}  of {{total}}</p>
+  <i class="material-icons icon-btn item-bottom" (click)=onPrevious() disabled="!total || !hasNext || loading">navigate_before</i>
+  <i class="material-icons icon-btn item-bottom" (click)=onNext() disabled="!total || !hasPrev ||loading" >navigate_next</i>
 </div>
+
   </div>
 
 </div>

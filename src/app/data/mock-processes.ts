@@ -7,8 +7,8 @@ export const PROCESS: Process[] = [
     nameProcess: 'Quy trình nghỉ phép',
     createdBy: 'Trương Thị Nguyệt',
     status: 'Đang hoạt động',
-    modifyBy: 'Trương Thị Nguyệt',
-    modifyAt: '12/12/2020',
+    modifiedBy: 'Trương Thị Nguyệt',
+    modifiedAt: '12/12/2020',
     createdAt: '10/1/2020',
     phase: [
       {
@@ -202,8 +202,8 @@ export const PROCESS: Process[] = [
     nameProcess: 'Quy trình xin cấp phép tài sản',
     createdBy: 'Trương Thị Nguyệt',
     status: 'Tạm ngừng',
-    modifyAt: '12/12/2020',
-    modifyBy: 'Mai Thị Hoa',
+    modifiedAt: '12/12/2020',
+    modifiedBy: 'Mai Thị Hoa',
     createdAt: '10/2/2019',
     phase: []
   },
@@ -212,8 +212,8 @@ export const PROCESS: Process[] = [
     nameProcess: 'Quy trình tuyển dụng',
     createdBy: 'Mai Thị Hoa',
     status: 'Đang hoạt động',
-    modifyBy: 'Mai Thị Hoa',
-    modifyAt: '23/2/2020',
+    modifiedBy: 'Mai Thị Hoa',
+    modifiedAt: '23/2/2020',
     createdAt: '10/1/2018',
     phase: []
 
@@ -223,8 +223,8 @@ export const PROCESS: Process[] = [
     nameProcess: 'Quy trình sản xuất',
     createdBy: 'Hỏa Thành An',
     status: 'Tạm ngừng',
-    modifyAt: '12/2/2020',
-    modifyBy: 'Trương Thị Nguyệt',
+    modifiedAt: '12/2/2020',
+    modifiedBy: 'Trương Thị Nguyệt',
     createdAt: '1/1/2019',
     phase: []
   },
@@ -233,8 +233,8 @@ export const PROCESS: Process[] = [
     nameProcess: 'Quy trình sản xuất 2',
     createdBy: 'Hỏa Thành An',
     status: 'Tạm ngừng',
-    modifyAt: '12/2/2020',
-    modifyBy: 'Trương Thị Nguyệt',
+    modifiedAt: '12/2/2020',
+    modifiedBy: 'Trương Thị Nguyệt',
     createdAt: '1/1/2019',
     phase: []
   }

@@ -63,6 +63,7 @@
   <hr />
   <div *ngIf="process.phase.length == 0">
     <h3>Bạn chưa cài đặt cho các giai đoạn của quy trình này!</h3>
+    <button type="button" class="btn btn-outline-primary" (click)="createPhase()">Tạo giai đoạn</button>
   </div>
   <div>
     <div class="container" >

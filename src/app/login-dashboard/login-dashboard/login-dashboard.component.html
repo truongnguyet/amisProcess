@@ -3,7 +3,6 @@
     <div class="login-container">
       <h1>Công ty cổ phần MISA</h1>
       <h2>Đăng nhập</h2>
-
       <div>
         <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
           <mat-form-field class="example-full-width">
@@ -16,7 +15,7 @@
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
-            <input type="password" matInput formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+            <input type="password" matInput formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" (keydown)="onKeydown($event)">
            <mat-error *ngIf="submitted && f.password.errors">
              Password is <strong>required</strong>
            </mat-error>

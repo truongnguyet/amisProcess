@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Process } from '../../models/process';
 import { ProcessService } from '../../services/processService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PhaseService } from 'src/app/services/phase.service';
 import _ from "lodash";
 import {MatDialog} from '@angular/material/dialog';
 import { DialogCommonComponent } from 'src/app/dialog-common/dialog-common/dialog-common.component';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-edit-screen',
@@ -16,16 +19,25 @@ export class EditScreenComponent implements OnInit {
   process: Process;
   statuses = [{ id: 1, name: 'Đang hoạt động' }, { id: 2, name: 'Tạm ngừng' }]
   loading = false;
+  user: User;
 
   constructor(
     private processService: ProcessService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog : MatDialog
+    private dialog : MatDialog,
+    private authenticate: AuthenticationService,
+    private userService : UserService
   ) { }
 
   ngOnInit(): void {
     this.getProcess();
+    var currentUser = this.authenticate.currentUserValue;
+    this.userService.getById(currentUser.id).subscribe(
+      p => {
+        this.user =p;
+      }
+    )
   }
 
   getProcess() {
@@ -46,10 +58,12 @@ export class EditScreenComponent implements OnInit {
     this.router.navigateByUrl('home/edit-process/' + this.process.id + '/' + phase.id);
   }
   onSave() {
-   
-    this.processService.updateProcess(this.process as Process)
+   this.process.modifiedBy = this.user.fullName;
+    this.process.modifiedAt = moment().format("YYYY-MM-DD");
+    console.log("before up",this.process)
+    this.processService.updateProcess(this.process)
       .subscribe(p => {
-       // console.log("sửa process", p)
+        console.log(p)
       })
     
     this.router.navigateByUrl('/home')
@@ -62,8 +76,9 @@ export class EditScreenComponent implements OnInit {
         item: phase
       }
     })
- 
- 
+  }
+  createPhase(){
+    this.router.navigateByUrl('home/setting/'+ this.process.id)
   }
   goBack(){
     this.router.navigateByUrl('/home');

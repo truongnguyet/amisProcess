@@ -49,7 +49,6 @@ export class LoginDashboardComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
-    console.log("start login");
     this.submitted = true;
 
     // stop here if form is invalid
@@ -74,4 +73,9 @@ export class LoginDashboardComponent implements OnInit {
     Validators.required,
     Validators.email,
   ]);
+  onKeydown(event){
+    if(event.key === "Enter"){
+      this.onSubmit();
+    }
+    }
 }

@@ -26,11 +26,17 @@ import { Phase } from 'src/app/models/phase';
 import { Users } from 'src/app/models/users';
 import { UserService } from 'src/app/services/user.service';
 
+
+export interface Error {
+  phaseName : boolean;
+  description: boolean
+}
 @Component({
   selector: 'app-edit-process',
   templateUrl: './edit-process.component.html',
   styleUrls: ['./edit-process.component.css']
 })
+
 export class EditProcessComponent implements OnInit {
   process: Process;
   icons = ICONS;
@@ -43,6 +49,8 @@ export class EditProcessComponent implements OnInit {
   changePhase =false;
   changeField = false;
   changeUser = false;
+  createNew  = false;
+  error: Error;
 
   constructor(
     private processService: ProcessService,
@@ -188,6 +196,7 @@ export class EditProcessComponent implements OnInit {
   }
 
   addTab() {
+    this.createNew = true;
     this.process.phase.splice(this.process.phase.length - 2, 0, {
       id: uuidv4(),
       phaseName: 'Giai đoạn mới',
@@ -203,6 +212,38 @@ export class EditProcessComponent implements OnInit {
       index:3,
     });
     this.activeTab = this.process.phase.length - 3;
+  }
+  onAddTab(tab,index) {
+    if (tab.phaseName == "") {
+      this.error.phaseName = true;
+      return
+    }
+    if(tab.description == ""){
+      this.error.description = true;
+      return
+    }
+    tab.processId = this.process.id;
+    tab.isFirstPhase = Number(tab.isFirstPhase);
+    tab.isTC = Number(tab.isTC);
+    tab.isTB = Number(tab.isTB);
+    tab.limitUser = Number(tab.limitUser);
+    tab.fieldData.forEach(a=> {
+      a.required = Number(a.required)
+    })
+    tab.index = index;
+
+   if(tab.limitUser == false){
+     tab.usersHasPhase = this.users.map( d => ({usersId: d.id,phaseId: tab.id}) )
+   }
+   
+    this.phaseService.addPhase(tab as Phase)
+      .subscribe(
+        p => {
+         // console.log("phase tao moi",p); 
+        }
+      )
+      this.error.description = false;
+      this.error.phaseName = false;
 
   }
 

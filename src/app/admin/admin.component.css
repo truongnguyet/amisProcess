@@ -62,4 +62,12 @@
 .bottom-page {
   float: right;
   margin: 15px;
+  background-color: #fff;
+}
+.item-bottom {
+  display: inline;
+  margin: 10px;
+}
+.search-div{
+  width: 40%;
 }

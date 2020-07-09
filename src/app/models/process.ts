@@ -6,7 +6,7 @@ export interface Process {
   createdBy: string;
   createdAt: string;
   status: string;
-  modifyBy: string;
-  modifyAt: string;
+  modifiedBy: string;
+  modifiedAt: string;
   phase: Phase[];
 }

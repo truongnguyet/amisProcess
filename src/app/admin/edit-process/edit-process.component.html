@@ -123,10 +123,15 @@
           </button>
         </div>
         <button type="button" class="btn btn-danger"
-                (click)="goBack()" >
+                (click)="goBack()" [hidden]="createNew">
           Quay lại
         </button>
-       
+       <div [hidden]="!createNew">
+        <button type="button" class="btn btn-danger">
+            Hủy
+        </button>
+        <button type="button" class="btn btn-success" (click)="onAddTab(tab,index)">Lưu</button>
+       </div>
       </div>
 
     </mat-tab>
