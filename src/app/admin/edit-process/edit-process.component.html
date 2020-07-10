@@ -57,10 +57,10 @@
         </div>
         <!-- Nếu có thay đổi thì hiện nút để lưu hoặc hủy -->
         <div [hidden]="!changePhase">
-          <button mat-stroked-button color="secondary" (click)="onCancel()"> 
+          <button mat-stroked-button color="secondary" (click)="onCancel()"  matTooltip="Hủy"> 
             <i class="material-icons">cancel</i>
           </button>
-          <button mat-stroked-button color="primary" (click)="onSave(tab)">
+          <button mat-stroked-button color="primary" (click)="onSave(tab)"  matTooltip="Lưu">
             <i class="material-icons">save</i>
           </button>
         </div>
@@ -82,10 +82,10 @@
           <br />
           <!-- Nếu có thay đổi thì hiện nút để lưu hoặc hủy -->
         <div [hidden]="!changeField">
-          <button mat-stroked-button color="secondary" (click)="onCancel()"> 
+          <button mat-stroked-button color="secondary" (click)="onCancel()" matTooltip="Hủy"> 
             <i class="material-icons">cancel</i>
           </button>
-          <button mat-stroked-button color="primary" (click)="onSaveFiled(tab)">
+          <button mat-stroked-button color="primary" (click)="onSaveFiled(tab)" matTooltip="Lưu">
             <i class="material-icons">save</i>
           </button>
         </div>
@@ -115,10 +115,10 @@
         </div>
          <!-- Nếu có thay đổi thì hiện nút để lưu hoặc hủy -->
          <div [hidden]="!changeUser">
-          <button mat-stroked-button color="secondary" (click)="onCancel()"> 
+          <button mat-stroked-button color="secondary" (click)="onCancel()" matTooltip="Hủy"> 
             <i class="material-icons">cancel</i>
           </button>
-          <button mat-stroked-button color="primary" (click)="onSaveUser(tab)">
+          <button mat-stroked-button color="primary" (click)="onSaveUser(tab)" matTooltip="Lưu">
             <i class="material-icons">save</i>
           </button>
         </div>

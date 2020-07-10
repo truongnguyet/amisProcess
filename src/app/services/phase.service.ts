@@ -19,7 +19,7 @@ export class PhaseService {
   getById(id: number): Observable<Phase> {
     const url = `${this.phaseURL}/${id}`;
     return this.http.get<Phase>(url).pipe(
-      tap(_ => console.log()),
+      tap(),
       catchError(this.handleError<Phase>(`getHero id=${id}`))
     );
   }
@@ -28,7 +28,7 @@ export class PhaseService {
   getId(id: number): Observable<Phase> {
     const url = `${this.phaseURL}/${id}/get`;
     return this.http.get<Phase>(url).pipe(
-      tap(_ => console.log("OK")),
+      tap(),
       catchError(this.handleError<Phase>(`get Phase id=${id}`))
     )
   }
@@ -36,7 +36,7 @@ export class PhaseService {
   getUserOfPhase(id: string): Observable<Phase> {
     const url = `${this.phaseURL}/${id}`;
     return this.http.get<Phase>(url).pipe(
-      tap(_ => console.log()),
+      tap(),
       catchError(this.handleError<Phase>(`get Phase id=${id}`))
     )
   }
@@ -44,7 +44,7 @@ export class PhaseService {
   //thêm mới phase
   addPhase(phase: Phase): Observable<Phase> {
     return this.http.post<Phase>(`${this.phaseURL}/createAll`, phase, this.httpOptions).pipe(
-      tap((newPhase: Phase) => console.log()),
+      tap(),
       catchError(this.handleError<Phase>('add phase loi'))
     );
   }
@@ -52,7 +52,7 @@ export class PhaseService {
   // sửa phase
   updatePhase(phase: Phase): Observable<any> {
     return this.http.put(`${this.phaseURL}/editPhase`, phase, this.httpOptions).pipe(
-      tap(_ => console.log(`updated phase id=${phase.id}`)),
+      tap(),
       catchError(this.handleError<any>('update Phase'))
     );
   }
@@ -60,14 +60,14 @@ export class PhaseService {
   //xóa phase
   deletePhase(id : string): Observable<Phase> {
     return this.http.delete<Phase>(`${this.phaseURL}/delete/${id}`, this.httpOptions).pipe(
-      tap(_ => console.log(`deleted phase id=${id}`)),
+      tap(),
       catchError(this.handleError<Phase>('delete Phase'))
     );
   }
   // sửa field trong phase
   updateField(phase : Phase): Observable<any> {
     return this.http.put(`${this.phaseURL}/editField`, phase,this.httpOptions).pipe(
-      tap(_ =>console.log()),
+      tap(),
       catchError(this.handleError<any>('Lỗi update'))
     )
   }

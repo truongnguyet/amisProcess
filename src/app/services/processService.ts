@@ -38,11 +38,21 @@ export class ProcessService {
     )
 
   }
+
+    //search process by name and phân trang
+    search(index: number,text: string): Observable<PageResult> {
+      const url = `${this.processURL}/${index}/${text}`;
+      return this.http.get<PageResult>(url).pipe(
+        tap(),
+        catchError(this.handleError<PageResult>("Lỗi"))
+      )
+    }
+
   //lấy process theo id từ database
   getById(id: number): Observable<Process> {
     const url = `${this.processURL}/phase/${id}`;
     return this.http.get<Process>(url).pipe(
-      tap(_ => console.log(`lấy process id=${id}`)),
+      tap(),
       catchError(this.handleError<Process>(`getProcess id=${id}`))
     );
   }
@@ -51,7 +61,7 @@ export class ProcessService {
   getPro(id : string): Observable<Process> {
     const url = `${this.processURL}/${id}/get`;
     return this.http.get<Process>(url).pipe(
-      tap(_ => console.log("")),
+      tap(),
       catchError(this.handleError<Process>(`get lỗi`))
     )
   }
@@ -81,7 +91,7 @@ export class ProcessService {
   //update process
   updateProcess(process: Process): Observable<any> {
     return this.http.put(`${this.processURL}/edit`, process, this.httpOptions).pipe(
-      tap(_ => console.log(`updated process id=${process.id}`)),
+      tap(),
       catchError(this.handleError<any>('update process'))
     );
   }

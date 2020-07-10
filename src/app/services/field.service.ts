@@ -30,7 +30,7 @@ export class FieldService {
   //sửa field
   updateField(field: FieldData): Observable<any> {
     return this.http.put(`${this.fieldURL}/edit`, field, this.httpOptions).pipe(
-      tap(_ => console.log(`updated process id=${field.id}`)),
+      tap(),
       catchError(this.handleError<any>('update process'))
     );
   }
@@ -38,7 +38,7 @@ export class FieldService {
   //xóa field
   deleteField(id : string): Observable<any> {
     return this.http.delete(`${this.fieldURL}/${id}`, this.httpOptions).pipe(
-      tap(_ => console.log(`delete phase id=${id}`)),
+      tap(),
       catchError(this.handleError<any>('update process'))
     );
   }

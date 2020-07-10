@@ -51,6 +51,7 @@ export class EditProcessComponent implements OnInit {
   changeUser = false;
   createNew  = false;
   error: Error;
+  userDelete = [];
 
   constructor(
     private processService: ProcessService,
@@ -157,6 +158,11 @@ export class EditProcessComponent implements OnInit {
       }
       else {
         tab.usersHasPhase.splice(index, 1);
+        this.userDelete.push({
+          usersId:user.id,
+          phaseId:tab.id
+        })
+        console.log("user để xóa", this.userDelete)
       }
       
     }
@@ -183,6 +189,7 @@ export class EditProcessComponent implements OnInit {
       );
   }
   onSaveUser(tab){
+    this.loading = true;
     tab.isFirstPhase = Number(tab.isFirstPhase);
     tab.isTc = Number(tab.isTc);
     tab.isTb = Number(tab.isTb);
@@ -190,9 +197,11 @@ export class EditProcessComponent implements OnInit {
     tab.fieldData.forEach(a=> {
       a.required = Number(a.required)
     })
-    this.phaseService.updateUser(tab as Phase).subscribe(
+    tab.userDelete = this.userDelete;
+    this.phaseService.updateUser(tab).subscribe(
       p => {
-        console.log(p);
+        this.loading = false;
+        this.changeUser = false;
       }
     )
   }
@@ -237,7 +246,7 @@ export class EditProcessComponent implements OnInit {
       isTc: false,
       isTb: false,
       limitUser: false,
-      index:3,
+      index:0,
     });
     this.activeTab = this.process.phase.length - 3;
   }
@@ -270,6 +279,7 @@ export class EditProcessComponent implements OnInit {
          // console.log("phase tao moi",p); 
         }
       )
+      
       this.error.description = false;
       this.error.phaseName = false;
       this.createNew = false;

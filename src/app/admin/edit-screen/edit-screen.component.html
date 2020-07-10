@@ -1,11 +1,7 @@
 <div>
   <mat-spinner *ngIf="loading == true" class="spiner"></mat-spinner>
 <div class="edit-container" *ngIf="process">
-  <div>
-    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="goBack()">
-     <i class="material-icons">arrow_back</i>
-    </button>
-  </div>
+  
   <form>
     <label for="name">Tên quy trình </label>
     <div class="input-group mb-3 form-name">
@@ -81,10 +77,11 @@
               </h4>
               <hr />
               <div>
-                <button type="button" class="btn btn-outline-danger" (click)="deletePhase(index,phase)" [disabled]="phase.isFirstPhase || phase.isTC || phase.isTB ">
+                <button type="button" class="btn btn-outline-danger" (click)="deletePhase(index,phase)" 
+                [disabled]="phase.isFirstPhase || phase.isTC || phase.isTB "  matTooltip="Xóa giai đoạn">
                 <i class="material-icons">delete</i>
                 </button>
-                <button type="button" class="btn btn-outline-primary" (click)="editPhase(phase)">
+                <button type="button" class="btn btn-outline-primary" (click)="editPhase(phase)" matTooltip="Chỉnh sửa">
                 <i class="material-icons">edit</i>
                 </button>
               </div>
@@ -95,6 +92,8 @@
     </div>
 
   </div>
-  <button type="button" class="btn btn-danger" (click)="onSave()">Lưu</button>
+  <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
+  <button type="button" class="btn btn-danger" (click)="goBack()">Hủy</button>
+
 </div>
 </div>

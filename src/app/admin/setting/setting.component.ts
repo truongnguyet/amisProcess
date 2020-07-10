@@ -157,11 +157,6 @@ export class SettingComponent implements OnInit {
     this.getProcess();
     this.getAllUser();
 
-    // this.filteredOptions = this.myControl.valueChanges
-    // .pipe(
-    //   startWith(''),
-    //   map(value => this.searchUser(value))
-    // );
   }
 
   getProcess(): void {
@@ -261,6 +256,9 @@ export class SettingComponent implements OnInit {
       .subscribe(
         p => {
          // console.log("phase tao moi",p); 
+         if(tab.isTB){
+          this.router.navigate(['/home/edit-process/', this.processes.id])
+        }
         }
       )
       this.limitUser = false;
@@ -271,9 +269,7 @@ export class SettingComponent implements OnInit {
       this.activeTab++;
     }
 
-    if(tab.isTB){
-      this.router.navigate(['/home/edit-process/', this.processes.id])
-    }
+   
 
   }
   onSelectTab(tab) {

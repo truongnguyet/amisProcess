@@ -5,12 +5,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
 import { USERS } from '../../data/mock-users';
 import _ from "lodash";
 import {v4 as uuidv4} from 'uuid';
 import { FieldService } from 'src/app/services/field.service';
-import { FieldData } from 'src/app/models/fieldData';
 import {FieldInPhase} from '../../models/fieldData';
 
 export interface Field {
@@ -40,11 +38,11 @@ export class DialogFieldComponent implements OnInit {
   options = [];
   count = 3;
   error: Error;
+ closeDialog : boolean;
 
   noDelete = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Field,
-    private fieldService : FieldService
     ) {
       if(data.fieldData){
         data.fieldData.required = Boolean(data.fieldData.required)
@@ -59,7 +57,7 @@ export class DialogFieldComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   console.log("Data nhan ve ",this.data);
+   //console.log("Data nhan ve ",this.data);
   }
   addOption(fieldData) {
     if(fieldData){
@@ -110,9 +108,12 @@ export class DialogFieldComponent implements OnInit {
   }
 
   onSaveField(fieldData) {   
+    //trường hợp chỉnh sửa
     if (fieldData) {
       if(fieldData.fieldName == ""){
+        //check tên field
         this.error.fieldName = true;
+        this.closeDialog = false;
         return
       }
       fieldData = {
@@ -123,13 +124,17 @@ export class DialogFieldComponent implements OnInit {
         option: fieldData.option,
         type: fieldData.type
       }
+      
       }
      else {
+       //trường hợp thêm mới
       if(this.editName == ""){
+        //check tên field
         this.error.fieldName = true;
+        this.closeDialog = false;
         return
       }
-
+      //tạo một mảng với các trường hợp đặc biệt để thêm option
      const emptyValue = ['radio','dropDown','checkBox'];
      if(emptyValue.includes(this.data.field.type)){
        this.options = this.options;
@@ -140,6 +145,7 @@ export class DialogFieldComponent implements OnInit {
          }
        })
      } else {
+       //nếu không thuộc các TH trên thì set option rỗng
        this.options = [];
      }
       
@@ -152,6 +158,7 @@ export class DialogFieldComponent implements OnInit {
         phaseId:this.data.tab.id,
         option: this.options
       })
+      this.closeDialog = true;
 
     }
   

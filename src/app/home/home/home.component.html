@@ -7,10 +7,10 @@
       <div class="icon-process">
         <i class="material-icons">settings</i>
         <i class="material-icons" (click)="viewMember()">people_alt</i>
+        <i class="material-icons" [matMenuTriggerFor]="menu">account_circle</i>
       </div>
-      <img class="img" src="assets/img/user.png" [matMenuTriggerFor]="menu" />
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Thông tin cá nhân</button>
+        <button mat-menu-item>{{users.fullName}}</button>
         <button mat-menu-item (click)="logout()">Đăng xuất</button>
       </mat-menu>
     </mat-toolbar-row>
@@ -31,9 +31,6 @@
       </mat-selection-list>
     </mat-drawer>
     <mat-drawer-content>
-      <ul *ngIf="users">
-        <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-      </ul>
     
       <router-outlet></router-outlet>
 
