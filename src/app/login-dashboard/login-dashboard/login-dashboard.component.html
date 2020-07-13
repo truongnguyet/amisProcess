@@ -7,19 +7,24 @@
         <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Ex. pat@gmail.com" formControlName="username" [ngClass]="{'is-invalid': submitted && f.username.errors }">
-            
+            <input matInput placeholder="Ex. pat@gmail.com" formControlName="username"
+              [ngClass]="{'is-invalid': submitted && f.username.errors }" (keydown)="nextInput($event)" autofocus>
+
             <mat-error *ngIf="submitted && f.username.errors">
               Email is <strong>required</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
-            <input type="password" matInput formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" (keydown)="onKeydown($event)">
-           <mat-error *ngIf="submitted && f.password.errors">
-             Password is <strong>required</strong>
-           </mat-error>
+            <input type="password" matInput formControlName="password" #password
+              [ngClass]="{ 'is-invalid': submitted && f.username.errors }" (keydown)="onKeydown($event)">
+            <mat-error *ngIf="submitted && f.password.errors">
+              Password is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
+          <div *ngIf="error != ''" class="error-validate">
+            {{error}}
+          </div>
         </form>
         <div class="example-button-row button">
           <button mat-raised-button color="primary" [disabled]="loading" type="submit" (click)="onSubmit()">
@@ -33,5 +38,3 @@
     </div>
   </div>
 </div>
-
-

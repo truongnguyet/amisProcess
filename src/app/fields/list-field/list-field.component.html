@@ -10,9 +10,10 @@
           <i class="material-icons btn" [matMenuTriggerFor]="menu">more_vert</i>
         </div>
       </div>
-      <span>
+      <p>
         {{child.description}}
-      </span>
+      </p>
+     
       <div *ngIf="child.type == 'shortText'">
         <input type="text" class="form-control" style="width: 50%">
         <br />

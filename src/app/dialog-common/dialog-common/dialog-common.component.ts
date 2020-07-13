@@ -25,14 +25,22 @@ export class DialogCommonComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-  console.log("Dữ liệu để xóa",this.data)
+  //console.log("Dữ liệu để xóa",this.data)
   }
 
   onDelete(){
     if(this.data.title == 'trường'){
-      this.fieldService.deleteField(this.data.item.id).subscribe();
+      this.fieldService.deleteField(this.data.item.id).subscribe(
+        p=> {
+          window.location.reload();
+        }
+      );
     } else if (this.data.title == 'giai đoạn'){
-     this.phaseService.deletePhase(this.data.item.id).subscribe();
+     this.phaseService.deletePhase(this.data.item.id).subscribe(
+       p=> {
+         window.location.reload();
+       }
+     );
     } else{
       console.log("Không xóa")
     }

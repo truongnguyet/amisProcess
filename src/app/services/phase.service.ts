@@ -49,9 +49,9 @@ export class PhaseService {
     );
   }
 
-  // sửa phase
+  // sửa các thông tin cơ bản của phase
   updatePhase(phase: Phase): Observable<any> {
-    return this.http.put(`${this.phaseURL}/editPhase`, phase, this.httpOptions).pipe(
+    return this.http.put(`${this.phaseURL}/edit`, phase, this.httpOptions).pipe(
       tap(),
       catchError(this.handleError<any>('update Phase'))
     );

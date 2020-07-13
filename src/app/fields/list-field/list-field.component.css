@@ -1,5 +1,7 @@
 p {
   color: #959da5;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 btn {
@@ -13,7 +15,7 @@ btn {
 
 .title-field {
   display: flex;
-  flex-direction: row;
+ 
 }
 
 .hide-icon {

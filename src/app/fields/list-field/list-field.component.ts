@@ -1,12 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFieldComponent } from '../dialog-field/dialog-field.component';
-import { remove } from 'lodash'
 import { FIELDS } from '../../data/mock-fields';
-import { FieldService } from 'src/app/services/field.service';
 import { DialogCommonComponent } from 'src/app/dialog-common/dialog-common/dialog-common.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-list-field',
@@ -16,16 +13,16 @@ import { Router } from '@angular/router';
 export class ListFieldComponent implements OnInit {
   @Input() childField: Array<any>;
   @Input() tab: any;
+  @Output() emitField = new EventEmitter();
 
   field = FIELDS;
   constructor(
     private dialog: MatDialog,
-    private fieldService: FieldService,
-    private router : Router
+
     ) { }
 
   ngOnInit(): void {
-  // console.log("this is child component", this.childField)
+  // console.log("this is child component", this.changeField)
   }
  
   onEdit(tab, child) {
@@ -42,6 +39,7 @@ export class ListFieldComponent implements OnInit {
         fieldData: child
       }
     })
+    this.emitField.emit();
   }
 
   onDelete(tab, field) {

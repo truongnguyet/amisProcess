@@ -10,6 +10,9 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import * as moment from 'moment';
 
+interface Error {
+  name :boolean;
+}
 @Component({
   selector: 'app-edit-screen',
   templateUrl: './edit-screen.component.html',
@@ -20,6 +23,7 @@ export class EditScreenComponent implements OnInit {
   statuses = [{ id: 1, name: 'Đang hoạt động' }, { id: 2, name: 'Tạm ngừng' }]
   loading = false;
   user: User;
+  error : Error;
 
   constructor(
     private processService: ProcessService,
@@ -28,7 +32,11 @@ export class EditScreenComponent implements OnInit {
     private dialog : MatDialog,
     private authenticate: AuthenticationService,
     private userService : UserService
-  ) { }
+  ) { 
+    this.error = {
+      name: false
+    }
+  }
 
   ngOnInit(): void {
     this.getProcess();
@@ -58,16 +66,16 @@ export class EditScreenComponent implements OnInit {
     this.router.navigateByUrl('home/edit-process/' + this.process.id + '/' + phase.id);
   }
   onSave() {
+    if(this.process.nameProcess == ''){
+      this.error.name = true;
+      return
+    }
    this.process.modifiedBy = this.user.fullName;
     this.process.modifiedAt = moment().format("YYYY-MM-DD");
-    console.log("before up",this.process)
-    this.processService.updateProcess(this.process)
-      .subscribe(p => {
-        console.log(p)
-      })
     
-    this.router.navigateByUrl('/home')
-   
+    this.processService.updateProcess(this.process)
+      .subscribe();
+    this.router.navigateByUrl('/home') 
   }
   deletePhase(index, phase) {
     this.dialog.open(DialogCommonComponent, {
@@ -76,6 +84,7 @@ export class EditScreenComponent implements OnInit {
         item: phase
       }
     })
+    this.process.phase.slice(index,1);
   }
   createPhase(){
     this.router.navigateByUrl('home/setting/'+ this.process.id)

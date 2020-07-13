@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ export class LoginDashboardComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  @ViewChild("password") passField: ElementRef;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +43,7 @@ export class LoginDashboardComponent implements OnInit {
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['/home'] ;
+    this.returnUrl = this.route.snapshot.queryParams['/home'];
   }
 
   // convenience getter for easy access to form fields
@@ -73,9 +74,14 @@ export class LoginDashboardComponent implements OnInit {
     Validators.required,
     Validators.email,
   ]);
-  onKeydown(event){
-    if(event.key === "Enter"){
+  onKeydown(event) {
+    if (event.key === "Enter") {
       this.onSubmit();
     }
+  }
+  nextInput(event): void {
+    if(event.key === "Enter"){
+      this.passField.nativeElement.focus();
     }
+  }
 }

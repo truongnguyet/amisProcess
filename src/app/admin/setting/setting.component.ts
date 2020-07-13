@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -12,19 +12,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MaterialModule } from '../../material.module';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
-import {v4 as uuidv4} from 'uuid';
-import { USERS } from '../../data/mock-users';
+import { v4 as uuidv4 } from 'uuid';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
 import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { ICONS } from '../../data/mock-icons';
 import { Process } from '../../models/process';
 import { ProcessService } from '../../services/processService';
-import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
 import { Users } from '../../models/users';
 import { PhaseService } from '../../services/phase.service';
 import { Phase } from '../../models/phase';
@@ -41,7 +38,7 @@ interface Error {
   styleUrls: ['./setting.component.css']
 })
 export class SettingComponent implements OnInit {
- // myControl = new FormControl();
+  @ViewChild("description") passField: ElementRef;
 
   limitUser = false;
   fields = FIELDS;
@@ -60,12 +57,12 @@ export class SettingComponent implements OnInit {
 
   filteredOptions: Observable<Users[]>;
   searchText: string;
-  userSearch : Users[];
-  usersHasPhase : Array<any>[];
+  userSearch: Users[];
+  usersHasPhase: Array<any>[];
 
   tabs = [
     {
-      id:uuidv4(),
+      id: uuidv4(),
       phaseName: 'Giai đoạn 1',
       icon: '',
       description: '',
@@ -79,7 +76,7 @@ export class SettingComponent implements OnInit {
       index: 1
     },
     {
-     id:uuidv4(),
+      id: uuidv4(),
       phaseName: 'Giai đoạn 2',
       icon: '',
       description: '',
@@ -93,7 +90,7 @@ export class SettingComponent implements OnInit {
       index: 2
     },
     {
-      id:uuidv4(),
+      id: uuidv4(),
       phaseName: 'Giai đoạn 3',
       icon: '',
       description: '',
@@ -107,7 +104,7 @@ export class SettingComponent implements OnInit {
       index: 3
     },
     {
-      id:uuidv4(),
+      id: uuidv4(),
       phaseName: 'Thành công',
       icon: '',
       description: '',
@@ -121,7 +118,7 @@ export class SettingComponent implements OnInit {
       index: 4
     },
     {
-      id:uuidv4(),
+      id: uuidv4(),
       phaseName: 'Thất bại',
       icon: '',
       description: '',
@@ -143,9 +140,9 @@ export class SettingComponent implements OnInit {
     private route: ActivatedRoute,
     private processService: ProcessService,
     private phaseService: PhaseService,
-    private userService : UserService
+    private userService: UserService
   ) {
-   
+
     this.error = {
       phaseName: false,
       description: false,
@@ -161,19 +158,19 @@ export class SettingComponent implements OnInit {
 
   getProcess(): void {
     this.loading = true;
-    const id =  this.route.snapshot.params.id;
+    const id = this.route.snapshot.params.id;
     this.processService.getPro(id)
-      .subscribe( process => {
+      .subscribe(process => {
         this.processes = process;
         this.loading = false;
-      });    
-  }
-  getAllUser(){
-    this.userService.getUsers().toPromise()
-    .then(
-      user => {
-        this.users = user;
       });
+  }
+  getAllUser() {
+    this.userService.getUsers().toPromise()
+      .then(
+        user => {
+          this.users = user;
+        });
   }
 
   addUser() {
@@ -186,7 +183,7 @@ export class SettingComponent implements OnInit {
   onCloseListUser(tab) {
     tab.limitUser = false;
     tab.usersHasPhase = this.usersHasPhase;
-    
+
   }
 
   addField(tab, field) {
@@ -202,7 +199,7 @@ export class SettingComponent implements OnInit {
 
   addTab() {
     this.tabs.splice(this.tabs.length - 2, 0, {
-      id:uuidv4(),
+      id: uuidv4(),
       phaseName: 'Giai đoạn mới',
       icon: '',
       description: '',
@@ -229,12 +226,12 @@ export class SettingComponent implements OnInit {
   }
 
 
-  onSave(tab,index) {
+  onSave(tab, index) {
     if (tab.phaseName == "") {
       this.error.phaseName = true;
       return
     }
-    if(tab.description == ""){
+    if (tab.description == "") {
       this.error.description = true;
       return
     }
@@ -243,33 +240,32 @@ export class SettingComponent implements OnInit {
     tab.isTC = Number(tab.isTC);
     tab.isTB = Number(tab.isTB);
     tab.limitUser = Number(tab.limitUser);
-    tab.fieldData.forEach(a=> {
+    tab.fieldData.forEach(a => {
       a.required = Number(a.required)
     })
     tab.index = index;
 
-   if(tab.limitUser == false){
-     tab.usersHasPhase = this.users.map( d => ({usersId: d.id,phaseId: tab.id}) )
-   }
-   
+    // if (tab.limitUser == false) {
+    //   tab.usersHasPhase = this.users.map(d => ({ usersId: d.id, phaseId: tab.id }))
+    // }
+
     this.phaseService.addPhase(tab as Phase)
       .subscribe(
         p => {
-         // console.log("phase tao moi",p); 
-         if(tab.isTB){
-          this.router.navigate(['/home/edit-process/', this.processes.id])
-        }
+          if (tab.isTB) {
+            this.router.navigate(['/home/edit-process/', this.processes.id])
+          }
         }
       )
-      this.limitUser = false;
-      this.error.description = false;
-      this.error.phaseName = false;
+    this.limitUser = false;
+    this.error.description = false;
+    this.error.phaseName = false;
 
     if (this.activeTab < this.tabs.length - 1) {
       this.activeTab++;
     }
 
-   
+
 
   }
   onSelectTab(tab) {
@@ -289,7 +285,7 @@ export class SettingComponent implements OnInit {
       else {
         tab.usersHasPhase.splice(index, 1);
       }
-      
+
     }
   }
   userCheck(imply = [], user) {
@@ -305,12 +301,18 @@ export class SettingComponent implements OnInit {
 
   //search user
 
-   searchUser = (input) =>{
-    if(!input)
-        return []
-    if(!this.userSearch.length)
-        return []
-    return this.userSearch.filter(user=>user.fullName.toLowerCase().includes(input.toLowerCase()))
-}
+  searchUser = (input) => {
+    if (!input)
+      return []
+    if (!this.userSearch.length)
+      return []
+    return this.userSearch.filter(user => user.fullName.toLowerCase().includes(input.toLowerCase()))
+  }
+  //focus sang input ke tiep
+  nextInput(event): void {
+    if (event.key === "Enter") {
+      this.passField.nativeElement.focus();
+    }
+  }
 }
 

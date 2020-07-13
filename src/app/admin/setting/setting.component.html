@@ -21,7 +21,7 @@
               Tên giai đoạn
             </label>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName">
+              <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="tab.phaseName" autofocus (keydown)="nextInput($event)">
             </div>
             <div *ngIf="error.phaseName" class="error-validate">
               Bạn chưa nhập tên giai đoạn
@@ -30,7 +30,7 @@
               Mô tả
             </label>
             <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description"></textarea>
+              <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description" #description></textarea>
             </div>
             <div *ngIf="error.description" class="error-validate">
               Bạn chưa nhập mô tả giai đoạn

@@ -12,10 +12,10 @@
              id="name"
              name="name"
              [(ngModel)]="process.nameProcess" />
-      <!--(input)="onChange($event.target.value)"-->
-      <!--<div *ngIf="error.name" class="error-validate">
-        Bạn chưa nhập tên quy trình
-      </div>-->
+      
+      <div *ngIf="error.name" class="error-validate">
+        Tên quy trình không được để trống
+      </div>
     </div>
   </form>
   <br />

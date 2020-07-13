@@ -1,10 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { USERS } from '../../data/mock-users';
 import _ from "lodash";
 import {v4 as uuidv4} from 'uuid';
@@ -27,7 +27,7 @@ export interface Error {
   styleUrls: ['./dialog-field.component.css']
 })
 export class DialogFieldComponent implements OnInit {
-
+  @ViewChild("description") desField : ElementRef;
   editName: string;
   editDes: string;
   users = USERS;
@@ -43,6 +43,7 @@ export class DialogFieldComponent implements OnInit {
   noDelete = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Field,
+    private dialog : MatDialog
     ) {
       if(data.fieldData){
         data.fieldData.required = Boolean(data.fieldData.required)
@@ -161,7 +162,11 @@ export class DialogFieldComponent implements OnInit {
       this.closeDialog = true;
 
     }
-  
+  }
+  nextInput(e){
+    if(e.key == "Enter"){
+      this.desField.nativeElement.focus();
+    }
   }
 
 }

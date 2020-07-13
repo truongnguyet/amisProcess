@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ProcessService } from '../../services/processService';
 import { Process } from '../../models/process';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -38,6 +38,7 @@ export interface Error {
 })
 
 export class EditProcessComponent implements OnInit {
+  @ViewChild("description") desField: ElementRef;
   process: Process;
   icons = ICONS;
   panelOpenState = false;
@@ -52,6 +53,7 @@ export class EditProcessComponent implements OnInit {
   createNew  = false;
   error: Error;
   userDelete = [];
+  
 
   constructor(
     private processService: ProcessService,
@@ -88,7 +90,6 @@ export class EditProcessComponent implements OnInit {
          e.limitUser =  Boolean(e.limitUser)
         })
         this.process = process
-       // console.log(process)
         const idPhase = this.route.snapshot.paramMap.get('id')  
         this.activeTab = _.findIndex(process.phase, function(o){ return o.id == idPhase ;});
         this.loading = false;
@@ -134,18 +135,22 @@ export class EditProcessComponent implements OnInit {
     
   }
 
-
   addUser() {
     this.dialog.open(InviteUserComponent);
   }
   onListUser(tab) {
     tab.limitUser = true;
-    tab.implementer = [];
-
+    tab.usersHasPhase = [];
   }
   onCloseListUser(tab) {
     tab.limitUser = false;
-    tab.implementer = this.users;
+    tab.usersHasPhase.push({
+      
+    })
+
+    if(!this.createNew){
+      this.changeUser = true;
+    }
   }
   selectUser(tab, user) {
     if (tab.limitUser) {
@@ -162,7 +167,6 @@ export class EditProcessComponent implements OnInit {
           usersId:user.id,
           phaseId:tab.id
         })
-        console.log("user để xóa", this.userDelete)
       }
       
     }
@@ -190,6 +194,9 @@ export class EditProcessComponent implements OnInit {
   }
   onSaveUser(tab){
     this.loading = true;
+    // if (tab.limitUser == false) {
+    //   tab.usersHasPhase = this.users.map(d => ({ usersId: d.id, phaseId: tab.id }))
+    // }
     tab.isFirstPhase = Number(tab.isFirstPhase);
     tab.isTc = Number(tab.isTc);
     tab.isTb = Number(tab.isTb);
@@ -202,6 +209,7 @@ export class EditProcessComponent implements OnInit {
       p => {
         this.loading = false;
         this.changeUser = false;
+        this.ngOnInit();
       }
     )
   }
@@ -269,16 +277,17 @@ export class EditProcessComponent implements OnInit {
     })
     tab.index = index;
 
-   if(tab.limitUser == false){
-     tab.usersHasPhase = this.users.map( d => ({usersId: d.id,phaseId: tab.id}) )
-   }
+  //  if(tab.limitUser == false){
+  //    tab.usersHasPhase = this.users.map( d => ({usersId: d.id,phaseId: tab.id}) )
+  //  }
   
     this.phaseService.addPhase(tab as Phase)
       .subscribe(
         p => {
-         // console.log("phase tao moi",p); 
+        this.toastr.success("Đã thêm giai đoạn mới!")
         }
       )
+
       
       this.error.description = false;
       this.error.phaseName = false;
@@ -299,6 +308,9 @@ export class EditProcessComponent implements OnInit {
   onKey(e){
     if(this.createNew)
       return
+    if(e.key == "Enter"){
+      this.desField.nativeElement.focus();
+    }
     this.changePhase = true;
   }
 }

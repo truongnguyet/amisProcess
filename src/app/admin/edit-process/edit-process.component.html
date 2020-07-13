@@ -26,7 +26,7 @@
             Mô tả
           </label>
           <div class="input-group">
-            <textarea class="form-control" aria-label="With textarea" [(ngModel)]="tab.description" (keyup)="onKey($event)"></textarea>
+            <textarea class="form-control" aria-label="With textarea" #description [(ngModel)]="tab.description" (keyup)="onKey($event)"></textarea>
           </div>
           <br />
           <br />
@@ -71,7 +71,7 @@
         <div [hidden]="tab.isTc || tab.isTb">
           <hr />
           <p *ngIf="tab.fieldData.length == 0 "> (Chưa có trường nào được chọn)</p>
-          <app-list-field [childField]="tab.fieldData" [tab]="tab"></app-list-field>
+          <app-list-field [childField]="tab.fieldData" [tab]="tab" (emitField)="changeField = true"></app-list-field>
           <button type="button" class="btn btn-outline-primary" [matMenuTriggerFor]="menu">Thêm trường</button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item *ngFor="let field of fields" (click)="addField(tab,field)">
@@ -124,7 +124,7 @@
         </div>
 
         <button type="button" class="btn btn-danger"
-                (click)="goBack()" [hidden]="createNew">
+                (click)="goBack()" [hidden]="createNew" [disabled]="loading">
           Quay lại
         </button>
        <div [hidden]="!createNew">

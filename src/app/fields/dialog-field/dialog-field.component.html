@@ -12,10 +12,10 @@
           Tên trường
         </label>
         <div class="input-group mb-3" *ngIf="!data.fieldData">
-          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editName" autofocus>
+          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editName" autofocus (keydown)="nextInput($event)">
         </div>
         <div class="input-group mb-3" *ngIf="data.fieldData">
-          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="data.fieldData.fieldName" autofocus>
+          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="data.fieldData.fieldName" autofocus (keydown)="nextInput($event)">
         </div>
         <div *ngIf="error.fieldName" class="error-validate">
           Bạn chưa nhập tên trường
@@ -24,10 +24,10 @@
           Mô tả
         </label>
         <div class="input-group mb-3" *ngIf="!data.fieldData">
-          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="editDes">
+          <input type="text" class="form-control" aria-describedby="basic-addon1" #description [(ngModel)]="editDes" >
         </div>
         <div class="input-group mb-3" *ngIf="data.fieldData">
-          <input type="text" class="form-control" aria-describedby="basic-addon1" [(ngModel)]="data.fieldData.description">
+          <input type="text" class="form-control" aria-describedby="basic-addon1" #description [(ngModel)]="data.fieldData.description">
         </div>
         <div *ngIf="(data.field.nameField === 'Radio' || data.field.nameField ==='CheckBox' || data.field.nameField === 'DropDownSelect') && data.fieldData ">
           <label>

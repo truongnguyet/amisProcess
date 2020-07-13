@@ -63,7 +63,6 @@ export class AdminComponent implements OnInit {
         
           this.processService.search(this.page,text).subscribe(
             p => {
-              console.log(p);
               this.searchLoading = false;
               this.processes = p.items;
               this.total = p.count;
@@ -138,7 +137,6 @@ export class AdminComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
-    
     const data = this.processes.slice();
     if (!sort.active || sort.direction === '') {
       this.processes = data;
