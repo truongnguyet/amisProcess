@@ -32,7 +32,7 @@ import { DialogCommonModule } from './dialog-common/dialog-common.module';
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
-      timeOut: 7200,
+      timeOut: 5400,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),

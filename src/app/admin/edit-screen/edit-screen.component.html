@@ -1,72 +1,67 @@
 <div>
   <mat-spinner *ngIf="loading == true" class="spiner"></mat-spinner>
-<div class="edit-container" *ngIf="process">
-  
-  <form>
-    <label for="name">Tên quy trình </label>
-    <div class="input-group mb-3 form-name">
-      <input type="text"
-             class="form-control"
-             aria-describedby="basic-addon1"
-             required
-             id="name"
-             name="name"
-             [(ngModel)]="process.nameProcess" />
-      
-      <div *ngIf="error.name" class="error-validate">
-        Tên quy trình không được để trống
+  <div class="edit-container" *ngIf="process">
+
+    <form>
+      <label for="name">Tên quy trình </label>
+      <div class="input-group mb-3 form-name">
+        <input type="text" class="form-control" aria-describedby="basic-addon1" required id="name" name="name"
+          [(ngModel)]="process.nameProcess" />
+
+        <div *ngIf="error.name" class="error-validate">
+          Tên quy trình không được để trống
+        </div>
+      </div>
+    </form>
+    <br />
+    <div class="select-container">
+      <p>Permission</p>
+      <div class="select-content">
+        <mat-radio-group aria-label="permission">
+          <mat-radio-button value="public">
+            Public(Ai cũng có thể nhìn thấy quy trình này)
+          </mat-radio-button><br />
+          <mat-radio-button value="private">
+            Private(Chỉ những người được mời vào quy trình mới nhìn thấy quy trình này)
+          </mat-radio-button>
+        </mat-radio-group>
+
+      </div>
+
+    </div>
+    <div class="select-container">
+      <p>Authorization</p>
+      <div class="select-content">
+        <mat-checkbox>Người dùng chỉ có thể chỉnh sửa trong quy trình mà mình tham gia!</mat-checkbox>
+        <br />
+        <mat-checkbox>Quy trình chỉ có thể bị xóa bởi admin</mat-checkbox>
       </div>
     </div>
-  </form>
-  <br />
-  <div class="select-container">
-    <p>Permission</p>
-    <div class="select-content">
-      <mat-radio-group aria-label="permission">
-        <mat-radio-button value="public">
-          Public(Ai cũng có thể nhìn thấy quy trình này)
-        </mat-radio-button><br />
-        <mat-radio-button value="private">
-          Private(Chỉ những người được mời vào quy trình mới nhìn thấy quy trình này)
-        </mat-radio-button>
-      </mat-radio-group>
+    <div>
+      <h4>
+        Trạng thái
+      </h4>
+      <mat-form-field>
+        <mat-label>Trạng thái</mat-label>
+        <mat-select [(ngModel)]="process.status">
+          <mat-option *ngFor="let status of statuses" [value]="status.name">
+            {{status.name}}
+          </mat-option>
 
+        </mat-select>
+      </mat-form-field>
     </div>
-
-  </div>
-  <div class="select-container">
-    <p>Authorization</p>
-    <div class="select-content">
-      <mat-checkbox>Người dùng chỉ có thể chỉnh sửa trong quy trình mà mình tham gia!</mat-checkbox>
-      <br />
-      <mat-checkbox>Quy trình chỉ có thể bị xóa bởi admin</mat-checkbox>
+    <hr />
+    <div *ngIf="process.phase.length == 0">
+      <h3>Bạn chưa cài đặt cho các giai đoạn của quy trình này!</h3>
+      <button type="button" class="btn btn-outline-primary" (click)="createPhase()">Tạo giai đoạn</button>
     </div>
-  </div>
-  <div>
-    <h4>
-      Trạng thái
-    </h4>
-    <mat-form-field>
-      <mat-label>Trạng thái</mat-label>
-      <mat-select [(ngModel)]="process.status">
-        <mat-option *ngFor="let status of statuses" [value]="status.name">
-          {{status.name}}
-        </mat-option>
+    <div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12  col-md-6 col-lg-4" *ngFor="let phase of process.phase;let index = index">
 
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <hr />
-  <div *ngIf="process.phase.length == 0">
-    <h3>Bạn chưa cài đặt cho các giai đoạn của quy trình này!</h3>
-    <button type="button" class="btn btn-outline-primary" (click)="createPhase()">Tạo giai đoạn</button>
-  </div>
-  <div>
-    <div class="container" >
-      <div class="row" >
-        <div class="col-12  col-md-6 col-lg-4" *ngFor="let phase of process.phase;let index = index">
-      
-       
+
             <div class="box-card">
               <div>
                 <i class="material-icons" style="padding:5px">{{phase.icon}}</i>
@@ -77,23 +72,23 @@
               </h4>
               <hr />
               <div>
-                <button type="button" class="btn btn-outline-danger" (click)="deletePhase(index,phase)" 
-                [disabled]="phase.isFirstPhase || phase.isTC || phase.isTB "  matTooltip="Xóa giai đoạn">
-                <i class="material-icons">delete</i>
+                <button type="button" class="btn btn-outline-danger" (click)="deletePhase(index,phase)"
+                  [disabled]="phase.isFirstPhase || phase.isTC || phase.isTB " matTooltip="Xóa giai đoạn">
+                  <i class="material-icons">delete</i>
                 </button>
                 <button type="button" class="btn btn-outline-primary" (click)="editPhase(phase)" matTooltip="Chỉnh sửa">
-                <i class="material-icons">edit</i>
+                  <i class="material-icons">edit</i>
                 </button>
               </div>
             </div>
-       
+
+          </div>
         </div>
       </div>
+
     </div>
+    <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
+    <button type="button" class="btn btn-danger" (click)="goBack()">Hủy</button>
 
   </div>
-  <button type="button" class="btn btn-success" (click)="onSave()">Lưu</button>
-  <button type="button" class="btn btn-danger" (click)="goBack()">Hủy</button>
-
-</div>
 </div>

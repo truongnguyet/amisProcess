@@ -13,14 +13,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import _ from 'lodash';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { ToastrService } from 'ngx-toastr';
 
 import { FIELDS } from '../../data/mock-fields';
 import { DialogFieldComponent } from '../../fields/dialog-field/dialog-field.component';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteUserComponent } from '../invite-user/invite-user.component';
-import { USERS } from '../../data/mock-users';
 import { PhaseService } from 'src/app/services/phase.service';
 import { Phase } from 'src/app/models/phase';
 import { Users } from 'src/app/models/users';
@@ -28,7 +27,7 @@ import { UserService } from 'src/app/services/user.service';
 
 
 export interface Error {
-  phaseName : boolean;
+  phaseName: boolean;
   description: boolean
 }
 @Component({
@@ -45,29 +44,28 @@ export class EditProcessComponent implements OnInit {
   selectedIcon: boolean;
   fields = FIELDS;
   activeTab = 0;
-  users : Users[];
+  users: Users[];
   loading = false;
-  changePhase =false;
+  changePhase = false;
   changeField = false;
   changeUser = false;
-  createNew  = false;
+  createNew = false;
   error: Error;
   userDelete = [];
-  
+
 
   constructor(
     private processService: ProcessService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private router: Router,
-    private phaseService : PhaseService,
-    private userService : UserService,
+    private phaseService: PhaseService,
+    private userService: UserService,
     private toastr: ToastrService
-  ) 
-  {
+  ) {
     this.error = {
       phaseName: false,
-      description:false
+      description: false
     }
 
   }
@@ -78,48 +76,48 @@ export class EditProcessComponent implements OnInit {
   }
 
   getProcess(): void {
-    this.loading =true;
+    this.loading = true;
     const id = this.router.url.split('/')[3];
     this.processService.getPro(id)
       .subscribe(process => {
-        process.phase = _.orderBy(process.phase,'index','des')
-        process.phase.forEach( e => {
-         e.isFirstPhase =  Boolean(e.isFirstPhase),
-         e.isTb =  Boolean(e.isTb),
-         e.isTc =  Boolean(e.isTc),
-         e.limitUser =  Boolean(e.limitUser)
+        process.phase = _.orderBy(process.phase, 'index', 'des')
+        process.phase.forEach(e => {
+          e.isFirstPhase = Boolean(e.isFirstPhase),
+            e.isTb = Boolean(e.isTb),
+            e.isTc = Boolean(e.isTc),
+            e.limitUser = Boolean(e.limitUser)
         })
         this.process = process
-        const idPhase = this.route.snapshot.paramMap.get('id')  
-        this.activeTab = _.findIndex(process.phase, function(o){ return o.id == idPhase ;});
+        const idPhase = this.route.snapshot.paramMap.get('id')
+        this.activeTab = _.findIndex(process.phase, function (o) { return o.id == idPhase; });
         this.loading = false;
       }
-        );
-    
+      );
+
   }
-  getAllUser():void {
+  getAllUser(): void {
     this.userService.getUsers().toPromise()
-    .then(
-      user => {
-        this.users = user;
-      });
+      .then(
+        user => {
+          this.users = user;
+        });
   }
-  
- 
+
+
 
   selectIcon(tab, id: string) {
     this.selectedIcon = true;
     tab.icon = id;
-    if(!this.createNew){
+    if (!this.createNew) {
       this.changePhase = true;
     }
-    
+
   }
 
-  onSelectTab(tab) { 
+  onSelectTab(tab) {
     this.activeTab = tab;
     this.changePhase = false;
-    
+
   }
 
   addField(tab, field) {
@@ -129,10 +127,10 @@ export class EditProcessComponent implements OnInit {
         tab: tab
       }
     });
-    if(!this.createNew){
+    if (!this.createNew) {
       this.changeField = true;
     }
-    
+
   }
 
   addUser() {
@@ -145,10 +143,10 @@ export class EditProcessComponent implements OnInit {
   onCloseListUser(tab) {
     tab.limitUser = false;
     tab.usersHasPhase.push({
-      
+
     })
 
-    if(!this.createNew){
+    if (!this.createNew) {
       this.changeUser = true;
     }
   }
@@ -164,35 +162,35 @@ export class EditProcessComponent implements OnInit {
       else {
         tab.usersHasPhase.splice(index, 1);
         this.userDelete.push({
-          usersId:user.id,
-          phaseId:tab.id
+          usersId: user.id,
+          phaseId: tab.id
         })
       }
-      
+
     }
-    if(!this.createNew){
+    if (!this.createNew) {
       this.changeUser = true;
     }
-    
+
   }
   onSave(tab) {
     tab.isFirstPhase = Number(tab.isFirstPhase);
     tab.isTc = Number(tab.isTc);
     tab.isTb = Number(tab.isTb);
     tab.limitUser = Number(tab.limitUser);
-    tab.fieldData.forEach(a=> {
+    tab.fieldData.forEach(a => {
       a.required = Number(a.required)
     })
-    
+
     this.phaseService.updatePhase(tab as Phase).subscribe(
-      p =>{ 
+      p => {
         this.changePhase = false;
         this.ngOnInit();
         this.toastr.success('Sửa thành công');
       }
-      );
+    );
   }
-  onSaveUser(tab){
+  onSaveUser(tab) {
     this.loading = true;
     // if (tab.limitUser == false) {
     //   tab.usersHasPhase = this.users.map(d => ({ usersId: d.id, phaseId: tab.id }))
@@ -201,7 +199,7 @@ export class EditProcessComponent implements OnInit {
     tab.isTc = Number(tab.isTc);
     tab.isTb = Number(tab.isTb);
     tab.limitUser = Number(tab.limitUser);
-    tab.fieldData.forEach(a=> {
+    tab.fieldData.forEach(a => {
       a.required = Number(a.required)
     })
     tab.userDelete = this.userDelete;
@@ -213,31 +211,31 @@ export class EditProcessComponent implements OnInit {
       }
     )
   }
-  onSaveFiled(tab){
+  onSaveFiled(tab) {
     tab.isFirstPhase = Number(tab.isFirstPhase);
     tab.isTc = Number(tab.isTc);
     tab.isTb = Number(tab.isTb);
     tab.limitUser = Number(tab.limitUser);
-    tab.fieldData.forEach(a=> {
+    tab.fieldData.forEach(a => {
       a.required = Number(a.required)
     })
     this.phaseService.updateField(tab as Phase).toPromise().then(
-      p=> {
+      p => {
         this.toastr.success('Sửa thành công');
-      this.changeField = false;
-       this.ngOnInit();
+        this.changeField = false;
+        this.ngOnInit();
       }
     )
-    
+
   }
   goBack() {
     this.router.navigateByUrl('home/edit-process/' + this.process.id)
   }
-  onCancel(){
-    this.changeField =false;
+  onCancel() {
+    this.changeField = false;
     this.changePhase = false;
-    this.changeUser =false;
-    this.ngOnInit();  
+    this.changeUser = false;
+    this.ngOnInit();
   }
 
   addTab() {
@@ -254,16 +252,16 @@ export class EditProcessComponent implements OnInit {
       isTc: false,
       isTb: false,
       limitUser: false,
-      index:0,
+      index: 0,
     });
     this.activeTab = this.process.phase.length - 3;
   }
-  onAddTab(tab,index) {
+  onAddTab(tab, index) {
     if (tab.phaseName == "") {
       this.error.phaseName = true;
       return
     }
-    if(tab.description == ""){
+    if (tab.description == "") {
       this.error.description = true;
       return
     }
@@ -272,27 +270,27 @@ export class EditProcessComponent implements OnInit {
     tab.isTc = Number(tab.isTc);
     tab.isTb = Number(tab.isTb);
     tab.limitUser = Number(tab.limitUser);
-    tab.fieldData.forEach(a=> {
+    tab.fieldData.forEach(a => {
       a.required = Number(a.required)
     })
     tab.index = index;
 
-  //  if(tab.limitUser == false){
-  //    tab.usersHasPhase = this.users.map( d => ({usersId: d.id,phaseId: tab.id}) )
-  //  }
-  
+    //  if(tab.limitUser == false){
+    //    tab.usersHasPhase = this.users.map( d => ({usersId: d.id,phaseId: tab.id}) )
+    //  }
+
     this.phaseService.addPhase(tab as Phase)
       .subscribe(
         p => {
-        this.toastr.success("Đã thêm giai đoạn mới!")
+          this.toastr.success("Đã thêm giai đoạn mới!")
         }
       )
 
-      
-      this.error.description = false;
-      this.error.phaseName = false;
-      this.createNew = false;
-      
+
+    this.error.description = false;
+    this.error.phaseName = false;
+    this.createNew = false;
+
   }
 
   userCheck(imply = [], user) {
@@ -305,10 +303,10 @@ export class EditProcessComponent implements OnInit {
 
     return result;
   }
-  onKey(e){
-    if(this.createNew)
+  onKey(e) {
+    if (this.createNew)
       return
-    if(e.key == "Enter"){
+    if (e.key == "Enter") {
       this.desField.nativeElement.focus();
     }
     this.changePhase = true;

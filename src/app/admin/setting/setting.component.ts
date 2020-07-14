@@ -265,8 +265,6 @@ export class SettingComponent implements OnInit {
       this.activeTab++;
     }
 
-
-
   }
   onSelectTab(tab) {
     this.activeTab = tab;

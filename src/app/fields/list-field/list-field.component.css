@@ -1,7 +1,7 @@
 p {
   color: #959da5;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 3px;
 }
 
 btn {
@@ -15,12 +15,13 @@ btn {
 
 .title-field {
   display: flex;
- 
+  margin-bottom: 0;
+  /* line-height: 40px; */
 }
 
 .hide-icon {
     min-width:50px;
-    min-height:40px;
+    min-height:30px;
 }
 .hide-icon i {
     display:none;
